@@ -35,17 +35,26 @@
     homeVC.title = @"首页";
     
     UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:homeVC];
-    homeNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:homeVC.title image:[UIImage imageNamed:@"tabbar_home"] selectedImage:nil];
+    homeNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:homeVC.title
+                                                       image:[UIImage imageNamed:@"tabbar_home"]
+                                               selectedImage:[[UIImage imageNamed:@"tabbar_home"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     
     CRKChannelViewController *channelVC = [[CRKChannelViewController alloc] init];
+    channelVC.title = @"情趣";
+    
     UINavigationController *channelNav = [[UINavigationController alloc] initWithRootViewController:channelVC];
-    channelNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"tabbar_channel_normal"] selectedImage:[UIImage imageNamed:@"tabbar_channel_selected"]];
+    channelNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil
+                                                          image:[UIImage imageNamed:@"tabbar_home"]
+                                                  selectedImage:[[UIImage imageNamed:@"tabbar_home"]
+                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     
     CRKMineViewController *mineVC = [[CRKMineViewController alloc] init];
     mineVC.title = @"我的";
     
     UINavigationController *mineNav = [[UINavigationController alloc] initWithRootViewController:mineVC];
-    mineNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:mineVC.title image:[UIImage imageNamed:@"tabbar_mine"] selectedImage:nil];
+    mineNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:mineVC.title
+                                                       image:[UIImage imageNamed:@"tabbar_mine"]
+                                               selectedImage:[[UIImage imageNamed:@"tabbar_mine"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[homeNav,channelNav,mineNav];
