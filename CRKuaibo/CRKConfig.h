@@ -61,6 +61,10 @@
 #define CRK_STANDBY_AGREEMENT_NOTPAID_URL   @"/static/iosvideo/agreement.html"
 #define CRK_STANDBY_AGREEMENT_PAID_URL      @"/static/iosvideo/agreement-paid.html"
 
+#define CRK_APP_SPREAD_LIST_URL         @"/iosvideo/appSpreadList.htm"
+#define CRK_STANDBY_APP_SPREAD_LIST_URL     @"/static/iosvideo/appSpreadList.json"
+
+
 #define CRK_SYSTEM_CONFIG_PAY_AMOUNT            @"PAY_AMOUNT"
 #define CRK_SYSTEM_CONFIG_SVIP_PAY_AMOUNT       @"SVIP_PAY_AMOUNT"
 #define CRK_SYSTEM_CONFIG_CONTACT               @"CONTACT"

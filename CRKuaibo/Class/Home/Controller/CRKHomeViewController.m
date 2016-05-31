@@ -8,6 +8,12 @@
 
 #import "CRKHomeViewController.h"
 
+typedef NS_ENUM (NSUInteger , SegmentIndex){
+    CRKBEuramerican, //欧美
+    CRKBJapanKorea,  //日韩
+    CRKBMainland     //大陆
+};
+
 @interface CRKHomeViewController ()
 
 @end
@@ -16,22 +22,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self setSegmentControll];
+    
 }
+/**
+ *  设置SegmentControll
+ */
+- (void)setSegmentControll {
+    
+    UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:@[@"欧美",@"日韩",@"大陆"]];
+    segment.selectedSegmentIndex = 0;
+    segment.frame = CGRectMake(0, 0, kScreenWidth*0.5, 31);
+    segment.tintColor = [UIColor colorWithWhite:1 alpha:0.5];
+    [segment.layer masksToBounds];
+    [segment setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17.]} forState:UIControlStateNormal];
+    self.navigationItem.titleView = segment;
+    @weakify(self)
+    [segment bk_addEventHandler:^(id sender) {
+        @strongify(self)
+        switch (segment.selectedSegmentIndex) {
+            case CRKBEuramerican:
+                DLog(@"欧美");
+                break;
+            case CRKBJapanKorea:
+                DLog(@"日韩");
+                break;
+            case CRKBMainland:
+                DLog(@"大陆");
+                break;
+            default:
+                break;
+        }
+        
+    } forControlEvents:UIControlEventValueChanged];
+    
+}
+
+/**
+ *
+ */
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

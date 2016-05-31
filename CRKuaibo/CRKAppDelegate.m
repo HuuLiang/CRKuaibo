@@ -43,11 +43,14 @@
     channelVC.title = @"情趣";
     
     UINavigationController *channelNav = [[UINavigationController alloc] initWithRootViewController:channelVC];
-    channelNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil
-                                                          image:[UIImage imageNamed:@"tabbar_home"]
-                                                  selectedImage:[[UIImage imageNamed:@"tabbar_home"]
-                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-    
+    //    channelNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil
+    //                                                          image:[UIImage imageNamed:@"qingqu"]
+    //                                                  selectedImage:[[UIImage imageNamed:@"qingquSelect"]
+    //                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    channelNav.tabBarItem = [[UITabBarItem alloc] init];
+    channelNav.tabBarItem.imageInsets = UIEdgeInsetsMake(-5.5, 0, 5.5, 0);
+    channelNav.tabBarItem.image = [[UIImage imageNamed:@"qingqu"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    channelNav.tabBarItem.selectedImage = [[UIImage imageNamed:@"qingquSelect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     CRKMineViewController *mineVC = [[CRKMineViewController alloc] init];
     mineVC.title = @"我的";
     
@@ -68,9 +71,14 @@
 - (void)setupCommonStyles {
     //[[UITabBar appearance] setBarStyle:UIBarStyleBlack];
     [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#dd0077"]];
+    [UITabBar appearance];
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
-//    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UITabBar appearance].layer setBorderColor:[UIColor clearColor].CGColor];
+    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
+    //    [UITabBar appearance].layer.borderWidth = 0.01;
+    //        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#dd0077"]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.],
                                                            NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -231,4 +239,5 @@
     [[CRKPaymentManager sharedManager] handleOpenURL:url];
     return YES;
 }
+ 
 @end
