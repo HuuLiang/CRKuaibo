@@ -40,14 +40,13 @@
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:_imageView];
         {
-//            CGFloat heightWidth = self.bounds.size.height - _titleLabel.bounds.size.height-8;
+            //            CGFloat heightWidth = self.bounds.size.height - _titleLabel.bounds.size.height-8;
             [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(self);
                 make.bottom.mas_equalTo(_titleLabel.mas_top).mas_offset(-8);
                 make.centerX.mas_equalTo(self.mas_centerX);
                 make.width.mas_equalTo(self.bounds.size.height*0.75);
-            }];
-            
+            }];  
         }
         
     }
@@ -57,7 +56,7 @@
 
 - (void)setImageName:(NSString *)imageName {
     _imageName = imageName;
-//    [_imageView sd_setImageWithURL:[NSURL URLWithString:imageName]];
+    //    [_imageView sd_setImageWithURL:[NSURL URLWithString:imageName]];
     @weakify(self);
     [_imageView sd_setImageWithURL:[NSURL URLWithString:imageName] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         @strongify(self);
@@ -70,13 +69,13 @@
     _titleLabel.text = title;
     
 }
-
+//等比例缩放图片
 - (UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize{
     UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
-                                [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
-                                UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
-                                UIGraphicsEndImageContext();
-                                return scaledImage;
-                                }
+    [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
+}
 
 @end

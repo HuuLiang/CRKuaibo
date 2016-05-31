@@ -101,5 +101,9 @@ DefineLazyPropertyInitialization(CRKRecommendModel,recommendModel);
     return  CGSizeMake(width, height);
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    CRKProgram *program = self.recommendModel.fetchedSpreads[indexPath.item];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:program.videoUrl]];
+}
 
 @end

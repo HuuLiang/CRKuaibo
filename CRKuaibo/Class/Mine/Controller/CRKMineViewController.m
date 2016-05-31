@@ -10,6 +10,8 @@
 #import "CRKRecommendCell.h"
 #import "CRKRecommendHeaderView.h"
 #import "CRKInputViewController.h"
+#import "CRKUserProtolController.h"
+#import "CRKNewVersionsController.h"
 
 static NSString *KUserCorrelationCellIdentifer = @"kusercorrelationcell";
 static NSString *KRecommendCellIdentifer = @"krecommendcell";
@@ -149,12 +151,28 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
+     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == CRKUserCorrelation) {
         
         if (indexPath.row == CRKUserFeedBack) {
             CRKInputViewController *inputVC = [[CRKInputViewController alloc] init];
-            [self presentViewController:inputVC animated:YES completion:nil];
+            inputVC.title = cell.textLabel.text;
+            inputVC.limitedTextLength = 140;
+            [self.navigationController pushViewController:inputVC animated:YES];
+        }else if (indexPath.row == CRKUserAgreement){
+            //用户协yi
+            NSString *urlString = [CRKUtil isPaid] ? CRK_STANDBY_AGREEMENT_PAID_URL:CRK_STANDBY_AGREEMENT_NOTPAID_URL;
+             urlString = [CRK_BASE_URL stringByAppendingString:urlString];
+            
+             NSString *standbyUrlString = [CRKUtil isPaid]?CRK_STANDBY_AGREEMENT_PAID_URL:CRK_STANDBY_AGREEMENT_NOTPAID_URL;
+         standbyUrlString = [CRK_STANDBY_BASE_URL stringByAppendingString:standbyUrlString];
+                  CRKUserProtolController *protolVC = [[CRKUserProtolController alloc] initWithURL:[NSURL URLWithString:urlString] standbyURL:[NSURL URLWithString:standbyUrlString]];
+            [self.navigationController pushViewController:protolVC animated:YES];
+            
+        }else {
+            CRKNewVersionsController *newVersionsVC = [[CRKNewVersionsController alloc] init];
+            [self.navigationController pushViewController:newVersionsVC animated:YES];
+        
         }
     }
 
