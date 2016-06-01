@@ -13,6 +13,7 @@
     UITextView *_inputTextView;
     UILabel *_textLimitLabel;
     UILabel *_placeholderLabel;
+    UIButton *_commitBtn;
 }
 
 @end
@@ -29,7 +30,7 @@
     _inputTextView.layer.borderWidth = 0.5;
     _inputTextView.layer.borderColor = [UIColor colorWithWhite:0.8 alpha:1].CGColor;
     _inputTextView.delegate = self;
-//    _inputTextView.placeholder = self.placeholder;
+    //    _inputTextView.placeholder = self.placeholder;
     _inputTextView.text = self.text;
     [self.view addSubview:_inputTextView];
     {
@@ -46,13 +47,14 @@
     _placeholderLabel.text = @"欢迎反馈任何意见和建议";
     [self.view addSubview:_placeholderLabel];
     {
-    [_placeholderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(_inputTextView).mas_offset(5);
-        make.top.mas_equalTo(_inputTextView.mas_top).mas_offset(6);
-    }];
-    
+        [_placeholderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(_inputTextView).mas_offset(5);
+            make.top.mas_equalTo(_inputTextView.mas_top).mas_offset(6);
+        }];
+        
     }
     UIButton *commitBtn = [[UIButton alloc] init];
+    _commitBtn = commitBtn;
     commitBtn.layer.cornerRadius = 4;
     commitBtn.layer.masksToBounds = YES;
     [commitBtn setBackgroundImage:[UIImage imageNamed:@"inputBtn"] forState:UIControlStateNormal];
@@ -62,7 +64,8 @@
     @weakify(self);
     [commitBtn bk_addEventHandler:^(id sender) {
         @strongify(self);
-            [self doSave];
+        [self doSave];
+        //        [_inputTextView becomeFirstResponder];
         
     } forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:commitBtn];
@@ -86,7 +89,7 @@
 
 - (void)handleSingleTap {
     [_inputTextView resignFirstResponder];
-
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -125,17 +128,19 @@
 
 - (void)doSave {
     [_inputTextView resignFirstResponder];
-    if (_text.length != 0) {
-        
+    if (_inputTextView.text.length != 0) {
+        _commitBtn.enabled = NO;
         CGFloat time = arc4random_uniform(2)+0.5;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             _inputTextView.text = nil;
             _textLimitLabel.text = @"140";
             [[CRKHudManager manager] showHudWithText:@"提交成功!"];
+            _commitBtn.enabled = YES;
+            
         });
     }else {
         [[CRKHudManager manager] showHudWithText:@"内容不能为空"];
-    
+        
     }
 }
 
@@ -158,26 +163,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-//    if (_inputTextView.text.length == 0) {
-//        _placeholderLabel.hidden = YES;
-//    }else{
-//        _placeholderLabel.hidden = NO;
-//    }
-//    return YES;
-//}
-
 - (void)textViewDidChange:(UITextView *)textView {
     if (_inputTextView.text.length == 0) {
         _placeholderLabel.hidden = NO;
     }else{
-       _placeholderLabel.hidden = YES;
+        _placeholderLabel.hidden = YES;
     }
     [self doChangeText];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-
+    if (_inputTextView.text.length == 0) {
+        _placeholderLabel.hidden = NO;
+    }else{
+        _placeholderLabel.hidden = YES;
+    }
     NSUInteger newTextLength = textView.text.length - range.length + text.length;
     if (self.limitedTextLength > 0 && newTextLength > self.limitedTextLength) {
         return NO;

@@ -40,12 +40,16 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTableView];
- 
+    //去掉多余分割线
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+    [_layoutTableView setTableFooterView:view];
+    
+    
 }
 
 - (void)setTableView {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    _layoutTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    _layoutTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     _layoutTableView.scrollEnabled = NO;
     _layoutTableView.backgroundColor = self.view.backgroundColor;
     _layoutTableView.delegate = self;
@@ -55,7 +59,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
     _layoutTableView.hasSectionBorder = YES;
     [_layoutTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:KUserCorrelationCellIdentifer];
     [_layoutTableView registerClass:[CRKRecommendCell class] forCellReuseIdentifier:KRecommendCellIdentifer];
-        [self.view addSubview:_layoutTableView];
+    [self.view addSubview:_layoutTableView];
     [_layoutTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];
@@ -68,24 +72,12 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
     }else{
         return CRKUserCorrelation;
     }
-    
 }
-//- (CRKSideMenuRow)sideMenuRowWithRow:(NSUInteger)row {
-//    if (row == 0) {
-//        return CRKUserFeedBack;
-//    }else if (row == 1){
-//        return CRKUserAgreement;
-//    }else{
-//        
-//        return CRKVersionRenew;
-//    }
-//    
-//}
 
 #pragma mark UITableView Delegate Datesurse
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
- 
-    return KSections;
+    
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -93,7 +85,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
         return 1;
     }else if ([self sectionNumberWithSection:section] == CRKUserCorrelation){
         
-        return 3;
+        return 4;
     }
     return 0;
 }
@@ -105,18 +97,22 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
         
     }else if ([self sectionNumberWithSection:indexPath.section] == CRKUserCorrelation){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KUserCorrelationCellIdentifer forIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == CRKUserFeedBack) {
             cell.imageView.image = [UIImage imageNamed:@"agreement"];
             cell.textLabel.text = @"意见反馈";
         }else if (indexPath.row == CRKUserAgreement ){
             cell.imageView.image = [UIImage imageNamed:@"协议_18x18_"];
             cell.textLabel.text = @"用户协议";
-        
-        }else {
+            
+        }else if(indexPath.row == CRKVersionRenew){
             cell.imageView.image = [UIImage imageNamed:@"版本_18x18_"];
             cell.textLabel.text = @"版本更新";
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryNone;
+             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
         return cell;
     }
     return nil;
@@ -127,7 +123,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
     if (indexPath.section == CRKRecommend) {
         return 200./667.*kScreenHeight;
     }else {
-        return 74./667.*kScreenHeight;
+        return 64./667.*kScreenHeight;
     }
 }
 /**
@@ -142,16 +138,18 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
     }
     return nil;
 }
+//组高
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == CRKRecommend) {
         return 34/667.*kScreenHeight;
-    }
-    return 1;
+    }else if (section == CRKUserCorrelation){
+        return 20/667.*kScreenHeight;}
+    return 140/667.*kScreenHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == CRKUserCorrelation) {
         
         if (indexPath.row == CRKUserFeedBack) {
@@ -162,22 +160,24 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
         }else if (indexPath.row == CRKUserAgreement){
             //用户协yi
             NSString *urlString = [CRKUtil isPaid] ? CRK_STANDBY_AGREEMENT_PAID_URL:CRK_STANDBY_AGREEMENT_NOTPAID_URL;
-             urlString = [CRK_BASE_URL stringByAppendingString:urlString];
+            urlString = [CRK_BASE_URL stringByAppendingString:urlString];
             
-             NSString *standbyUrlString = [CRKUtil isPaid]?CRK_STANDBY_AGREEMENT_PAID_URL:CRK_STANDBY_AGREEMENT_NOTPAID_URL;
-         standbyUrlString = [CRK_STANDBY_BASE_URL stringByAppendingString:standbyUrlString];
-                  CRKUserProtolController *protolVC = [[CRKUserProtolController alloc] initWithURL:[NSURL URLWithString:urlString] standbyURL:[NSURL URLWithString:standbyUrlString]];
+            NSString *standbyUrlString = [CRKUtil isPaid]?CRK_STANDBY_AGREEMENT_PAID_URL:CRK_STANDBY_AGREEMENT_NOTPAID_URL;
+            standbyUrlString = [CRK_STANDBY_BASE_URL stringByAppendingString:standbyUrlString];
+            CRKUserProtolController *protolVC = [[CRKUserProtolController alloc] initWithURL:[NSURL URLWithString:urlString] standbyURL:[NSURL URLWithString:standbyUrlString]];
             [self.navigationController pushViewController:protolVC animated:YES];
             
-        }else {
+        }else if(indexPath.row == CRKVersionRenew ){
             CRKNewVersionsController *newVersionsVC = [[CRKNewVersionsController alloc] init];
             [self.navigationController pushViewController:newVersionsVC animated:YES];
+            
+        }else {
+           
         
         }
     }
-
+    
 }
-
 
 
 - (void)didReceiveMemoryWarning {

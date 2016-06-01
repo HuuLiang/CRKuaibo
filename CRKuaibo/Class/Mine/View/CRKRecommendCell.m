@@ -17,7 +17,7 @@ static NSString *const CRKRecommendCollectionIdentify = @"crkrecommendidentify";
 {
     UICollectionView *_collectionView;
 }
-@property (nonatomic,retain)CRKRecommendModel *recommendModel;
+
 
 @end
 
@@ -28,7 +28,6 @@ DefineLazyPropertyInitialization(CRKRecommendModel,recommendModel);
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumLineSpacing = KFlowlayoutSpace-5;
         layout.minimumInteritemSpacing = KFlowlayoutSpace;
