@@ -7,6 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3044B101CFFD45800BFB26C /* CRKChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3044B0F1CFFD45800BFB26C /* CRKChannelCell.m */; };
+		B3044B131CFFDB9D00BFB26C /* CRKChannelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3044B121CFFDB9D00BFB26C /* CRKChannelModel.m */; };
+		B3044B161D0002FD00BFB26C /* NSArray+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = B3044B151D0002FD00BFB26C /* NSArray+Log.m */; };
+		B3341ACC1CF571C90002C674 /* CRKRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3341ACB1CF571C90002C674 /* CRKRecommendCell.m */; };
+		B343BFD01CF7FA58004D7C7D /* CRKRecommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B343BFCF1CF7FA58004D7C7D /* CRKRecommendModel.m */; };
+		B3692EBB1D00224F006F03AE /* CRKChannels.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692EBA1D00224F006F03AE /* CRKChannels.m */; };
+		B3692EBE1D0023C4006F03AE /* CRKChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692EBD1D0023C4006F03AE /* CRKChannel.m */; };
+		B3692EC11D00279D006F03AE /* CRKChannelDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692EC01D00279D006F03AE /* CRKChannelDetailsController.m */; };
+		B3692EC41D002D62006F03AE /* CRKDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692EC31D002D62006F03AE /* CRKDetailsCell.m */; };
+		B3692EC61D002EF7006F03AE /* holder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3692EC51D002EF7006F03AE /* holder.jpg */; };
+		B3692ECC1D012C77006F03AE /* CRKChannelProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692ECB1D012C77006F03AE /* CRKChannelProgram.m */; };
+		B3692ECF1D0134F8006F03AE /* CRKChannelProgramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692ECE1D0134F8006F03AE /* CRKChannelProgramModel.m */; };
+		B37485841CFEA856001288F3 /* CRKOccidentController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37485831CFEA856001288F3 /* CRKOccidentController.m */; };
+		B37485871CFEA8A2001288F3 /* CRKRHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37485861CFEA8A2001288F3 /* CRKRHViewController.m */; };
+		B374858A1CFEA8B4001288F3 /* CRKDLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37485891CFEA8B4001288F3 /* CRKDLViewController.m */; };
+		B37485911CFEBA74001288F3 /* b1.png in Resources */ = {isa = PBXBuildFile; fileRef = B374858C1CFEBA74001288F3 /* b1.png */; };
+		B37485921CFEBA74001288F3 /* SlideHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = B374858E1CFEBA74001288F3 /* SlideHeadView.m */; };
+		B37485931CFEBA74001288F3 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B37485901CFEBA74001288F3 /* UIView+Extension.m */; };
+		B37485961CFEC9D4001288F3 /* CRKUniversalityController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37485951CFEC9D4001288F3 /* CRKUniversalityController.m */; };
+		B37485991CFED37A001288F3 /* CRKUniverSalityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B37485981CFED37A001288F3 /* CRKUniverSalityModel.m */; };
+		B374B9AE1CFD2D5C0063C1C6 /* CRKInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9AD1CFD2D5C0063C1C6 /* CRKInputViewController.m */; };
+		B374B9BA1CFD5F9E0063C1C6 /* CRKUserProtolController.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9B91CFD5F9E0063C1C6 /* CRKUserProtolController.m */; };
+		B374B9BD1CFD62DE0063C1C6 /* CRKNewVersionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9BC1CFD62DE0063C1C6 /* CRKNewVersionsController.m */; };
+		B374B9BF1CFD646A0063C1C6 /* app.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B374B9BE1CFD646A0063C1C6 /* app.jpg */; };
+		B37D97021CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B37D97011CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m */; };
+		B382C5251CF5B4AD00BE7089 /* CRKRecommendHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B382C5241CF5B4AD00BE7089 /* CRKRecommendHeaderView.m */; };
+		B394B9E21D0275AC00597860 /* CRKVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B394B9E11D0275AC00597860 /* CRKVideoPlayerController.m */; };
 		BC0F71041CF2ECC5000894A3 /* CRKVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0F71031CF2ECC5000894A3 /* CRKVideoPlayerViewController.m */; };
 		BC0F71091CF2EF60000894A3 /* CRKPaymentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0F71061CF2EF60000894A3 /* CRKPaymentPopView.m */; };
 		BC0F710A1CF2EF60000894A3 /* CRKVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0F71081CF2EF60000894A3 /* CRKVideoPlayer.m */; };
@@ -35,7 +62,6 @@
 		BC5B52F71CEDF5FD00CAA1A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC5B52F51CEDF5FD00CAA1A1 /* LaunchScreen.storyboard */; };
 		BC5B53001CEDF6B000CAA1A1 /* CRKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5B52FF1CEDF6B000CAA1A1 /* CRKAppDelegate.m */; };
 		BC83B8AF1CEEADB00084AAC6 /* CRKActivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC83B8A11CEEADB00084AAC6 /* CRKActivateModel.m */; };
-		BC83B8B01CEEADB00084AAC6 /* CRKChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC83B8A31CEEADB00084AAC6 /* CRKChannel.m */; };
 		BC83B8B11CEEADB00084AAC6 /* CRKEncryptedURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC83B8A51CEEADB00084AAC6 /* CRKEncryptedURLRequest.m */; };
 		BC83B8B21CEEADB00084AAC6 /* CRKProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = BC83B8A71CEEADB00084AAC6 /* CRKProgram.m */; };
 		BC83B8B31CEEADB00084AAC6 /* CRKURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC83B8A91CEEADB00084AAC6 /* CRKURLRequest.m */; };
@@ -82,6 +108,57 @@
 /* Begin PBXFileReference section */
 		1ABCE6B2C227521B0472ED5B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ADBE3C6249DAB5D5CAA28A9E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B3044B0E1CFFD45800BFB26C /* CRKChannelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannelCell.h; sourceTree = "<group>"; };
+		B3044B0F1CFFD45800BFB26C /* CRKChannelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKChannelCell.m; sourceTree = "<group>"; };
+		B3044B111CFFDB9D00BFB26C /* CRKChannelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannelModel.h; sourceTree = "<group>"; };
+		B3044B121CFFDB9D00BFB26C /* CRKChannelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKChannelModel.m; sourceTree = "<group>"; };
+		B3044B141D0002FD00BFB26C /* NSArray+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Log.h"; sourceTree = "<group>"; };
+		B3044B151D0002FD00BFB26C /* NSArray+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Log.m"; sourceTree = "<group>"; };
+		B3341ACA1CF571C90002C674 /* CRKRecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommendCell.h; sourceTree = "<group>"; };
+		B3341ACB1CF571C90002C674 /* CRKRecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommendCell.m; sourceTree = "<group>"; };
+		B343BFCE1CF7FA58004D7C7D /* CRKRecommendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommendModel.h; sourceTree = "<group>"; };
+		B343BFCF1CF7FA58004D7C7D /* CRKRecommendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommendModel.m; sourceTree = "<group>"; };
+		B3692EB91D00224F006F03AE /* CRKChannels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannels.h; sourceTree = "<group>"; };
+		B3692EBA1D00224F006F03AE /* CRKChannels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKChannels.m; sourceTree = "<group>"; };
+		B3692EBC1D0023C4006F03AE /* CRKChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannel.h; sourceTree = "<group>"; };
+		B3692EBD1D0023C4006F03AE /* CRKChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKChannel.m; sourceTree = "<group>"; };
+		B3692EBF1D00279D006F03AE /* CRKChannelDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannelDetailsController.h; sourceTree = "<group>"; };
+		B3692EC01D00279D006F03AE /* CRKChannelDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKChannelDetailsController.m; sourceTree = "<group>"; };
+		B3692EC21D002D62006F03AE /* CRKDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKDetailsCell.h; sourceTree = "<group>"; };
+		B3692EC31D002D62006F03AE /* CRKDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKDetailsCell.m; sourceTree = "<group>"; };
+		B3692EC51D002EF7006F03AE /* holder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = holder.jpg; sourceTree = "<group>"; };
+		B3692ECA1D012C77006F03AE /* CRKChannelProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannelProgram.h; sourceTree = "<group>"; };
+		B3692ECB1D012C77006F03AE /* CRKChannelProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKChannelProgram.m; sourceTree = "<group>"; };
+		B3692ECD1D0134F8006F03AE /* CRKChannelProgramModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannelProgramModel.h; sourceTree = "<group>"; };
+		B3692ECE1D0134F8006F03AE /* CRKChannelProgramModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKChannelProgramModel.m; sourceTree = "<group>"; };
+		B37485821CFEA856001288F3 /* CRKOccidentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKOccidentController.h; sourceTree = "<group>"; };
+		B37485831CFEA856001288F3 /* CRKOccidentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKOccidentController.m; sourceTree = "<group>"; };
+		B37485851CFEA8A2001288F3 /* CRKRHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRHViewController.h; sourceTree = "<group>"; };
+		B37485861CFEA8A2001288F3 /* CRKRHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRHViewController.m; sourceTree = "<group>"; };
+		B37485881CFEA8B4001288F3 /* CRKDLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKDLViewController.h; sourceTree = "<group>"; };
+		B37485891CFEA8B4001288F3 /* CRKDLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKDLViewController.m; sourceTree = "<group>"; };
+		B374858C1CFEBA74001288F3 /* b1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b1.png; sourceTree = "<group>"; };
+		B374858D1CFEBA74001288F3 /* SlideHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideHeadView.h; sourceTree = "<group>"; };
+		B374858E1CFEBA74001288F3 /* SlideHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideHeadView.m; sourceTree = "<group>"; };
+		B374858F1CFEBA74001288F3 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		B37485901CFEBA74001288F3 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		B37485941CFEC9D4001288F3 /* CRKUniversalityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKUniversalityController.h; sourceTree = "<group>"; };
+		B37485951CFEC9D4001288F3 /* CRKUniversalityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKUniversalityController.m; sourceTree = "<group>"; };
+		B37485971CFED37A001288F3 /* CRKUniverSalityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKUniverSalityModel.h; sourceTree = "<group>"; };
+		B37485981CFED37A001288F3 /* CRKUniverSalityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKUniverSalityModel.m; sourceTree = "<group>"; };
+		B374B9AC1CFD2D5C0063C1C6 /* CRKInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRKInputViewController.h; path = ../../Base/Controller/CRKInputViewController.h; sourceTree = "<group>"; };
+		B374B9AD1CFD2D5C0063C1C6 /* CRKInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CRKInputViewController.m; path = ../../Base/Controller/CRKInputViewController.m; sourceTree = "<group>"; };
+		B374B9B81CFD5F9E0063C1C6 /* CRKUserProtolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKUserProtolController.h; sourceTree = "<group>"; };
+		B374B9B91CFD5F9E0063C1C6 /* CRKUserProtolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKUserProtolController.m; sourceTree = "<group>"; };
+		B374B9BB1CFD62DE0063C1C6 /* CRKNewVersionsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKNewVersionsController.h; sourceTree = "<group>"; };
+		B374B9BC1CFD62DE0063C1C6 /* CRKNewVersionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKNewVersionsController.m; sourceTree = "<group>"; };
+		B374B9BE1CFD646A0063C1C6 /* app.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = app.jpg; sourceTree = "<group>"; };
+		B37D97001CF7EF2100520BDB /* CRKRecommentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommentCollectionViewCell.h; sourceTree = "<group>"; };
+		B37D97011CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommentCollectionViewCell.m; sourceTree = "<group>"; };
+		B382C5231CF5B4AD00BE7089 /* CRKRecommendHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommendHeaderView.h; sourceTree = "<group>"; };
+		B382C5241CF5B4AD00BE7089 /* CRKRecommendHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommendHeaderView.m; sourceTree = "<group>"; };
+		B394B9E01D0275AC00597860 /* CRKVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKVideoPlayerController.h; sourceTree = "<group>"; };
+		B394B9E11D0275AC00597860 /* CRKVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKVideoPlayerController.m; sourceTree = "<group>"; };
 		BC0F71021CF2ECC5000894A3 /* CRKVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKVideoPlayerViewController.h; sourceTree = "<group>"; };
 		BC0F71031CF2ECC5000894A3 /* CRKVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKVideoPlayerViewController.m; sourceTree = "<group>"; };
 		BC0F71051CF2EF60000894A3 /* CRKPaymentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKPaymentPopView.h; sourceTree = "<group>"; };
@@ -131,8 +208,6 @@
 		BC5B52FF1CEDF6B000CAA1A1 /* CRKAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKAppDelegate.m; sourceTree = "<group>"; };
 		BC83B8A01CEEADB00084AAC6 /* CRKActivateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKActivateModel.h; sourceTree = "<group>"; };
 		BC83B8A11CEEADB00084AAC6 /* CRKActivateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKActivateModel.m; sourceTree = "<group>"; };
-		BC83B8A21CEEADB00084AAC6 /* CRKChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannel.h; sourceTree = "<group>"; };
-		BC83B8A31CEEADB00084AAC6 /* CRKChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKChannel.m; sourceTree = "<group>"; };
 		BC83B8A41CEEADB00084AAC6 /* CRKEncryptedURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKEncryptedURLRequest.h; sourceTree = "<group>"; };
 		BC83B8A51CEEADB00084AAC6 /* CRKEncryptedURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKEncryptedURLRequest.m; sourceTree = "<group>"; };
 		BC83B8A61CEEADB00084AAC6 /* CRKProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKProgram.h; sourceTree = "<group>"; };
@@ -265,9 +340,87 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B3341AC31CF569780002C674 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B37485971CFED37A001288F3 /* CRKUniverSalityModel.h */,
+				B37485981CFED37A001288F3 /* CRKUniverSalityModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B3341AC41CF569780002C674 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B3341AC51CF56C3C0002C674 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B343BFCE1CF7FA58004D7C7D /* CRKRecommendModel.h */,
+				B343BFCF1CF7FA58004D7C7D /* CRKRecommendModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B3341AC61CF56C3C0002C674 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B3341ACA1CF571C90002C674 /* CRKRecommendCell.h */,
+				B3341ACB1CF571C90002C674 /* CRKRecommendCell.m */,
+				B382C5231CF5B4AD00BE7089 /* CRKRecommendHeaderView.h */,
+				B382C5241CF5B4AD00BE7089 /* CRKRecommendHeaderView.m */,
+				B37D97001CF7EF2100520BDB /* CRKRecommentCollectionViewCell.h */,
+				B37D97011CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B374858B1CFEBA74001288F3 /* SlideNavClass */ = {
+			isa = PBXGroup;
+			children = (
+				B374858C1CFEBA74001288F3 /* b1.png */,
+				B374858D1CFEBA74001288F3 /* SlideHeadView.h */,
+				B374858E1CFEBA74001288F3 /* SlideHeadView.m */,
+				B374858F1CFEBA74001288F3 /* UIView+Extension.h */,
+				B37485901CFEBA74001288F3 /* UIView+Extension.m */,
+			);
+			path = SlideNavClass;
+			sourceTree = "<group>";
+		};
+		B374859D1CFED8F0001288F3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B3692EB91D00224F006F03AE /* CRKChannels.h */,
+				B3692EBA1D00224F006F03AE /* CRKChannels.m */,
+				B3044B111CFFDB9D00BFB26C /* CRKChannelModel.h */,
+				B3044B121CFFDB9D00BFB26C /* CRKChannelModel.m */,
+				B3692ECA1D012C77006F03AE /* CRKChannelProgram.h */,
+				B3692ECB1D012C77006F03AE /* CRKChannelProgram.m */,
+				B3692ECD1D0134F8006F03AE /* CRKChannelProgramModel.h */,
+				B3692ECE1D0134F8006F03AE /* CRKChannelProgramModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B374859E1CFED8F0001288F3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B3044B0E1CFFD45800BFB26C /* CRKChannelCell.h */,
+				B3044B0F1CFFD45800BFB26C /* CRKChannelCell.m */,
+				B3692EC21D002D62006F03AE /* CRKDetailsCell.h */,
+				B3692EC31D002D62006F03AE /* CRKDetailsCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BC0F71291CF30996000894A3 /* Channel */ = {
 			isa = PBXGroup;
 			children = (
+				B374859D1CFED8F0001288F3 /* Model */,
+				B374859E1CFED8F0001288F3 /* View */,
 				BC0F712A1CF30997000894A3 /* Controller */,
 			);
 			path = Channel;
@@ -278,6 +431,10 @@
 			children = (
 				BC0F71321CF309D3000894A3 /* CRKChannelViewController.h */,
 				BC0F71331CF309D3000894A3 /* CRKChannelViewController.m */,
+				B3692EBF1D00279D006F03AE /* CRKChannelDetailsController.h */,
+				B3692EC01D00279D006F03AE /* CRKChannelDetailsController.m */,
+				B394B9E01D0275AC00597860 /* CRKVideoPlayerController.h */,
+				B394B9E11D0275AC00597860 /* CRKVideoPlayerController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -285,6 +442,9 @@
 		BC0F712B1CF30997000894A3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B374858B1CFEBA74001288F3 /* SlideNavClass */,
+				B3341AC31CF569780002C674 /* Model */,
+				B3341AC41CF569780002C674 /* View */,
 				BC0F712C1CF30997000894A3 /* Controller */,
 			);
 			path = Home;
@@ -295,6 +455,14 @@
 			children = (
 				BC0F712F1CF309BD000894A3 /* CRKHomeViewController.h */,
 				BC0F71301CF309BD000894A3 /* CRKHomeViewController.m */,
+				B37485821CFEA856001288F3 /* CRKOccidentController.h */,
+				B37485831CFEA856001288F3 /* CRKOccidentController.m */,
+				B37485851CFEA8A2001288F3 /* CRKRHViewController.h */,
+				B37485861CFEA8A2001288F3 /* CRKRHViewController.m */,
+				B37485881CFEA8B4001288F3 /* CRKDLViewController.h */,
+				B37485891CFEA8B4001288F3 /* CRKDLViewController.m */,
+				B37485941CFEC9D4001288F3 /* CRKUniversalityController.h */,
+				B37485951CFEC9D4001288F3 /* CRKUniversalityController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -302,6 +470,8 @@
 		BC0F712D1CF30997000894A3 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				B3341AC51CF56C3C0002C674 /* Model */,
+				B3341AC61CF56C3C0002C674 /* View */,
 				BC0F712E1CF30997000894A3 /* Controller */,
 			);
 			path = Mine;
@@ -312,6 +482,12 @@
 			children = (
 				BC0F71351CF309E1000894A3 /* CRKMineViewController.h */,
 				BC0F71361CF309E1000894A3 /* CRKMineViewController.m */,
+				B374B9AC1CFD2D5C0063C1C6 /* CRKInputViewController.h */,
+				B374B9AD1CFD2D5C0063C1C6 /* CRKInputViewController.m */,
+				B374B9B81CFD5F9E0063C1C6 /* CRKUserProtolController.h */,
+				B374B9B91CFD5F9E0063C1C6 /* CRKUserProtolController.m */,
+				B374B9BB1CFD62DE0063C1C6 /* CRKNewVersionsController.h */,
+				B374B9BC1CFD62DE0063C1C6 /* CRKNewVersionsController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -365,6 +541,8 @@
 		BC5B52DB1CEDF5FD00CAA1A1 = {
 			isa = PBXGroup;
 			children = (
+				B3044B141D0002FD00BFB26C /* NSArray+Log.h */,
+				B3044B151D0002FD00BFB26C /* NSArray+Log.m */,
 				BC5B52E61CEDF5FD00CAA1A1 /* CRKuaibo */,
 				BC5B52E51CEDF5FD00CAA1A1 /* Products */,
 				551F48DDD6ECF46FE912EABE /* Pods */,
@@ -396,6 +574,8 @@
 		BC5B52E71CEDF5FD00CAA1A1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B374B9BE1CFD646A0063C1C6 /* app.jpg */,
+				B3692EC51D002EF7006F03AE /* holder.jpg */,
 				BC5B52E81CEDF5FD00CAA1A1 /* main.m */,
 				BC5B52F81CEDF5FD00CAA1A1 /* Info.plist */,
 				BC83B9151CEEB19C0084AAC6 /* CRKPrefixHeader.pch */,
@@ -425,7 +605,6 @@
 				BC2939F61CF2DB59000128E2 /* View */,
 				BC83B89E1CEEADB00084AAC6 /* Controller */,
 				BC83B89F1CEEADB00084AAC6 /* Model */,
-				BC83B8AE1CEEADB00084AAC6 /* View */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -451,12 +630,12 @@
 				BC83B9261CEEC3160084AAC6 /* Payment */,
 				BC83B8A01CEEADB00084AAC6 /* CRKActivateModel.h */,
 				BC83B8A11CEEADB00084AAC6 /* CRKActivateModel.m */,
-				BC83B8A21CEEADB00084AAC6 /* CRKChannel.h */,
-				BC83B8A31CEEADB00084AAC6 /* CRKChannel.m */,
 				BC83B8A41CEEADB00084AAC6 /* CRKEncryptedURLRequest.h */,
 				BC83B8A51CEEADB00084AAC6 /* CRKEncryptedURLRequest.m */,
 				BC83B8A61CEEADB00084AAC6 /* CRKProgram.h */,
 				BC83B8A71CEEADB00084AAC6 /* CRKProgram.m */,
+				B3692EBC1D0023C4006F03AE /* CRKChannel.h */,
+				B3692EBD1D0023C4006F03AE /* CRKChannel.m */,
 				BC83B8A81CEEADB00084AAC6 /* CRKURLRequest.h */,
 				BC83B8A91CEEADB00084AAC6 /* CRKURLRequest.m */,
 				BC83B8AA1CEEADB00084AAC6 /* CRKURLResponse.h */,
@@ -471,13 +650,6 @@
 				BC0F711B1CF3029B000894A3 /* CRKAppSpreadBannerModel.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		BC83B8AE1CEEADB00084AAC6 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		BC83B8B61CEEB0440084AAC6 /* Utils */ = {
@@ -669,6 +841,7 @@
 				TargetAttributes = {
 					BC5B52E31CEDF5FD00CAA1A1 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 7VHT3KAS56;
 					};
 				};
 			};
@@ -697,6 +870,9 @@
 			files = (
 				BC0F71391CF30C28000894A3 /* config.plist in Resources */,
 				BC5B52F71CEDF5FD00CAA1A1 /* LaunchScreen.storyboard in Resources */,
+				B37485911CFEBA74001288F3 /* b1.png in Resources */,
+				B374B9BF1CFD646A0063C1C6 /* app.jpg in Resources */,
+				B3692EC61D002EF7006F03AE /* holder.jpg in Resources */,
 				BC5B52F41CEDF5FD00CAA1A1 /* Assets.xcassets in Resources */,
 				BC293A091CF2E05B000128E2 /* IapppayAlphaResource.bundle in Resources */,
 			);
@@ -758,7 +934,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC0F71041CF2ECC5000894A3 /* CRKVideoPlayerViewController.m in Sources */,
+				B37485991CFED37A001288F3 /* CRKUniverSalityModel.m in Sources */,
+				B37485841CFEA856001288F3 /* CRKOccidentController.m in Sources */,
 				BC83B91B1CEEB7FE0084AAC6 /* NSDictionary+CRKSign.m in Sources */,
+				B3692EBE1D0023C4006F03AE /* CRKChannel.m in Sources */,
 				BC0F710D1CF2F055000894A3 /* CRKPaymentViewController.m in Sources */,
 				BC83B9011CEEB0440084AAC6 /* NSString+crypt.m in Sources */,
 				BC0F711F1CF3054D000894A3 /* CRKSpreadBannerViewController.m in Sources */,
@@ -766,17 +945,21 @@
 				BC0F71091CF2EF60000894A3 /* CRKPaymentPopView.m in Sources */,
 				BC0F71121CF2F135000894A3 /* CRKApplication.m in Sources */,
 				BC83B9141CEEB0440084AAC6 /* WXUtil.mm in Sources */,
+				B37485931CFEBA74001288F3 /* UIView+Extension.m in Sources */,
 				BC83B8B31CEEADB00084AAC6 /* CRKURLRequest.m in Sources */,
 				BC83B91E1CEEB8270084AAC6 /* CRKUtil.m in Sources */,
 				BC83B9001CEEB0440084AAC6 /* NSObject+PropertyAccessInspecting.m in Sources */,
+				B3044B101CFFD45800BFB26C /* CRKChannelCell.m in Sources */,
 				BC2939FF1CF2DF94000128E2 /* CRKPaymentManager.m in Sources */,
 				BC83B9111CEEB0440084AAC6 /* payRequsestHandler.mm in Sources */,
+				B3044B131CFFDB9D00BFB26C /* CRKChannelModel.m in Sources */,
 				BC0F71191CF2FCC7000894A3 /* CRKSystemConfigModel.m in Sources */,
 				BC0F71221CF305FE000894A3 /* CRKLocalNotificationManager.m in Sources */,
 				BC83B8B11CEEADB00084AAC6 /* CRKEncryptedURLRequest.m in Sources */,
 				BC2939FC1CF2DB84000128E2 /* CRKBaseViewController.m in Sources */,
 				BC83B92D1CEEC3160084AAC6 /* CRKPaymentConfig.m in Sources */,
 				BC0F71341CF309D3000894A3 /* CRKChannelViewController.m in Sources */,
+				B3341ACC1CF571C90002C674 /* CRKRecommendCell.m in Sources */,
 				BC83B9091CEEB0440084AAC6 /* UIImage+crop.m in Sources */,
 				BC83B9131CEEB0440084AAC6 /* WeChatPayQueryOrderRequest.m in Sources */,
 				BC83B9081CEEB0440084AAC6 /* UIImage+color.m in Sources */,
@@ -784,36 +967,52 @@
 				BC83B9251CEEC13F0084AAC6 /* CRKPaymentInfo.m in Sources */,
 				BC83B8FE1CEEB0440084AAC6 /* NSMutableDictionary+SafeCoding.m in Sources */,
 				BC83B8F91CEEB0440084AAC6 /* CRKErrorHandler.m in Sources */,
-				BC83B8B01CEEADB00084AAC6 /* CRKChannel.m in Sources */,
+				B382C5251CF5B4AD00BE7089 /* CRKRecommendHeaderView.m in Sources */,
+				B37485921CFEBA74001288F3 /* SlideHeadView.m in Sources */,
+				B37D97021CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m in Sources */,
+				B3692ECF1D0134F8006F03AE /* CRKChannelProgramModel.m in Sources */,
 				BC83B8FA1CEEB0440084AAC6 /* CRKHudManager.m in Sources */,
 				BC83B9061CEEB0440084AAC6 /* UIColor+CustomColor.m in Sources */,
 				BC83B9121CEEB0440084AAC6 /* WeChatPayManager.m in Sources */,
 				BC0F71181CF2FCC6000894A3 /* CRKSystemConfig.m in Sources */,
+				B343BFD01CF7FA58004D7C7D /* CRKRecommendModel.m in Sources */,
 				BC5B53001CEDF6B000CAA1A1 /* CRKAppDelegate.m in Sources */,
 				BC83B90E1CEEB0440084AAC6 /* UIViewExt.m in Sources */,
 				BC0F71131CF2F135000894A3 /* CRKApplicationManager.m in Sources */,
+				B3044B161D0002FD00BFB26C /* NSArray+Log.m in Sources */,
 				BC0F71311CF309BD000894A3 /* CRKHomeViewController.m in Sources */,
 				BC83B8AF1CEEADB00084AAC6 /* CRKActivateModel.m in Sources */,
 				BC83B90F1CEEB0440084AAC6 /* RACEXTRuntimeExtensions.m in Sources */,
+				B3692EBB1D00224F006F03AE /* CRKChannels.m in Sources */,
 				BC83B9021CEEB0440084AAC6 /* NSString+FilterHTML.m in Sources */,
 				BC0F711C1CF3029B000894A3 /* CRKAppSpreadBannerModel.m in Sources */,
+				B37485871CFEA8A2001288F3 /* CRKRHViewController.m in Sources */,
+				B3692EC41D002D62006F03AE /* CRKDetailsCell.m in Sources */,
 				BC83B9031CEEB0440084AAC6 /* NSString+length.m in Sources */,
 				BC83B90B1CEEB0440084AAC6 /* UIScrollView+Refresh.m in Sources */,
 				BC83B90D1CEEB0440084AAC6 /* UIView+Loading.m in Sources */,
 				BC83B8FF1CEEB0440084AAC6 /* NSObject+Properties.m in Sources */,
 				BC83B8B41CEEADB00084AAC6 /* CRKURLResponse.m in Sources */,
+				B374858A1CFEA8B4001288F3 /* CRKDLViewController.m in Sources */,
+				B374B9BD1CFD62DE0063C1C6 /* CRKNewVersionsController.m in Sources */,
 				BC5B52E91CEDF5FD00CAA1A1 /* main.m in Sources */,
 				BC83B8B21CEEADB00084AAC6 /* CRKProgram.m in Sources */,
+				B394B9E21D0275AC00597860 /* CRKVideoPlayerController.m in Sources */,
 				BC83B9041CEEB0440084AAC6 /* NSString+md5.m in Sources */,
 				BC83B9051CEEB0440084AAC6 /* NSString+meltutils.m in Sources */,
 				BC83B9071CEEB0440084AAC6 /* UIColor+hexColor.m in Sources */,
+				B374B9AE1CFD2D5C0063C1C6 /* CRKInputViewController.m in Sources */,
 				BC83B92E1CEEC3160084AAC6 /* CRKPaymentConfigModel.m in Sources */,
 				BC83B9101CEEB0440084AAC6 /* ApiXml.mm in Sources */,
+				B3692EC11D00279D006F03AE /* CRKChannelDetailsController.m in Sources */,
+				B374B9BA1CFD5F9E0063C1C6 /* CRKUserProtolController.m in Sources */,
+				B3692ECC1D012C77006F03AE /* CRKChannelProgram.m in Sources */,
 				BC83B90C1CEEB0440084AAC6 /* UITableView+Separator.m in Sources */,
 				BC83B8FC1CEEB0440084AAC6 /* NSDate+Utilities.m in Sources */,
 				BC83B92F1CEEC3160084AAC6 /* CRKPaymentModel.m in Sources */,
 				BC83B90A1CEEB0440084AAC6 /* UIImageView+YPBAnimation.m in Sources */,
 				BC0F71371CF309E1000894A3 /* CRKMineViewController.m in Sources */,
+				B37485961CFEC9D4001288F3 /* CRKUniversalityController.m in Sources */,
 				BC0F710A1CF2EF60000894A3 /* CRKVideoPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -940,10 +1139,11 @@
 					"$(PROJECT_DIR)/CRKuaibo/Class/Vendor/Umeng",
 					"$(PROJECT_DIR)/CRKuaibo/Class/Vendor/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iqu8.CRKuaibo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.photolibrary2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -969,10 +1169,11 @@
 					"$(PROJECT_DIR)/CRKuaibo/Class/Vendor/Umeng",
 					"$(PROJECT_DIR)/CRKuaibo/Class/Vendor/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iqu8.CRKuaibo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.photolibrary2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};

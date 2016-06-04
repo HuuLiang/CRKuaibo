@@ -12,13 +12,13 @@
 #import "CRKConfiguration.h"
 
 #define CRK_CHANNEL_NO           [CRKConfiguration sharedConfig].channelNo
-#define CRK_REST_APP_ID          @"QUBA_2006"
-#define CRK_REST_PV              @140
-#define CRK_PAYMENT_PV           @200
+#define CRK_REST_APP_ID          @"QUBA_2022"
+#define CRK_REST_PV              @100
+#define CRK_PAYMENT_PV           @100
 #define CRK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd."
 #define CRK_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", CRK_REST_APP_ID, CRK_CHANNEL_NO]
 
-#define CRK_BASE_URL             @"http://iv.ihuiyx.com"//@"http://120.24.252.114:8093" //
+#define CRK_BASE_URL             @"http://120.24.252.114:8093" //@"http://iv.ihuiyx.com"//
 #define CRK_UMENG_APP_ID         @"56e653d767e58e0eb7002156"
 
 #define CRK_HOME_VIDEO_URL              @"/iosvideo/homePage.htm"
@@ -44,7 +44,7 @@
 #define CRK_STATS_PAY_URL               @"/stats/payRes.service"
 
 #define CRK_PAYMENT_COMMIT_URL          @"http://pay.iqu8.net/paycenter/qubaPr.json" //@"http://120.24.252.114:8084/paycenter/qubaPr.json" //
-#define CRK_PAYMENT_CONFIG_URL          @"http://pay.iqu8.net/paycenter/payConfig.json"//@"http://120.24.252.114:8084/paycenter/payConfig.json"//
+#define CRK_PAYMENT_CONFIG_URL          @"http://120.24.252.114:8084/paycenter/payConfig.json"////@"http://pay.iqu8.net/paycenter/payConfig.json"//
 #define CRK_STANDBY_PAYMENT_CONFIG_URL  @"http://appcdn.mqu8.com/static/iosvideo/payConfig_%@.json"
 
 #define CRK_STANDBY_BASE_URL                @"http://appcdn.mqu8.com"

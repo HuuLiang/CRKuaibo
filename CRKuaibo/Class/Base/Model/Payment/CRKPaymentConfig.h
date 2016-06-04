@@ -41,28 +41,28 @@ typedef NS_ENUM(NSUInteger, CRKSubPayType) {
 //+ (instancetype)defaultConfig;
 @end
 
-@interface CRKVIAPayConfig : NSObject
-
-@property (nonatomic) NSString *packageId;
-@property (nonatomic) NSNumber *supportPayTypes;
-
-+ (instancetype)defaultConfig;
-
-@end
-
-@interface CRKSPayConfig : NSObject
-@property (nonatomic) NSString *signKey;
-@property (nonatomic) NSString *mchId;
-@property (nonatomic) NSString *notifyUrl;
-@end
+//@interface CRKVIAPayConfig : NSObject
+//
+//@property (nonatomic) NSString *packageId;
+//@property (nonatomic) NSNumber *supportPayTypes;
+//
+//+ (instancetype)defaultConfig;
+//
+//@end
+//
+//@interface CRKSPayConfig : NSObject
+//@property (nonatomic) NSString *signKey;
+//@property (nonatomic) NSString *mchId;
+//@property (nonatomic) NSString *notifyUrl;
+//@end
 
 @interface CRKPaymentConfig : CRKURLResponse
 
 @property (nonatomic,retain) CRKWeChatPaymentConfig *weixinInfo;
 @property (nonatomic,retain) CRKAlipayConfig *alipayInfo;
 @property (nonatomic,retain) CRKIAppPayConfig *iappPayInfo;
-@property (nonatomic,retain) CRKVIAPayConfig *syskPayInfo;
-@property (nonatomic,retain) CRKSPayConfig *wftPayInfo;
+//@property (nonatomic,retain) CRKVIAPayConfig *syskPayInfo;
+//@property (nonatomic,retain) CRKSPayConfig *wftPayInfo;
 
 + (instancetype)sharedConfig;
 - (void)setAsCurrentConfig;

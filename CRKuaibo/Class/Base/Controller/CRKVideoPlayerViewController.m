@@ -34,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
-    
+        self.navigationController.navigationBarHidden = YES;
     @weakify(self);
     _videoPlayer = [[CRKVideoPlayer alloc] initWithVideoURL:[NSURL URLWithString:self.video.videoUrl]];
     _videoPlayer.endPlayAction = ^(id sender) {
@@ -63,6 +63,7 @@
         [self->_videoPlayer pause];
         
         [self dismissAndPopPayment];
+        [self dismissViewControllerAnimated:YES completion:nil];
     } forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -77,7 +78,6 @@
                                                    programLocation:self.videoLocation
                                                          inChannel:self.channel
                                              withCompletionHandler:nil];
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 //- (BOOL)shouldAutorotate {
 //    return YES;

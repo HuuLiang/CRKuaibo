@@ -156,6 +156,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
             CRKInputViewController *inputVC = [[CRKInputViewController alloc] init];
             inputVC.title = cell.textLabel.text;
             inputVC.limitedTextLength = 140;
+            inputVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:inputVC animated:YES];
         }else if (indexPath.row == CRKUserAgreement){
             //用户协yi
@@ -165,10 +166,12 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
             NSString *standbyUrlString = [CRKUtil isPaid]?CRK_STANDBY_AGREEMENT_PAID_URL:CRK_STANDBY_AGREEMENT_NOTPAID_URL;
             standbyUrlString = [CRK_STANDBY_BASE_URL stringByAppendingString:standbyUrlString];
             CRKUserProtolController *protolVC = [[CRKUserProtolController alloc] initWithURL:[NSURL URLWithString:urlString] standbyURL:[NSURL URLWithString:standbyUrlString]];
+            protolVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:protolVC animated:YES];
             
         }else if(indexPath.row == CRKVersionRenew ){
             CRKNewVersionsController *newVersionsVC = [[CRKNewVersionsController alloc] init];
+            newVersionsVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:newVersionsVC animated:YES];
             
         }else {

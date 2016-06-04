@@ -151,11 +151,11 @@
         _textLimitLabel.text = [NSString stringWithFormat:@"%ld", self.limitedTextLength - self.text.length];
     }
     
-    if (self.changeHandler) {
-        self.navigationItem.rightBarButtonItem.enabled = self.changeHandler(self, self.text);
-    } else {
-        self.navigationItem.rightBarButtonItem.enabled = _text.length > 0;
-    }
+//    if (self.changeHandler) {
+//        self.navigationItem.rightBarButtonItem.enabled = self.changeHandler(self, self.text);
+//    } else {
+//        self.navigationItem.rightBarButtonItem.enabled = _text.length > 0;
+//    }
 }
 
 - (void)didReceiveMemoryWarning {

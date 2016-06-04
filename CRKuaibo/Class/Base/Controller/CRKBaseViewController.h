@@ -12,5 +12,4 @@
 
 - (void)switchToPlayProgram:(CRKProgram *)program programLocation:(NSUInteger)programLocation inChannel:(CRKChannel *)channel;
 
-
 @end

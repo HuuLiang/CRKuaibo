@@ -58,22 +58,17 @@
 //    _popView.headerImageURL = [NSURL URLWithString:[CRKSystemConfigModel sharedModel].hasDiscount ? [CRKSystemConfigModel sharedModel].discountImage : [CRKSystemConfigModel sharedModel].paymentImage];
     _popView.footerImage = [UIImage imageNamed:@"payment_footer"];
     
-    if ([CRKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & CRKSubPayTypeAlipay) {
+    if ([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & CRKSubPayTypeAlipay) {
         [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-            Pay(CRKPaymentTypeVIAPay, CRKPaymentTypeAlipay);
+            Pay(CRKPaymentTypeIAppPay, CRKPaymentTypeAlipay);
         }];
     }
     
-    if ([CRKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & CRKSubPayTypeWeChat) {
+    if ([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & CRKSubPayTypeWeChat) {
         [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信客户端支付" available:YES action:^(id sender) {
-            Pay(CRKPaymentTypeVIAPay, CRKPaymentTypeWeChatPay);
-        }];
-    } else if ([CRKPaymentConfig sharedConfig].wftPayInfo) {
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信客户端支付" available:YES action:^(id sender) {
-            Pay(CRKPaymentTypeSPay, CRKPaymentTypeWeChatPay);
+            Pay(CRKPaymentTypeIAppPay, CRKPaymentTypeWeChatPay);
         }];
     }
-    
 //    if (([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & CRKIAppPayTypeWeChat)
 //        || [CRKPaymentConfig sharedConfig].weixinInfo) {
 //        BOOL useBuildInWeChatPay = [CRKPaymentConfig sharedConfig].weixinInfo != nil;

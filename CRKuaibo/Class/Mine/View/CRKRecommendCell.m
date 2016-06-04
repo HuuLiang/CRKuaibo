@@ -17,7 +17,7 @@ static NSString *const CRKRecommendCollectionIdentify = @"crkrecommendidentify";
 {
     UICollectionView *_collectionView;
 }
-
+@property (nonatomic,retain)CRKRecommendModel *recommendModel;
 
 @end
 
