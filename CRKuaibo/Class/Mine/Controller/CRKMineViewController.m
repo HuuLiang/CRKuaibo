@@ -15,7 +15,7 @@
 
 static NSString *KUserCorrelationCellIdentifer = @"kusercorrelationcell";
 static NSString *KRecommendCellIdentifer = @"krecommendcell";
-static NSInteger KSections = 2;
+static NSInteger KSections = 3;
 
 typedef NS_ENUM(NSInteger , CRKSectionNumber) {
     CRKRecommend,
@@ -77,7 +77,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
 #pragma mark UITableView Delegate Datesurse
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 3;
+    return KSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

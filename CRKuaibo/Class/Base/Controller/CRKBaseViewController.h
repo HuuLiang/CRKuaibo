@@ -12,4 +12,10 @@
 
 - (void)switchToPlayProgram:(CRKProgram *)program programLocation:(NSUInteger)programLocation inChannel:(CRKChannel *)channel;
 
+- (void)playVideo:(CRKProgram *)video
+    videoLocation:(NSUInteger)videoLocation
+        inChannel:(CRKChannel *)channel
+  withTimeControl:(BOOL)hasTimeControl
+ shouldPopPayment:(BOOL)shouldPopPayment;
+
 @end

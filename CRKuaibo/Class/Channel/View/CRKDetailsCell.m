@@ -142,7 +142,8 @@
     for (int i = 0; i < KStarts; i++) {
         if (i>starsCount-1) {
             _starView.subviews[i].hidden = YES;
-              NSLog(@">>>>>>>>%d",starsCount);
+        }else{
+            _starView.subviews[i].hidden = NO;
         }
     }
     

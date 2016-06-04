@@ -33,7 +33,6 @@
 		B374B9BF1CFD646A0063C1C6 /* app.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B374B9BE1CFD646A0063C1C6 /* app.jpg */; };
 		B37D97021CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B37D97011CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m */; };
 		B382C5251CF5B4AD00BE7089 /* CRKRecommendHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B382C5241CF5B4AD00BE7089 /* CRKRecommendHeaderView.m */; };
-		B394B9E21D0275AC00597860 /* CRKVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B394B9E11D0275AC00597860 /* CRKVideoPlayerController.m */; };
 		BC0F71041CF2ECC5000894A3 /* CRKVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0F71031CF2ECC5000894A3 /* CRKVideoPlayerViewController.m */; };
 		BC0F71091CF2EF60000894A3 /* CRKPaymentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0F71061CF2EF60000894A3 /* CRKPaymentPopView.m */; };
 		BC0F710A1CF2EF60000894A3 /* CRKVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0F71081CF2EF60000894A3 /* CRKVideoPlayer.m */; };
@@ -157,8 +156,6 @@
 		B37D97011CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommentCollectionViewCell.m; sourceTree = "<group>"; };
 		B382C5231CF5B4AD00BE7089 /* CRKRecommendHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommendHeaderView.h; sourceTree = "<group>"; };
 		B382C5241CF5B4AD00BE7089 /* CRKRecommendHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommendHeaderView.m; sourceTree = "<group>"; };
-		B394B9E01D0275AC00597860 /* CRKVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKVideoPlayerController.h; sourceTree = "<group>"; };
-		B394B9E11D0275AC00597860 /* CRKVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKVideoPlayerController.m; sourceTree = "<group>"; };
 		BC0F71021CF2ECC5000894A3 /* CRKVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKVideoPlayerViewController.h; sourceTree = "<group>"; };
 		BC0F71031CF2ECC5000894A3 /* CRKVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKVideoPlayerViewController.m; sourceTree = "<group>"; };
 		BC0F71051CF2EF60000894A3 /* CRKPaymentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKPaymentPopView.h; sourceTree = "<group>"; };
@@ -433,8 +430,6 @@
 				BC0F71331CF309D3000894A3 /* CRKChannelViewController.m */,
 				B3692EBF1D00279D006F03AE /* CRKChannelDetailsController.h */,
 				B3692EC01D00279D006F03AE /* CRKChannelDetailsController.m */,
-				B394B9E01D0275AC00597860 /* CRKVideoPlayerController.h */,
-				B394B9E11D0275AC00597860 /* CRKVideoPlayerController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -997,7 +992,6 @@
 				B374B9BD1CFD62DE0063C1C6 /* CRKNewVersionsController.m in Sources */,
 				BC5B52E91CEDF5FD00CAA1A1 /* main.m in Sources */,
 				BC83B8B21CEEADB00084AAC6 /* CRKProgram.m in Sources */,
-				B394B9E21D0275AC00597860 /* CRKVideoPlayerController.m in Sources */,
 				BC83B9041CEEB0440084AAC6 /* NSString+md5.m in Sources */,
 				BC83B9051CEEB0440084AAC6 /* NSString+meltutils.m in Sources */,
 				BC83B9071CEEB0440084AAC6 /* UIColor+hexColor.m in Sources */,

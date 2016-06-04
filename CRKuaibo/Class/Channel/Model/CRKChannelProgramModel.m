@@ -24,7 +24,7 @@
                          pageSize:(NSUInteger)pageSize
                 completionHandler:(CRKFetchChannelProgramCompletionHandler)handler {
     @weakify(self);
-    NSDictionary *params = @{@"columnId":columnId, @"page":@(pageNo), @"pageSize":@(pageSize),@"scale":[CRKUtil isPaid]?@1:@2};
+    NSDictionary *params = @{@"columnId":columnId, @"page":@(pageNo), @"pageSize":@(pageSize),@"scale":[CRKUtil isPaid]?@2:@2};//@1
     BOOL success = [self requestURLPath:CRK_CHANNEL_PROGRAM_URL
                              withParams:params
                         responseHandler:^(CRKURLResponseStatus respStatus, NSString *errorMessage)

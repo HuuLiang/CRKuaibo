@@ -11,7 +11,6 @@
 #import "CRKPaymentViewController.h"
 #import "CRKChannelProgramModel.h"
 #import "CRKChannel.h"
-#import "CRKVideoPlayerViewController.h"
 
 static NSString *kDetailsCellIdentifier = @"kdetailscellidentifier";
 static const NSUInteger kDefaultPageSize = 7;
@@ -59,7 +58,9 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
     _tableView.backgroundColor = self.view.backgroundColor;
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    //    _tableView.
+    // 去掉多余的分割线
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+    [_tableView setTableFooterView:view];
     
     [_tableView registerClass:[CRKDetailsCell class] forCellReuseIdentifier:kDetailsCellIdentifier];
     //    _tableView.contentInset = UIEdgeInsetsMake(3, 3, 3, 3);
@@ -183,10 +184,9 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
         [self switchToPlayProgram:program programLocation:indexPath.section inChannel:self.channel];
         return;
     }else {
-        CRKVideoPlayerViewController *videoVC = [[CRKVideoPlayerViewController alloc] initWithVideo:program videoLocation:indexPath.section channel:self.channel];
-        //        videoVC.
-        videoVC.hidesBottomBarWhenPushed = YES;
-        [self presentViewController:videoVC animated:YES completion:nil];
+        //如果已经付费,进入播放界面
+        [self playVideo:program videoLocation:indexPath.section inChannel:_channel withTimeControl:YES shouldPopPayment:NO];
+        
         
     }
     
