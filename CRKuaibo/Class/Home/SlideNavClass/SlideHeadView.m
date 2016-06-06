@@ -1,6 +1,7 @@
 //
 //  SlideHeadView.m
-//  Copyright © 2016 All rights reserved.
+//  slideNavDemo
+
 //
 
 #import "SlideHeadView.h"
@@ -13,7 +14,7 @@
 #define RandomColor Color(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))/** 随机色  */
 static CGFloat const titleH = 44;/** 文字高度  */
 
-static CGFloat const MaxScale = 1.2;/** 选中文字放大  */
+static CGFloat const MaxScale = 1.14;/** 选中文字放大  */
 
 
 @implementation SlideHeadView
@@ -29,6 +30,7 @@ static CGFloat const MaxScale = 1.2;/** 选中文字放大  */
 
 -(void)setSlideHeadView{
     
+    self.backgroundColor = [UIColor whiteColor];
     [self setTitleScrollView];        /** 添加文字标签  */
     
     [self setContentScrollView];      /** 添加scrollView  */
@@ -41,6 +43,7 @@ static CGFloat const MaxScale = 1.2;/** 选中文字放大  */
     self.contentScrollView.showsHorizontalScrollIndicator  = NO;
     self.contentScrollView.delegate = self;
     self.contentScrollView.bounces = NO;
+    
 }
 - (UIViewController *)findViewController:(UIView *)sourceView
 {
@@ -62,22 +65,15 @@ static CGFloat const MaxScale = 1.2;/** 选中文字放大  */
     [superVC addChildViewController:childVC];
     
 }
-/**
- *  setTitleScrollView
- */
 -(void)setTitleScrollView{
     UIViewController *superVC = [self findViewController:self];
-    CGRect rect  = CGRectMake(0, 0, ScreenW, titleH);
+    CGRect rect  = CGRectMake(0, -titleH *0.125, ScreenW, titleH*7/8);
     self.titleScrollView = [[UIScrollView alloc] initWithFrame:rect];
-    
+    _titleScrollView.backgroundColor = [UIColor whiteColor];
     [superVC.view addSubview:self.titleScrollView];
     
     
 }
-
-/**
- *  setContentScrollView
- */
 -(void)setContentScrollView{
     UIViewController *superVC = [self findViewController:self];
     
@@ -96,14 +92,10 @@ static CGFloat const MaxScale = 1.2;/** 选中文字放大  */
     CGFloat x = 0;
     CGFloat w = 80;
     CGFloat h = titleH;
-    self.imageBackView  = [[UIButton alloc] initWithFrame:CGRectMake(15, 10, 80-30, titleH-20)];
-    //    self.imageBackView.imageView.image = [UIImage imageNamed:@"b1"];
-    [_imageBackView setTitle:@"热门" forState:UIControlStateNormal];
-    _imageBackView.titleLabel.font = [UIFont systemFontOfSize:14.];
-    [_imageBackView setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    _imageBackView.layer.cornerRadius = 10;
+    self.imageBackView  = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 80-30, titleH-20)];
+    _imageBackView.backgroundColor = [UIColor colorWithWhite:0.65 alpha:0.5];
+    _imageBackView.layer.cornerRadius = 5;
     _imageBackView.layer.masksToBounds = YES;
-    self.imageBackView.backgroundColor = self.selectedBtn.tintColor;
     self.imageBackView.userInteractionEnabled = YES;
     [self.titleScrollView addSubview:self.imageBackView];
     
@@ -157,8 +149,8 @@ static CGFloat const MaxScale = 1.2;/** 选中文字放大  */
     self.selectedBtn.transform = CGAffineTransformIdentity;
     
     
-    //    [btn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    //    btn.transform = CGAffineTransformMakeScale(MaxScale, MaxScale);
+    [btn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    btn.transform = CGAffineTransformMakeScale(MaxScale, MaxScale);
     self.selectedBtn = btn;
     
     [self setupTitleCenter:btn];
@@ -178,7 +170,7 @@ static CGFloat const MaxScale = 1.2;/** 选中文字放大  */
         offset = maxOffset;
     }
     
-    NSLog(@"%lf,%lf,%ld",offset,maxOffset,sender.tag);
+    //    NSLog(@"%lf,%lf,%ld",offset,maxOffset,sender.tag);
     [self.titleScrollView setContentOffset:CGPointMake(offset, 0) animated:YES];
     
 }
@@ -208,6 +200,7 @@ static CGFloat const MaxScale = 1.2;/** 选中文字放大  */
     
 }
 
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
@@ -222,14 +215,12 @@ static CGFloat const MaxScale = 1.2;/** 选中文字放大  */
     }
     CGFloat scaleR  = offsetX / ScreenW - leftIndex;
     CGFloat scaleL  = 1 - scaleR;
-    CGFloat transScale = MaxScale - 1;
+    CGFloat transScale = MaxScale - 1.;
     
     self.imageBackView.transform  = CGAffineTransformMakeTranslation((offsetX*(self.titleScrollView.contentSize.width / self.contentScrollView.contentSize.width)), 0);
     
-    [_imageBackView setTitle:leftButton.titleLabel.text forState:UIControlStateNormal];
-    //    [leftButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-    //    leftButton.transform = CGAffineTransformMakeScale(scaleL * transScale + 1, scaleL * transScale + 1);
-    //    rightButton.transform = CGAffineTransformMakeScale(scaleR * transScale + 1, scaleR * transScale + 1);
+    leftButton.transform = CGAffineTransformMakeScale(scaleL * transScale + 1, scaleL * transScale + 1);
+    rightButton.transform = CGAffineTransformMakeScale(scaleR * transScale + 1, scaleR * transScale + 1);
     
     UIColor *rightColor = [UIColor colorWithRed:(174+66*scaleR)/255.0 green:(174-71*scaleR)/255.0 blue:(174-174*scaleR)/255.0 alpha:1];
     UIColor *leftColor = [UIColor colorWithRed:(174+66*scaleL)/255.0 green:(174-71*scaleL)/255.0 blue:(174-174*scaleL)/255.0 alpha:1];

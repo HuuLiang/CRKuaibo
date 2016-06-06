@@ -173,7 +173,7 @@ static void *kHasSectionBorderAssociatedKey = &kHasSectionBorderAssociatedKey;
             {
                 if (dataSource) {
                     AddSeparatorWithDataSource(dataSource);
-                }
+            }
             } error:nil];
         } else {
             AddSeparatorWithDataSource(thisTableView.dataSource);

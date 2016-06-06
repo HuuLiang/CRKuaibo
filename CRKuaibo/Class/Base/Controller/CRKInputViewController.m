@@ -7,6 +7,8 @@
 //
 
 #import "CRKInputViewController.h"
+#import "CRKURLRequest.h"
+#import "CRKErrorHandler.h"
 
 @interface CRKInputViewController ()<UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate>
 {
@@ -22,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     _inputTextView = [[UITextView alloc] init];
     _inputTextView.font = [UIFont systemFontOfSize:14.];
     _inputTextView.backgroundColor = [UIColor whiteColor];
@@ -130,6 +131,8 @@
     [_inputTextView resignFirstResponder];
     if (_inputTextView.text.length != 0) {
         _commitBtn.enabled = NO;
+//        CRKURLResponseStatus resp = (CRKURLResponseStatus)(((NSNumber *)userInfo[kNetworkErrorCodeKey]).unsignedIntegerValue);
+        
         CGFloat time = arc4random_uniform(2)+0.5;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             _inputTextView.text = nil;

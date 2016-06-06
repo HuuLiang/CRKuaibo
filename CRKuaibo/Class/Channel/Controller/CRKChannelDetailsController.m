@@ -89,13 +89,15 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
         @strongify(self);
         if (![CRKUtil isPaid]) {
             //弹出提示框
-            [self joinVipUIAlertView];
-            [self->_tableView CRK_endPullToRefresh];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1. * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self joinVipUIAlertView];
+                [self->_tableView CRK_endPullToRefresh];
+            });
         }else{
             [self loadChannelProgramModel];
         }
     }];
-    
     
 }
 

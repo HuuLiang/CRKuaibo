@@ -8,8 +8,8 @@
 
 #import "CRKOccidentController.h"
 #import "SlideHeadView.h"
-#import "CRKRHViewController.h"
-#import "CRKDLViewController.h"
+#import "CRKUniversalityController.h"
+
 
 @interface CRKOccidentController ()
 
@@ -19,24 +19,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    SlideHeadView *slideVC = [[SlideHeadView alloc]init];
-    [self.view addSubview:slideVC];
-    CRKRHViewController *riHanVC = [[CRKRHViewController alloc] init];
-    CRKDLViewController *mainLandVC = [[CRKDLViewController alloc] init];
-    CRKRHViewController *riHanVC1 = [[CRKRHViewController alloc] init];
-    CRKDLViewController *mainLandVC1 = [[CRKDLViewController alloc] init];
-    CRKRHViewController *riHanVC2 = [[CRKRHViewController alloc] init];
-    NSArray *titleArr = @[@"热门",@"肥臀",@"人妻",@"金发",@"巨乳"];
-    slideVC.titlesArr = titleArr;
-    [slideVC addChildViewController:riHanVC title:titleArr[0]];
-    [slideVC addChildViewController:mainLandVC title:titleArr[1]];
-    [slideVC addChildViewController:riHanVC1 title:titleArr[2]];
-    [slideVC addChildViewController:mainLandVC1 title:titleArr[3]];
-    [slideVC addChildViewController:riHanVC2 title:titleArr[4]];
-//    [slideVC addChildViewController:mainLandVC title:titleArr[1]];
+    SlideHeadView *slider = [[SlideHeadView alloc] init];
+    [self.view addSubview:slider];
     
-    [slideVC setSlideHeadView];
+    CRKUniversalityController *vc1 = [[CRKUniversalityController alloc] init];
+    vc1.isHaveFreeVideo = YES;
+    CRKUniversalityController *vc2 = [[CRKUniversalityController alloc] init];
+    
+    CRKUniversalityController *vc3 = [[CRKUniversalityController alloc] init];
+    CRKUniversalityController *vc4 = [[CRKUniversalityController alloc] init];
+    CRKUniversalityController *vc5 = [[CRKUniversalityController alloc] init];
+    
+    slider.titlesArr = @[@"vc1",@"vc2",@"vc3",@"vc4",@"v5"];
+    
+    [slider addChildViewController:vc1 title:slider.titlesArr[0]];
+    [slider addChildViewController:vc2 title:slider.titlesArr[1]];
+    [slider addChildViewController:vc3 title:slider.titlesArr[2]];
+    [slider addChildViewController:vc4 title:slider.titlesArr[3]];
+    [slider addChildViewController:vc5 title:slider.titlesArr[4]];
+    [slider setSlideHeadView];
 }
 
 - (void)didReceiveMemoryWarning {

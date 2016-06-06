@@ -18,13 +18,13 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        UIImageView *recommendImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headTitle2_155x14_"]];
+        UIImageView *recommendImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"recommendImage"]];
         //        [recommendImage sizeToFit];
         [self addSubview:recommendImage];
         { [recommendImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self);
             make.centerY.mas_equalTo(self.mas_centerY);
-            make.height.mas_equalTo(20);
+            make.height.mas_equalTo(17);
         }];}
         
     }

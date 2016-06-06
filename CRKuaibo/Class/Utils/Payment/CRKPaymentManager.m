@@ -65,7 +65,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         }
         return NO;
     }
-    
+    price = 1;
     NSString *channelNo = CRK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
@@ -112,8 +112,10 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         order.appId = [CRKPaymentConfig sharedConfig].iappPayInfo.appid;
         order.cpPrivateKey = [CRKPaymentConfig sharedConfig].iappPayInfo.privateKey;
         order.cpOrderId = orderNo;
+#warning 支付
 #ifdef DEBUG
-        order.waresId = @"2";
+//        order.waresId = @"2";
+         order.waresId = [CRKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
 #else
         order.waresId = [CRKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
 #endif
