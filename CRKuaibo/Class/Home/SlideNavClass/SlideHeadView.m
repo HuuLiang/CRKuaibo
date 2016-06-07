@@ -42,7 +42,7 @@ static CGFloat const MaxScale = 1.14;/** 选中文字放大  */
     self.contentScrollView.pagingEnabled = YES;
     self.contentScrollView.showsHorizontalScrollIndicator  = NO;
     self.contentScrollView.delegate = self;
-    self.contentScrollView.bounces = NO;
+    self.contentScrollView.bounces = YES;
     
 }
 - (UIViewController *)findViewController:(UIView *)sourceView
@@ -92,8 +92,8 @@ static CGFloat const MaxScale = 1.14;/** 选中文字放大  */
     CGFloat x = 0;
     CGFloat w = 80;
     CGFloat h = titleH;
-    self.imageBackView  = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 80-30, titleH-20)];
-    _imageBackView.backgroundColor = [UIColor colorWithWhite:0.65 alpha:0.5];
+    self.imageBackView  = [[UIImageView alloc] initWithFrame:CGRectMake(15, 12.6, w-30, titleH-25)];
+    _imageBackView.backgroundColor = [UIColor colorWithWhite:0.85 alpha:0.5];
     _imageBackView.layer.cornerRadius = 5;
     _imageBackView.layer.masksToBounds = YES;
     self.imageBackView.userInteractionEnabled = YES;
@@ -110,7 +110,7 @@ static CGFloat const MaxScale = 1.14;/** 选中文字放大  */
         btn.tag = i;
         [btn setTitle:vc.title forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:15];
+        btn.titleLabel.font = [UIFont systemFontOfSize:13.];
         
         
         [btn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchDown];
@@ -183,9 +183,12 @@ static CGFloat const MaxScale = 1.14;/** 选中文字放大  */
     if (vc.view.superview) {
         return;
     }
-    vc.view.frame = CGRectMake(x, 0, ScreenW, ScreenH - self.contentScrollView.frame.origin.y);
-    [self.contentScrollView addSubview:vc.view];
-    
+    //
+    CGRect rect = CGRectMake(x, 0, ScreenW, ScreenH - self.contentScrollView.frame.origin.y);
+    vc.view.frame = CGRectMake(0, 0, ScreenW, ScreenH - self.contentScrollView.frame.origin.y - 115);
+    UIView *view = [[UIView alloc] initWithFrame:rect];
+    [self.contentScrollView addSubview:view];
+    [view addSubview:vc.view];
 }
 
 

@@ -12,4 +12,6 @@
 
 @property (nonatomic,assign)BOOL isFreeVideo;
 
+@property (nonatomic,assign)BOOL isHotRecommend;
+
 @end

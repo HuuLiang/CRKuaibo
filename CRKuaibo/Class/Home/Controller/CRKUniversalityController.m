@@ -8,12 +8,14 @@
 
 #import "CRKUniversalityController.h"
 #import "CRKHomeCollectionViewCell.h"
-//#import "CRKHomeHeaderReusableView.h"
+#import "CRKHomeSpreeCell.h"
 #import "CRKHomeHeaderReusableView.h"
+#import "CRKDetailsController.h"
 
-CGFloat const kHomespace = 5;
+CGFloat const kHomespace = 2.5;
 CGFloat const kHomeSection = 2;
 static NSString *const kHomeCellIdentifer = @"khomecellidentifers";
+static NSString *const kHomeSpreeCellIdentifer = @"khomespreecellidentifers";
 static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusableIdentifier";
 
 @interface CRKUniversalityController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
@@ -38,14 +40,18 @@ static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusabl
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = kHomespace;
     layout.minimumInteritemSpacing = kHomespace;
-    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    
     _collectinView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     _collectinView.dataSource = self;
     _collectinView.delegate = self;
     _collectinView.scrollEnabled = YES;
     _collectinView.backgroundColor = self.view.backgroundColor;
     _collectinView.contentInset = UIEdgeInsetsMake(2.5, 2.5, 2.5, 2.5);
+    _collectinView.alwaysBounceVertical = YES;
+    _collectinView.showsVerticalScrollIndicator = NO;
+    
     [_collectinView registerClass:[CRKHomeCollectionViewCell class] forCellWithReuseIdentifier:kHomeCellIdentifer];
+    [_collectinView registerClass:[CRKHomeSpreeCell class] forCellWithReuseIdentifier:kHomeSpreeCellIdentifer];
     
     [_collectinView registerClass:[CRKHomeHeaderReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kSectionHeaderReusableIdentifier];
     
@@ -53,7 +59,7 @@ static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusabl
     {
         [_collectinView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(self.view);
-//            make.top.mas_equalTo(self.view).mas_offset(3);
+            //            make.top.mas_equalTo(self.view).mas_offset(3);
         }];
     }
 }
@@ -67,19 +73,37 @@ static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusabl
     return kHomeSection;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return kHomeSection*2;
+    if (section == 0) {
+        return 3;
+    }
+    return kHomeSection*3;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 ) {
+        if (indexPath.item == 2) {
+            CRKHomeSpreeCell *spreeCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifer forIndexPath:indexPath];
+            spreeCell.imageUrl = @"";
+            return spreeCell;
+        }
+    }
+    
     CRKHomeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellIdentifer forIndexPath:indexPath];
     //    cell.i
     cell.imageUrl = @"";
     cell.title = @"";
+    cell.subTitle = @"";
     return cell;
     
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat kwidth = (kScreenWidth - kHomespace*3)/2;
+    if (indexPath.section == 0) {
+        if (indexPath.item == 2) {
+            return CGSizeMake(kScreenWidth, kwidth*2/5);
+        }
+    }
+    
     return CGSizeMake(kwidth, kwidth/3*2);
 }
 
@@ -89,7 +113,7 @@ static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusabl
         return nil;
     }
     CRKHomeHeaderReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kSectionHeaderReusableIdentifier forIndexPath:indexPath];
-     headerView.backgroundColor = self.view.backgroundColor;
+    headerView.backgroundColor = self.view.backgroundColor;
     if (indexPath.section == 0 && _isHaveFreeVideo ) {
         headerView.isFreeVideo = YES;
         return headerView;
@@ -110,5 +134,12 @@ static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusabl
     
     return CGSizeMake(0, 34);
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    CRKDetailsController *detailsVC = [[CRKDetailsController alloc] init];
+    detailsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailsVC animated:YES];
+}
+
 
 @end

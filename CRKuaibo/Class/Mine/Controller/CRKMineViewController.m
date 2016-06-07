@@ -12,10 +12,11 @@
 #import "CRKInputViewController.h"
 #import "CRKUserProtolController.h"
 #import "CRKNewVersionsController.h"
+#import "CRKSpreadController.h"
 
 static NSString *KUserCorrelationCellIdentifer = @"kusercorrelationcell";
 static NSString *KRecommendCellIdentifer = @"krecommendcell";
-static NSInteger KSections = 3;
+static NSInteger KSections = 2;
 
 typedef NS_ENUM(NSInteger , CRKSectionNumber) {
     CRKRecommend,
@@ -50,8 +51,8 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
 - (void)setTableView {
     self.automaticallyAdjustsScrollViewInsets = NO;
     _layoutTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    _layoutTableView.scrollEnabled = NO;
-    _layoutTableView.backgroundColor = self.view.backgroundColor;
+    //    _layoutTableView.scrollEnabled = NO;
+    _layoutTableView.backgroundColor = [UIColor clearColor];
     _layoutTableView.delegate = self;
     _layoutTableView.dataSource = self;
     _layoutTableView.separatorColor = [UIColor lightGrayColor];
@@ -86,8 +87,9 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
     }else if ([self sectionNumberWithSection:section] == CRKUserCorrelation){
         
         return 4;
+    }else{
+        return 0;
     }
-    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -107,10 +109,10 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
             
         }else if(indexPath.row == CRKVersionRenew){
             cell.imageView.image = [UIImage imageNamed:@"版本_18x18_"];
-            cell.textLabel.text = @"版本更新";
+            cell.textLabel.text = @"精品推荐";
         }else{
             cell.accessoryType = UITableViewCellAccessoryNone;
-             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
         return cell;
@@ -170,13 +172,14 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
             [self.navigationController pushViewController:protolVC animated:YES];
             
         }else if(indexPath.row == CRKVersionRenew ){
-            CRKNewVersionsController *newVersionsVC = [[CRKNewVersionsController alloc] init];
+            CRKSpreadController *newVersionsVC = [[CRKSpreadController alloc] init];
+            newVersionsVC.title = @"精品推荐";
             newVersionsVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:newVersionsVC animated:YES];
             
         }else {
-           
-        
+            
+            
         }
     }
     

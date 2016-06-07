@@ -13,6 +13,11 @@
 		B3086C5A1D02D35F0072ECCD /* CRKHomeHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3086C591D02D35F0072ECCD /* CRKHomeHeaderReusableView.m */; };
 		B3086C5D1D02D8750072ECCD /* CRKHomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3086C5C1D02D8750072ECCD /* CRKHomeCollectionViewCell.m */; };
 		B3341ACC1CF571C90002C674 /* CRKRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3341ACB1CF571C90002C674 /* CRKRecommendCell.m */; };
+		B33BCD091D06C50200D8E62F /* CRKDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCD081D06C50200D8E62F /* CRKDetailsController.m */; };
+		B33BCD0D1D06C52900D8E62F /* CRKVideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCD0C1D06C52900D8E62F /* CRKVideoCollectionViewCell.m */; };
+		B33BCD101D06C56C00D8E62F /* CRKHomeSpreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCD0F1D06C56C00D8E62F /* CRKHomeSpreeCell.m */; };
+		B33BCD131D06C72900D8E62F /* CRKSpreadController.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCD121D06C72900D8E62F /* CRKSpreadController.m */; };
+		B33BCD161D06C73800D8E62F /* CRKSpreadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCD151D06C73800D8E62F /* CRKSpreadCell.m */; };
 		B343BFD01CF7FA58004D7C7D /* CRKRecommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B343BFCF1CF7FA58004D7C7D /* CRKRecommendModel.m */; };
 		B3692EBB1D00224F006F03AE /* CRKChannels.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692EBA1D00224F006F03AE /* CRKChannels.m */; };
 		B3692EBE1D0023C4006F03AE /* CRKChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692EBD1D0023C4006F03AE /* CRKChannel.m */; };
@@ -120,6 +125,16 @@
 		B3086C5C1D02D8750072ECCD /* CRKHomeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKHomeCollectionViewCell.m; sourceTree = "<group>"; };
 		B3341ACA1CF571C90002C674 /* CRKRecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommendCell.h; sourceTree = "<group>"; };
 		B3341ACB1CF571C90002C674 /* CRKRecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommendCell.m; sourceTree = "<group>"; };
+		B33BCD071D06C50200D8E62F /* CRKDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKDetailsController.h; sourceTree = "<group>"; };
+		B33BCD081D06C50200D8E62F /* CRKDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKDetailsController.m; sourceTree = "<group>"; };
+		B33BCD0B1D06C52900D8E62F /* CRKVideoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKVideoCollectionViewCell.h; sourceTree = "<group>"; };
+		B33BCD0C1D06C52900D8E62F /* CRKVideoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKVideoCollectionViewCell.m; sourceTree = "<group>"; };
+		B33BCD0E1D06C56C00D8E62F /* CRKHomeSpreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKHomeSpreeCell.h; sourceTree = "<group>"; };
+		B33BCD0F1D06C56C00D8E62F /* CRKHomeSpreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKHomeSpreeCell.m; sourceTree = "<group>"; };
+		B33BCD111D06C72900D8E62F /* CRKSpreadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKSpreadController.h; sourceTree = "<group>"; };
+		B33BCD121D06C72900D8E62F /* CRKSpreadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKSpreadController.m; sourceTree = "<group>"; };
+		B33BCD141D06C73800D8E62F /* CRKSpreadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKSpreadCell.h; sourceTree = "<group>"; };
+		B33BCD151D06C73800D8E62F /* CRKSpreadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKSpreadCell.m; sourceTree = "<group>"; };
 		B343BFCE1CF7FA58004D7C7D /* CRKRecommendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommendModel.h; sourceTree = "<group>"; };
 		B343BFCF1CF7FA58004D7C7D /* CRKRecommendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommendModel.m; sourceTree = "<group>"; };
 		B3692EB91D00224F006F03AE /* CRKChannels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannels.h; sourceTree = "<group>"; };
@@ -357,6 +372,10 @@
 				B3086C591D02D35F0072ECCD /* CRKHomeHeaderReusableView.m */,
 				B3086C5B1D02D8750072ECCD /* CRKHomeCollectionViewCell.h */,
 				B3086C5C1D02D8750072ECCD /* CRKHomeCollectionViewCell.m */,
+				B33BCD0E1D06C56C00D8E62F /* CRKHomeSpreeCell.h */,
+				B33BCD0F1D06C56C00D8E62F /* CRKHomeSpreeCell.m */,
+				B33BCD0B1D06C52900D8E62F /* CRKVideoCollectionViewCell.h */,
+				B33BCD0C1D06C52900D8E62F /* CRKVideoCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -379,8 +398,19 @@
 				B382C5241CF5B4AD00BE7089 /* CRKRecommendHeaderView.m */,
 				B37D97001CF7EF2100520BDB /* CRKRecommentCollectionViewCell.h */,
 				B37D97011CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m */,
+				B33BCD141D06C73800D8E62F /* CRKSpreadCell.h */,
+				B33BCD151D06C73800D8E62F /* CRKSpreadCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B33BCD0A1D06C50700D8E62F /* VideoDetails */ = {
+			isa = PBXGroup;
+			children = (
+				B33BCD071D06C50200D8E62F /* CRKDetailsController.h */,
+				B33BCD081D06C50200D8E62F /* CRKDetailsController.m */,
+			);
+			name = VideoDetails;
 			sourceTree = "<group>";
 		};
 		B374858B1CFEBA74001288F3 /* SlideNavClass */ = {
@@ -455,6 +485,7 @@
 		BC0F712C1CF30997000894A3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B33BCD0A1D06C50700D8E62F /* VideoDetails */,
 				BC0F712F1CF309BD000894A3 /* CRKHomeViewController.h */,
 				BC0F71301CF309BD000894A3 /* CRKHomeViewController.m */,
 				B37485821CFEA856001288F3 /* CRKOccidentController.h */,
@@ -490,6 +521,8 @@
 				B374B9B91CFD5F9E0063C1C6 /* CRKUserProtolController.m */,
 				B374B9BB1CFD62DE0063C1C6 /* CRKNewVersionsController.h */,
 				B374B9BC1CFD62DE0063C1C6 /* CRKNewVersionsController.m */,
+				B33BCD111D06C72900D8E62F /* CRKSpreadController.h */,
+				B33BCD121D06C72900D8E62F /* CRKSpreadController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -935,6 +968,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC0F71041CF2ECC5000894A3 /* CRKVideoPlayerViewController.m in Sources */,
+				B33BCD131D06C72900D8E62F /* CRKSpreadController.m in Sources */,
 				B37485991CFED37A001288F3 /* CRKUniverSalityModel.m in Sources */,
 				B37485841CFEA856001288F3 /* CRKOccidentController.m in Sources */,
 				BC83B91B1CEEB7FE0084AAC6 /* NSDictionary+CRKSign.m in Sources */,
@@ -966,6 +1000,7 @@
 				BC83B9091CEEB0440084AAC6 /* UIImage+crop.m in Sources */,
 				BC83B9131CEEB0440084AAC6 /* WeChatPayQueryOrderRequest.m in Sources */,
 				BC83B9081CEEB0440084AAC6 /* UIImage+color.m in Sources */,
+				B33BCD101D06C56C00D8E62F /* CRKHomeSpreeCell.m in Sources */,
 				BC83B8F81CEEB0440084AAC6 /* CRKConfiguration.m in Sources */,
 				BC83B9251CEEC13F0084AAC6 /* CRKPaymentInfo.m in Sources */,
 				BC83B8FE1CEEB0440084AAC6 /* NSMutableDictionary+SafeCoding.m in Sources */,
@@ -1002,14 +1037,17 @@
 				BC83B8B21CEEADB00084AAC6 /* CRKProgram.m in Sources */,
 				BC83B9041CEEB0440084AAC6 /* NSString+md5.m in Sources */,
 				BC83B9051CEEB0440084AAC6 /* NSString+meltutils.m in Sources */,
+				B33BCD161D06C73800D8E62F /* CRKSpreadCell.m in Sources */,
 				BC83B9071CEEB0440084AAC6 /* UIColor+hexColor.m in Sources */,
 				B374B9AE1CFD2D5C0063C1C6 /* CRKInputViewController.m in Sources */,
 				BC83B92E1CEEC3160084AAC6 /* CRKPaymentConfigModel.m in Sources */,
+				B33BCD091D06C50200D8E62F /* CRKDetailsController.m in Sources */,
 				BC83B9101CEEB0440084AAC6 /* ApiXml.mm in Sources */,
 				B3692EC11D00279D006F03AE /* CRKChannelDetailsController.m in Sources */,
 				B374B9BA1CFD5F9E0063C1C6 /* CRKUserProtolController.m in Sources */,
 				B3692ECC1D012C77006F03AE /* CRKChannelProgram.m in Sources */,
 				BC83B90C1CEEB0440084AAC6 /* UITableView+Separator.m in Sources */,
+				B33BCD0D1D06C52900D8E62F /* CRKVideoCollectionViewCell.m in Sources */,
 				BC83B8FC1CEEB0440084AAC6 /* NSDate+Utilities.m in Sources */,
 				BC83B92F1CEEC3160084AAC6 /* CRKPaymentModel.m in Sources */,
 				BC83B90A1CEEB0440084AAC6 /* UIImageView+YPBAnimation.m in Sources */,

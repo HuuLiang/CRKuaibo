@@ -21,15 +21,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         _imageView = [[UIImageView alloc] init];
-        _imageView.backgroundColor = [UIColor whiteColor];
         [self addSubview:_imageView];
         {
-        [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self);
-            make.centerY.mas_equalTo(self.mas_centerY);
-            make.height.mas_equalTo(17);
-        }];
-        
+            [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self);
+                make.centerY.mas_equalTo(self.mas_centerY);
+                make.height.mas_equalTo(15);
+            }];
+            
         }
     }
     return self;
@@ -40,7 +39,16 @@
     
     NSString *imageName = isFreeVideo ? @"freeVideo" :@"recommendImage";
     _imageView.image = [UIImage imageNamed:imageName];
+    
+}
 
+- (void)setIsHotRecommend:(BOOL)isHotRecommend {
+    _isHotRecommend = isHotRecommend;
+    if (isHotRecommend) {
+        
+        _imageView.image = [UIImage imageNamed:@"hotrecommendImage"];
+    }
+    
 }
 
 @end
