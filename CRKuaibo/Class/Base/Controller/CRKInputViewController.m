@@ -37,9 +37,9 @@
     {
         [_inputTextView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view).offset(15);
-            make.top.equalTo(self.view).offset(45);
+            make.top.equalTo(self.view).offset(45/667.*kScreenHeight);
             make.right.equalTo(self.view).offset(-15);
-            make.height.mas_equalTo(180);
+            make.height.mas_equalTo(180/667.*kScreenHeight);
         }];
     }
     //占位符
@@ -139,6 +139,7 @@
             _textLimitLabel.text = @"140";
             [[CRKHudManager manager] showHudWithText:@"提交成功!"];
             _commitBtn.enabled = YES;
+            [self.navigationController popViewControllerAnimated:YES];
             
         });
     }else {

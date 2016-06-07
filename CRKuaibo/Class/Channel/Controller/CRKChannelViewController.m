@@ -16,19 +16,19 @@ CGFloat const kspace = 3.;
 
 static NSString *const kChannelIdentifier = @"kchannelidentifier";
 
-
 @interface CRKChannelViewController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     UICollectionView *_layoutCollectionView;
     
 }
 @property (nonatomic,retain)CRKChannelModel *fetchChannel;
-@property (nonatomic,retain) NSArray *channels;
+@property (nonatomic,retain) NSMutableArray *channels;
+@property (nonatomic,assign)NSInteger currentPage;
 @end
 
 @implementation CRKChannelViewController
 DefineLazyPropertyInitialization(CRKChannelModel,fetchChannel)
-DefineLazyPropertyInitialization(NSArray,channels)
+DefineLazyPropertyInitialization(NSMutableArray,channels)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,22 +61,39 @@ DefineLazyPropertyInitialization(NSArray,channels)
         }];
         
     }
-
+    //下拉刷新
+    @weakify(self);
+    [_layoutCollectionView CRK_addPullToRefreshWithHandler:^{
+        @strongify(self);
+        
+        [self.channels removeAllObjects];
+        _currentPage = 0;
+        [self loadChannels];
+        
+    }];
+    [_layoutCollectionView CRK_triggerPullToRefresh];
+    
+    [_layoutCollectionView CRK_addPagingRefreshWithHandler:^{
+        [self loadChannels];
+        
+    }];
+    
+    
 }
 
 - (void)loadChannels {
     if (!_fetchChannel) {
-            _fetchChannel = [[CRKChannelModel alloc] init];
+        _fetchChannel = [[CRKChannelModel alloc] init];
     }
     @weakify(self);
-    [_fetchChannel fetchWithPage:10 withCompletionHandler:^(BOOL success, id obj) {
+    [_fetchChannel fetchWithPage:_currentPage++ withCompletionHandler:^(BOOL success, id obj) {
         @strongify(self);
         if (!self) {
             return ;
         }
         if (success) {
             self.channels = obj;
-
+            [_layoutCollectionView CRK_endPullToRefresh];
             [self ->_layoutCollectionView reloadData];
             
         }

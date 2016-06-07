@@ -18,7 +18,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        UIImageView *recommendImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"recommendImage"]];
+        UIImageView *recommendImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vipheader"]];
         //        [recommendImage sizeToFit];
         [self addSubview:recommendImage];
         { [recommendImage mas_makeConstraints:^(MASConstraintMaker *make) {

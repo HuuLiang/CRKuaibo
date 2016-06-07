@@ -16,20 +16,20 @@
 
 static NSString *KUserCorrelationCellIdentifer = @"kusercorrelationcell";
 static NSString *KRecommendCellIdentifer = @"krecommendcell";
-static NSInteger KSections = 2;
+static NSInteger KSections = 2;//组
 
 typedef NS_ENUM(NSInteger , CRKSectionNumber) {
-    CRKRecommend,
+    CRKVip,
     CRKUserCorrelation
 };
 typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
+    CRKSpred,
     CRKUserFeedBack,
-    CRKUserAgreement,
-    CRKVersionRenew
+    CRKUserAgreement
     
 };
 
-@interface CRKMineViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface CRKMineViewController ()<UITableViewDataSource,UITableViewSeparatorDelegate>
 {
     UITableView *_layoutTableView;
 }
@@ -57,7 +57,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
     _layoutTableView.dataSource = self;
     _layoutTableView.separatorColor = [UIColor lightGrayColor];
     _layoutTableView.hasRowSeparator = YES;
-    _layoutTableView.hasSectionBorder = YES;
+    //    _layoutTableView.hasSectionBorder = YES;
     [_layoutTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:KUserCorrelationCellIdentifer];
     [_layoutTableView registerClass:[CRKRecommendCell class] forCellReuseIdentifier:KRecommendCellIdentifer];
     [self.view addSubview:_layoutTableView];
@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
 
 - (CRKSectionNumber)sectionNumberWithSection:(NSUInteger)section {
     if (section == 0) {
-        return CRKRecommend;
+        return CRKVip;
     }else{
         return CRKUserCorrelation;
     }
@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ([self sectionNumberWithSection:section] == CRKRecommend) {
+    if ([self sectionNumberWithSection:section] == CRKVip) {
         return 1;
     }else if ([self sectionNumberWithSection:section] == CRKUserCorrelation){
         
@@ -93,21 +93,39 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self sectionNumberWithSection:indexPath.section] == CRKRecommend) {
-        CRKRecommendCell *recommendCell = [tableView dequeueReusableCellWithIdentifier:KRecommendCellIdentifer forIndexPath:indexPath];
-        return recommendCell;
+    if ([self sectionNumberWithSection:indexPath.section] == CRKVip) {
+        CRKRecommendCell *vipCell = [tableView dequeueReusableCellWithIdentifier:KRecommendCellIdentifer forIndexPath:indexPath];
+        vipCell.memberTitle = [CRKUtil isPaid] ? @"VIP会员" :@"成为VIP会员";
+        @weakify(self);
+        if (!vipCell.memberAction) {
+            vipCell.memberAction = ^(id sender) {
+                @strongify(self);
+                if (![CRKUtil isPaid]) {
+                    CRKProgram *program = [[CRKProgram alloc] init];
+                    //                    program.payPointType = @(payPointType);
+                    CRKChannel *channel = [[CRKChannel alloc] init];
+                    //    channel.
+                    //跳转到支付
+                    [self switchToPlayProgram:program programLocation:1 inChannel:channel];
+                } else {
+                    [[CRKHudManager manager] showHudWithText:@"您已经是会员，感谢您的观看！"];
+                }
+            };}
+        
+        return vipCell;
         
     }else if ([self sectionNumberWithSection:indexPath.section] == CRKUserCorrelation){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KUserCorrelationCellIdentifer forIndexPath:indexPath];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == CRKUserFeedBack) {
+            
             cell.imageView.image = [UIImage imageNamed:@"agreement"];
             cell.textLabel.text = @"意见反馈";
         }else if (indexPath.row == CRKUserAgreement ){
             cell.imageView.image = [UIImage imageNamed:@"协议_18x18_"];
             cell.textLabel.text = @"用户协议";
             
-        }else if(indexPath.row == CRKVersionRenew){
+        }else if(indexPath.row ==  CRKSpred){
             cell.imageView.image = [UIImage imageNamed:@"版本_18x18_"];
             cell.textLabel.text = @"精品推荐";
         }else{
@@ -122,7 +140,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == CRKRecommend) {
+    if (indexPath.section == CRKVip) {
         return 200./667.*kScreenHeight;
     }else {
         return 64./667.*kScreenHeight;
@@ -132,7 +150,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
  *  tableView 组内容设置
  */
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == CRKRecommend) {
+    if (section == CRKVip) {
         
         CRKRecommendHeaderView *headerView = [[CRKRecommendHeaderView alloc] init];
         headerView.backgroundColor = self.view.backgroundColor;
@@ -142,7 +160,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
 }
 //组高
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == CRKRecommend) {
+    if (section == CRKVip) {
         return 34/667.*kScreenHeight;
     }else if (section == CRKUserCorrelation){
         return 20/667.*kScreenHeight;}
@@ -171,7 +189,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
             protolVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:protolVC animated:YES];
             
-        }else if(indexPath.row == CRKVersionRenew ){
+        }else if(indexPath.row ==  CRKSpred ){
             CRKSpreadController *newVersionsVC = [[CRKSpreadController alloc] init];
             newVersionsVC.title = @"精品推荐";
             newVersionsVC.hidesBottomBarWhenPushed = YES;

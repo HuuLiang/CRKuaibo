@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CRKRecommendCell : UITableViewCell
-
+@property (nonatomic) NSString *memberTitle;
+@property (nonatomic,copy) CRKAction memberAction;
+@property (nonatomic,retain) UIImage *vipImage;
 @end

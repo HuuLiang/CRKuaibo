@@ -71,12 +71,13 @@
 - (void)setupCommonStyles {
     //[[UITabBar appearance] setBarStyle:UIBarStyleBlack];
     [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#dd0077"]];
-    [UITabBar appearance];
-    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+    //[[UITabBar appearance] setBackgroundColor:[UIColor greenColor]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
-    [[UITabBar appearance].layer setBorderColor:[UIColor clearColor].CGColor];
     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithWhite:0.7 alpha:1]} forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateSelected];
+    //    [[UITabBar appearance] setTintColor:[UIColor lightGrayColor]];
     //    [UITabBar appearance].layer.borderWidth = 0.01;
     //        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#dd0077"]];
@@ -239,5 +240,5 @@
     [[CRKPaymentManager sharedManager] handleOpenURL:url];
     return YES;
 }
- 
+
 @end

@@ -50,9 +50,9 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
         @weakify(self);
         [_headerImageView bk_whenTapped:^{
             @strongify(self);
-//            if (![CRKUtil isPaid]) {
-//                [self payForPayPointType:CRKPayPointTypeVIP];
-//            };
+            if (![CRKUtil isPaid]) {
+                [self payForPayPointType:CRKPayPointTypeVIP];
+            };
         }];
         [self.view addSubview:_headerImageView];
         {
@@ -108,11 +108,14 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
         make.edges.equalTo(self.view);
     }];
 }
-//- (void)payForPayPointType:(CRKPayPointType)payPointType {
-//    CRKProgram *program = [[CRKProgram alloc] init];
-//    program.payPointType = @(payPointType);
-//    [self payForProgram:program];
-//}
+- (void)payForPayPointType:(CRKPayPointType)payPointType {
+    CRKProgram *program = [[CRKProgram alloc] init];
+    program.payPointType = @(payPointType);
+    CRKChannel *channel = [[CRKChannel alloc] init];
+//    channel.
+    //跳转到支付
+    [self switchToPlayProgram:program programLocation:1 inChannel:channel];
+}
 //获取模型数据
 - (void)loadSpreadModel {
     @weakify(self);
@@ -155,9 +158,9 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
                  }
                  
                  if (image) {
-                     NSUInteger showPrice = systemConfigModel.payAmount *100;
+                     NSUInteger showPrice = systemConfigModel.payAmount ;
                      BOOL showInteger = showPrice % 100 == 0;
-                     self->_priceLabel.text = showInteger ? [NSString stringWithFormat:@"%ld", showPrice/100] : [NSString stringWithFormat:@"%.2f", showPrice/100.];
+                     self->_priceLabel.text = showInteger ? [NSString stringWithFormat:@"%u", showPrice/100] : [NSString stringWithFormat:@"%.2f", showPrice/100.];
                  } else {
                      self->_priceLabel.text = nil;
                  }
