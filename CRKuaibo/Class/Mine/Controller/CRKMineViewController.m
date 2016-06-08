@@ -46,6 +46,8 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
     [_layoutTableView setTableFooterView:view];
     
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPaidNotification) name:kPaidNotificationName object:nil];
+    
 }
 
 - (void)setTableView {
@@ -73,6 +75,11 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
     }else{
         return CRKUserCorrelation;
     }
+}
+//如果支付完成则刷新界面
+- (void)onPaidNotification{
+    [_layoutTableView reloadData];
+
 }
 
 #pragma mark UITableView Delegate Datesurse
@@ -110,6 +117,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
                 } else {
                     [[CRKHudManager manager] showHudWithText:@"您已经是会员，感谢您的观看！"];
                 }
+                
             };}
         
         return vipCell;
@@ -202,6 +210,8 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
     }
     
 }
+
+
 
 
 - (void)didReceiveMemoryWarning {

@@ -7,13 +7,19 @@
 //
 
 #import "CRKVideoCollectionViewCell.h"
+#import "CRKVideoImageCollectionViewCell.h"
 
-@interface CRKVideoCollectionViewCell ()
+CGFloat const kVideoImageItems = 5;
+CGFloat const kVideoImageSpace = 10;
+static NSString *const kVideoImageIdentifier = @"kVideoImageIdentifier";
+
+@interface CRKVideoCollectionViewCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate>
 {
     UIImageView *_imageView;
-    UIScrollView *_scrollView;
+    UICollectionView *_collectionView;
 }
 @property (nonatomic,assign)NSArray <NSString *>*imageArr;
+@property (nonatomic,retain)UIView *popupPictureView;//图片弹框
 
 @end
 
@@ -27,7 +33,7 @@
         {
             [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(self);
-                make.height.mas_equalTo(self);
+                make.height.mas_equalTo(self).multipliedBy(0.65);
             }];
         }
         
@@ -36,7 +42,7 @@
         {
             [playImage mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.center.mas_equalTo(_imageView);
-                make.width.height.mas_equalTo(50);
+                make.width.height.mas_equalTo(50/568.*kScreenHeight);
             }];
             
         }
@@ -45,23 +51,35 @@
         {
             [playProgress mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.bottom.right.mas_equalTo(_imageView);
-                make.height.mas_equalTo(15);
+                make.height.mas_equalTo(15/568.*kScreenHeight);
             }];
             
         }
+        //视频下面的图片详情
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.minimumInteritemSpacing = kVideoImageSpace;
         
-        //        _scrollView = [self creatScrollViewWithItems:5];
-        //        [self addSubview:_scrollView];
-        //        _scrollView.backgroundColor = [UIColor whiteColor];
-        //        {
-        //            [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        //                make.top.mas_equalTo(_imageView.mas_bottom);
-        //                make.left.right.mas_equalTo(self);
-        //                make.height.mas_equalTo(_scrollView.mas_width).multipliedBy(0.2);
-        //
-        //            }];
-        //
-        //        }
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        
+        _collectionView.contentInset = UIEdgeInsetsMake(8, 8, 8, 8);
+        
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+        [self addSubview:_collectionView];
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        [_collectionView registerClass:[CRKVideoImageCollectionViewCell class] forCellWithReuseIdentifier:kVideoImageIdentifier];
+        
+        {
+            [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(_imageView.mas_bottom);
+                make.left.right.mas_equalTo(self);
+                make.height.mas_equalTo(self).multipliedBy(0.35);
+                
+            }];
+            
+        }
         //
         
     }
@@ -69,101 +87,69 @@
     return self;
 }
 
-- (UIScrollView *)creatScrollViewWithItems:(NSInteger)items {
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    CGFloat itemWidth = (kScreenWidth -4)/4;
-    CGFloat itemHeight = itemWidth;
-    CGFloat y = (scrollView.bounds.size.height - itemHeight)/2;
-    for (int i = 0; i<items; ++i) {
-        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(i*itemWidth, y, itemWidth, itemHeight)];
-        
-        NSURL *imageURl = [NSURL URLWithString:self.imageArr[i]];
-        
-        [manager downloadImageWithURL:imageURl options:SDWebImageRetryFailed|SDWebImageLowPriority progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-            if (error==nil) {
-                //                btn.imageView.image = image;
-                [btn setBackgroundImage:image forState:UIControlStateNormal];
-            }
-        }];
-        
-        [btn bk_addEventHandler:^(id sender) {
-            if (![CRKUtil isPaid]) {
-                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"友情提示" message:@"加入会员查看更多" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"成为会员", nil];
-                [alerView show];
-            }else{
-                UIImageView *currentImageView = [self popupBigImageWithImage:imageURl];
-                [self addSubview:currentImageView];
-                {
-                    [currentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.center.equalTo(self);
-                        make.height.width.mas_equalTo(0.1);
-                    }];
-                }
-                
-                [UIView animateWithDuration:0.5 animations:^{
-                    currentImageView.transform = CGAffineTransformMakeScale(12, 10);
-                    
-                } completion:nil];
-                
-            }
-            
-        } forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-    scrollView.contentSize = CGSizeMake((itemWidth + 5) *items, 0);
-    return scrollView;
+#pragma mark collectionView Delegate Datasoure
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
+    return kVideoImageItems;
 }
 
-//弹框
-- (UIImageView *)popupBigImageWithImage:(NSURL *)imageUrl {
-    UIImageView *popuImage = [[UIImageView alloc] init];
-    [popuImage sd_setImageWithURL:imageUrl];
-    UIButton *closeBtn =  [[UIButton alloc] init];
-    [closeBtn setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
-    [closeBtn sizeToFit];
-    [popuImage addSubview:closeBtn];
-    {
-        [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.top.mas_equalTo(popuImage);
-        }];
-        
-    }
-    [closeBtn bk_addEventHandler:^(id sender) {
-        [UIView animateWithDuration:0.5 animations:^{
-            popuImage.frame = CGRectZero;
-            [popuImage removeFromSuperview];
-        }];
-        
-    } forControlEvents:UIControlEventTouchUpInside];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CRKVideoImageCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kVideoImageIdentifier forIndexPath:indexPath];
+    cell.imageUrl = @"";
+    return cell;
     
-    return popuImage;
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat kWidth = (kScreenWidth - 5*kVideoImageSpace)/4;
+    
+    return CGSizeMake(kWidth, kWidth*1.1);
+    
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (![CRKUtil isPaid]) {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"友情提示" message:@"会员用户才能查看详情图片" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"成为会员", nil];
+        [alerView show];
+    }else {
+//        CRKVideoImageCollectionViewCell *cell = (CRKVideoImageCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+//        _popupPictureView = [[UIView alloc] init];
+//        _popupPictureView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.7];
+//        [self addSubview:_popupPictureView];
+//        {
+//            [_popupPictureView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.edges.mas_equalTo(self);
+//                
+//            }];
+//            
+//        }
+        
+        if (self.popImageBloc) {
+            self.popImageBloc(_imageArr,indexPath);
+        }
+       
+    }
+    
+}
+//成为会员
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        DLog(@"支付-->弹框");
+    if (buttonIndex == 1 ) {
+        if (self.action) {
+            self.action(nil);
+        }
     }
-    
-}
-
-- (void)setIsFreeVideo:(BOOL)isFreeVideo {
-    _isFreeVideo = isFreeVideo;
-    
-    if (isFreeVideo) {
-        
-        _scrollView.frame = CGRectZero;
-        _scrollView.hidden = YES;
-        [_scrollView removeFromSuperview];
-    }
-    
 }
 
 - (NSArray<NSString *> *)imageArr {
     if (!_imageArr) {
-        _imageArr = @[@"http://apkcdn.mquba.com/wysy/video/imgcover/20160526x2.png",@"http://apkcdn.mquba.com/wysy/video/imgcover/20160526x2.png",@"http://apkcdn.mquba.com/wysy/video/imgcover/20160526x2.png",@"http://apkcdn.mquba.com/wysy/video/imgcover/20160526x2.png",@"http://apkcdn.mquba.com/wysy/video/imgcover/20160526x2.png"];
+        _imageArr = @[@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg"];
     }
+
     return _imageArr;
 }
+
+
 
 - (void)setImageUrl:(NSString *)imageUrl {
     _imageUrl = imageUrl;

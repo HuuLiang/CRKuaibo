@@ -9,6 +9,7 @@
 #import "CRKApplicationManager.h"
 #import <objc/runtime.h>
 
+
 #define SafelyPerformSelector(instance, sel, ret) \
 if (instance && sel && [instance respondsToSelector:sel]) { \
 ret = [instance performSelector:sel]; \

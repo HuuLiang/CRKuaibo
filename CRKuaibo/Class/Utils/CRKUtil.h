@@ -30,4 +30,5 @@ extern NSString *const kPaymentInfoKeyName;
 + (void)showSpreadBanner;
 + (NSUInteger)launchSeq;
 + (void)accumateLaunchSeq;
++ (void)checkAppInstalledWithBundleId:(NSString *)bundleId completionHandler:(void (^)(BOOL))handler;
 @end

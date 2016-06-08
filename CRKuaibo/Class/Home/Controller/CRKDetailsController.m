@@ -44,7 +44,7 @@ NSInteger const KDetailsSections = 2;//组数
     layout.minimumInteritemSpacing = kDetailspace;
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     
-    _collectionView.contentInset = UIEdgeInsetsMake(0, 2.5, 2.5, 2.5);
+    _collectionView.contentInset = UIEdgeInsetsMake(-2.5, 2.5, 2.5, 2.5);
     
     _collectionView.backgroundColor = self.view.backgroundColor;
     
@@ -89,7 +89,23 @@ NSInteger const KDetailsSections = 2;//组数
             
             CRKVideoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kVideoCellIdentifier forIndexPath:indexPath];
             cell.imageUrl = @"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823mnyh.jpg";
-            //            cell.isFreeVideo = NO;
+            //点击图片详情 支付
+            cell.action = ^(id sender){
+                CRKProgram *program = [[CRKProgram alloc] init];
+                CRKChannel *channel = [[CRKChannel alloc] init];
+                [self switchToPlayProgram:program programLocation:1 inChannel:channel];
+                
+            };
+            //支付完成后点击图片会查看大图
+            cell.popImageBloc = ^(NSArray*imageArr,NSIndexPath *indexPath){
+                UIView *popView = [self creatPictureBrowserWithImageArr:imageArr indexPath:indexPath];
+                //                popView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.9];
+                [self.view addSubview:popView];
+                [UIView animateWithDuration:0.5 animations:^{
+                    popView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+                }];
+                
+            };
             return cell;
         }else {
             CRKHomeSpreeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifier forIndexPath:indexPath];
@@ -109,7 +125,7 @@ NSInteger const KDetailsSections = 2;//组数
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.item == 0) {
-            return CGSizeMake(kScreenWidth,kScreenWidth *0.5);
+            return CGSizeMake(kScreenWidth,kScreenWidth *0.8);
         }else {
             return CGSizeMake(kScreenWidth, kScreenWidth *0.2);
         }
@@ -123,8 +139,8 @@ NSInteger const KDetailsSections = 2;//组数
     if (section == 0 ){
         return CGSizeMake(0, 0);
     }
-
-  return CGSizeMake(0, 34);
+    
+    return CGSizeMake(0, 34);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -135,7 +151,36 @@ NSInteger const KDetailsSections = 2;//组数
     headerView.backgroundColor = self.view.backgroundColor;
     headerView.isHotRecommend = YES;
     return headerView;
-
+    
 }
+
+/**
+ *  图片浏览
+ */
+- (UIView*)creatPictureBrowserWithImageArr:(NSArray *)imageArr indexPath:(NSIndexPath *)indexPath {
+    UIView *popView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    popView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.9];
+    UIButton *closeBtn = [[UIButton alloc] init];
+    [closeBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    [closeBtn bk_addEventHandler:^(id sender) {
+        [UIView animateWithDuration:0.5 animations:^{
+            popView.frame = CGRectMake(0, 0, 0, 0);
+        }];
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [popView addSubview:closeBtn];
+    {
+        [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(popView.mas_right).mas_offset(-4);
+            make.top.mas_equalTo(popView.mas_top).mas_offset(4);
+        }];
+        
+    }
+    
+    return popView;
+}
+
 
 @end

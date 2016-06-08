@@ -131,4 +131,18 @@ static NSString *const kLaunchSeqKeyName = @"crkuaibov_launchseq_keyname";
     NSUInteger launchSeq = [self launchSeq];
     [[NSUserDefaults standardUserDefaults] setObject:@(launchSeq+1) forKey:kLaunchSeqKeyName];
 }
+
++ (void)checkAppInstalledWithBundleId:(NSString *)bundleId completionHandler:(void (^)(BOOL))handler {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        BOOL installed = [[[CRKApplicationManager defaultManager] allInstalledAppIdentifiers] bk_any:^BOOL(id obj) {
+            return [bundleId isEqualToString:obj];
+        }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (handler) {
+                handler(installed);
+            }
+        });
+    });
+}
+
 @end

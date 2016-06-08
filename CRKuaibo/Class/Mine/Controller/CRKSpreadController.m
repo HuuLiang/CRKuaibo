@@ -113,7 +113,7 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
     program.payPointType = @(payPointType);
     CRKChannel *channel = [[CRKChannel alloc] init];
 //    channel.
-    //跳转到支付
+    
     [self switchToPlayProgram:program programLocation:1 inChannel:channel];
 }
 //获取模型数据
@@ -185,11 +185,11 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
         cell.imageURL = [NSURL URLWithString:appSpread.coverImg];
         cell.isInstalled = NO;
         
-//        [CRKUtil checkAppInstalledWithBundleId:appSpread.specialDesc completionHandler:^(BOOL installed) {
-//            if (installed) {
-//                cell.isInstalled = YES;
-//            }
-//        }];
+        [CRKUtil checkAppInstalledWithBundleId:appSpread.specialDesc completionHandler:^(BOOL installed) {
+            if (installed) {
+                cell.isInstalled = YES;
+            }
+        }];
         
     }else {
         cell.imageURL = nil;

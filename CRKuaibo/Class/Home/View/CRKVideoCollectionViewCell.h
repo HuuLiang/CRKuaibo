@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^popViewBloc)(NSArray*arr,NSIndexPath*indexpath);
+
 @interface CRKVideoCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic,copy)NSString *imageUrl;
 @property (nonatomic,assign)BOOL isFreeVideo;
 
+@property (nonatomic,copy)CRKAction action;
+
+@property (nonatomic,copy)popViewBloc popImageBloc;
 
 @end
