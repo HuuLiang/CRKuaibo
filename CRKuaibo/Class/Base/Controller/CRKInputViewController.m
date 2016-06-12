@@ -37,7 +37,7 @@
     {
         [_inputTextView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view).offset(15);
-            make.top.equalTo(self.view).offset(45/667.*kScreenHeight);
+            make.top.equalTo(self.view).offset(35/667.*kScreenHeight);
             make.right.equalTo(self.view).offset(-15);
             make.height.mas_equalTo(180/667.*kScreenHeight);
         }];
@@ -188,5 +188,11 @@
     }
     return YES;
 }
+
+- (void)dealloc {
+    
+    
+}
+
 
 @end

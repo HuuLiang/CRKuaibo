@@ -38,6 +38,15 @@ static NSString *const kVideoImageIdentifier = @"kVideoImageIdentifier";
         }
         
         UIImageView *playImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detailPlayicon"]];
+        playImage.userInteractionEnabled = YES;
+        _imageView.userInteractionEnabled = YES;
+        //点击播放按钮
+        [playImage bk_whenTapped:^{
+            if (self.playVideo) {
+                self.playVideo(_isFreeVideo);
+            }
+            
+        }];
         [_imageView addSubview:playImage];
         {
             [playImage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -113,22 +122,23 @@ static NSString *const kVideoImageIdentifier = @"kVideoImageIdentifier";
         UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"友情提示" message:@"会员用户才能查看详情图片" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"成为会员", nil];
         [alerView show];
     }else {
-//        CRKVideoImageCollectionViewCell *cell = (CRKVideoImageCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-//        _popupPictureView = [[UIView alloc] init];
-//        _popupPictureView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.7];
-//        [self addSubview:_popupPictureView];
-//        {
-//            [_popupPictureView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.edges.mas_equalTo(self);
-//                
-//            }];
-//            
-//        }
+        //        CRKVideoImageCollectionViewCell *cell = (CRKVideoImageCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        //        _popupPictureView = [[UIView alloc] init];
+        //        _popupPictureView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.7];
+        //        [self addSubview:_popupPictureView];
+        //        {
+        //            [_popupPictureView mas_makeConstraints:^(MASConstraintMaker *make) {
+        //                make.edges.mas_equalTo(self);
+        //                
+        //            }];
+        //            
+        //        }
+        NSArray *imageArr = @[@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg"];;
         
         if (self.popImageBloc) {
-            self.popImageBloc(_imageArr,indexPath);
+            self.popImageBloc(imageArr,indexPath);
         }
-       
+        
     }
     
 }
@@ -145,7 +155,7 @@ static NSString *const kVideoImageIdentifier = @"kVideoImageIdentifier";
     if (!_imageArr) {
         _imageArr = @[@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg",@"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823xcmn.jpg"];
     }
-
+    
     return _imageArr;
 }
 

@@ -9,14 +9,19 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^popViewBloc)(NSArray*arr,NSIndexPath*indexpath);
+typedef void(^playVideoBloc)(BOOL);
 
 @interface CRKVideoCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic,copy)NSString *imageUrl;
 @property (nonatomic,assign)BOOL isFreeVideo;
 
-@property (nonatomic,copy)CRKAction action;
+@property (nonatomic,copy)CRKAction action;//支付
 
-@property (nonatomic,copy)popViewBloc popImageBloc;
+@property (nonatomic,copy)popViewBloc popImageBloc;//图片弹框
+
+@property (nonatomic,assign,getter=isFreeVideo)BOOL freeVideo;//是否是试播视频
+
+@property (nonatomic,copy)playVideoBloc playVideo; //视频播放
 
 @end
