@@ -82,16 +82,16 @@ static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusabl
     if (indexPath.section == 0 ) {
         if (indexPath.item == 2) {
             CRKHomeSpreeCell *spreeCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifer forIndexPath:indexPath];
-            spreeCell.imageUrl = @"";
+            spreeCell.imageUrl = @"http://apkcdn.mquba.com/wysy/tuji/img_pic/20151217b2.jpg";
             return spreeCell;
         }
     }
     
     CRKHomeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellIdentifer forIndexPath:indexPath];
     //    cell.i
-    cell.imageUrl = @"";
-    cell.title = @"";
-    cell.subTitle = @"";
+    cell.imageUrl = @"http://apkcdn.mquba.com/wysy/video/imgcover/20160526x2.png";
+    cell.title = @"title";
+    cell.subTitle = @"sbutitle";
     return cell;
     
 }

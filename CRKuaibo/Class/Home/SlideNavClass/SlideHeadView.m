@@ -16,6 +16,10 @@ static CGFloat const titleH = 44;/** 文字高度  */
 
 static CGFloat const MaxScale = 1.14;/** 选中文字放大  */
 
+@interface SlideHeadView ()
+@property (nonatomic,assign,getter=isCanScroll) BOOL canScroll;//判断titleScroll是否可以滚动
+
+@end
 
 @implementation SlideHeadView
 
@@ -89,8 +93,16 @@ static CGFloat const MaxScale = 1.14;/** 选中文字放大  */
     UIViewController *superVC = [self findViewController:self];
     
     NSUInteger count = superVC.childViewControllers.count;
+    
     CGFloat x = 0;
     CGFloat w = 80;
+    NSInteger a = ScreenW / w;
+    if (a >= count) {
+        w = ScreenW /count;
+    }
+    _canScroll = count > a;
+    
+    
     CGFloat h = titleH;
     self.imageBackView  = [[UIImageView alloc] initWithFrame:CGRectMake(15, 12.6, w-30, titleH-25)];
     _imageBackView.backgroundColor = [UIColor colorWithWhite:0.85 alpha:0.5];
@@ -125,6 +137,7 @@ static CGFloat const MaxScale = 1.14;/** 选中文字放大  */
         }
         
     }
+ 
     
     self.titleScrollView.contentSize = CGSizeMake(count * w, 0);
     self.titleScrollView.showsHorizontalScrollIndicator = NO;
@@ -159,7 +172,9 @@ static CGFloat const MaxScale = 1.14;/** 选中文字放大  */
 
 -(void)setupTitleCenter:(UIButton *)sender
 {
-    
+    if (!self.isCanScroll) {
+        return;
+    }
     CGFloat offset = sender.center.x - ScreenW * 0.5;
     if (offset < 0) {
         offset = 0;

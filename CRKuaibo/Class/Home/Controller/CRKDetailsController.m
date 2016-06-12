@@ -100,15 +100,15 @@ NSInteger const KDetailsSections = 2;//组数
                 CRKProgram *program = [[CRKProgram alloc] init];
                 CRKChannel *channel = [[CRKChannel alloc] init];
                 if (freeVideo) {
-             //是否是付费,是否是试播进行判断
+                    //是否是付费,是否是试播进行判断
                     [self playVideo:program videoLocation:0 inChannel:channel withTimeControl:NO shouldPopPayment:YES];
                 } else {
                     if ([CRKUtil isPaid]) {
-                         [self playVideo:program videoLocation:0 inChannel:channel withTimeControl:YES shouldPopPayment:NO];
+                        [self playVideo:program videoLocation:0 inChannel:channel withTimeControl:YES shouldPopPayment:NO];
                     }else {
-                    [self switchToPlayProgram:program programLocation:1 inChannel:channel];
+                        [self switchToPlayProgram:program programLocation:1 inChannel:channel];
                     }
-                
+                    
                 }
                 
             };
@@ -141,9 +141,9 @@ NSInteger const KDetailsSections = 2;//组数
         
     }else {
         CRKHomeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellIdentifier forIndexPath:indexPath];
-        cell.imageUrl = @"";
-        cell.title = @"";
-        cell.subTitle = @"";
+        cell.imageUrl = @"http://apkcdn.mquba.com/wysy/video/imgcover/20160526x2.png";
+        cell.title = @"title";
+        cell.subTitle = @"sbutitle";
         return cell;
     }
 }

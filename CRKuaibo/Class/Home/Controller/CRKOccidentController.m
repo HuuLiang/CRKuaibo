@@ -30,13 +30,13 @@
     CRKUniversalityController *vc4 = [[CRKUniversalityController alloc] init];
     CRKUniversalityController *vc5 = [[CRKUniversalityController alloc] init];
     
-    slider.titlesArr = @[@"vc1",@"vc2",@"vc3",@"vc4",@"v5"];
+    slider.titlesArr = @[@"vc1",@"vc2",@"vc3",@"vc4"];
     
     [slider addChildViewController:vc1 title:slider.titlesArr[0]];
     [slider addChildViewController:vc2 title:slider.titlesArr[1]];
     [slider addChildViewController:vc3 title:slider.titlesArr[2]];
     [slider addChildViewController:vc4 title:slider.titlesArr[3]];
-    [slider addChildViewController:vc5 title:slider.titlesArr[4]];
+//    [slider addChildViewController:vc5 title:slider.titlesArr[4]];
     [slider setSlideHeadView];
 }
 

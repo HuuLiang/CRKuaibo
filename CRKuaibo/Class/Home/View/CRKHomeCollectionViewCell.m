@@ -62,20 +62,18 @@
 
 - (void)setTitle:(NSString *)title {
     _title = title;
-    //    _titleLabel.text = title;
-    _titleLabel.text = @"哈哈哈哈哈";
+    _titleLabel.text = title;
     
 }
 
 - (void)setSubTitle:(NSString *)subTitle {
     _subTitle = subTitle;
-    _subLabel.text = @"sdfsalfjklsaj";
+    _subLabel.text = subTitle;
     
 }
 
 - (void)setImageUrl:(NSString *)imageUrl {
     _imageUrl = imageUrl;
-    imageUrl = @"http://apkcdn.mquba.com/wysy/video/imgcover/20160526x2.png";
     [_imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
     
 }
