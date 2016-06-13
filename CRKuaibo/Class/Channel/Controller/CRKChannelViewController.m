@@ -66,17 +66,17 @@ DefineLazyPropertyInitialization(NSMutableArray,channels)
     [_layoutCollectionView CRK_addPullToRefreshWithHandler:^{
         @strongify(self);
         
-        [self.channels removeAllObjects];
+//        [self.channels removeAllObjects];
         _currentPage = 0;
         [self loadChannels];
         
     }];
     [_layoutCollectionView CRK_triggerPullToRefresh];
     
-    [_layoutCollectionView CRK_addPagingRefreshWithHandler:^{
-        [self loadChannels];
-        
-    }];
+//    [_layoutCollectionView CRK_addPagingRefreshWithHandler:^{
+//        [self loadChannels];
+//        
+//    }];
     
     
 }
