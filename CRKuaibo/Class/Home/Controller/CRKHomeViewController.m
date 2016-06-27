@@ -10,6 +10,7 @@
 #import "CRKOccidentController.h"
 #import "CRKRHViewController.h"
 #import "CRKDLViewController.h"
+#import "CRKHomePageModel.h"
 
 typedef NS_ENUM (NSUInteger , SegmentIndex){
     CRKBEuramerican, //欧美
@@ -17,26 +18,45 @@ typedef NS_ENUM (NSUInteger , SegmentIndex){
     CRKBMainland     //大陆
 };
 
-@interface CRKHomeViewController ()<UIPageViewControllerDelegate,UIPageViewControllerDataSource>
+@interface CRKHomeViewController ()<UIPageViewControllerDelegate>
 {
     UIPageViewController *_pageViewCtroller;
     
 }
 @property (nonatomic,retain)NSMutableArray <UIViewController*>*viewCtrollers;
+@property (nonatomic,retain)CRKHomePageModel *homePageModel;
+@property (nonatomic,retain)NSArray <NSString *>*segmentTitles;
 
 @end
 
 @implementation CRKHomeViewController
 
 DefineLazyPropertyInitialization(NSMutableArray,viewCtrollers);
+DefineLazyPropertyInitialization(CRKHomePageModel, homePageModel);
+DefineLazyPropertyInitialization(NSArray, segmentTitles);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setPageCtroller];
+    [self loadChannel];
     
     [self setSegmentControll];
     
 }
+/**
+ *  加载数据
+ */
+- (void)loadChannel {
+    [self.homePageModel fetchWiithCompletionHandler:^(BOOL success, NSArray<CRKHomePage *>*programs) {
+        if (success) {
+            
+            
+            [self setPageCtroller];
+        }
+    }];
+    
+}
+
+
 /**
  *  设置PageCtroller
  */
@@ -44,21 +64,21 @@ DefineLazyPropertyInitialization(NSMutableArray,viewCtrollers);
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    CRKOccidentController *occidentVC = [[CRKOccidentController alloc] init];
+    
+    CRKOccidentController *occidentVC = [[CRKOccidentController alloc] initWithHomePage:_homePageModel.homePageOM];
     [self.viewCtrollers addObject:occidentVC];
-    CRKRHViewController *riHanVC = [[CRKRHViewController alloc] init];
+    CRKRHViewController *riHanVC = [[CRKRHViewController alloc] initWithHomePage:_homePageModel.homePageRH];
     [self.viewCtrollers addObject:riHanVC];
-    CRKDLViewController *mainLandVC = [[CRKDLViewController alloc] init];
+    CRKDLViewController *mainLandVC = [[CRKDLViewController alloc] initWithHomePage:_homePageModel.homePageDL];
     [self.viewCtrollers addObject:mainLandVC];
     
     _pageViewCtroller = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     _pageViewCtroller.delegate = self;
-    _pageViewCtroller.dataSource = self;
+    //    _pageViewCtroller.dataSource = self;
     [_pageViewCtroller setViewControllers:@[self.viewCtrollers.firstObject] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     [self addChildViewController:_pageViewCtroller];
     [self.view addSubview:_pageViewCtroller.view];
     [_pageViewCtroller didMoveToParentViewController:self];
-    
     
 }
 
@@ -67,8 +87,8 @@ DefineLazyPropertyInitialization(NSMutableArray,viewCtrollers);
  *  设置SegmentControll
  */
 - (void)setSegmentControll {
-    
-    UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:@[@"欧美",@"日韩",@"大陆"]];
+    _segmentTitles = @[@"欧美",@"日韩",@"大陆"];
+    UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:_segmentTitles];
     segment.selectedSegmentIndex = 0;
     segment.frame = CGRectMake(0, 0, kScreenWidth*0.5, 31);
     segment.tintColor = [UIColor colorWithWhite:1 alpha:0.5];
@@ -86,7 +106,7 @@ DefineLazyPropertyInitialization(NSMutableArray,viewCtrollers);
         NSNumber *newValue = change[NSKeyValueChangeNewKey];
         //选则控制器
         [_pageViewCtroller setViewControllers:@[_viewCtrollers[newValue.unsignedIntegerValue]]
-    direction:newValue.unsignedIntegerValue>oldValue.unsignedIntegerValue ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
+                                    direction:newValue.unsignedIntegerValue>oldValue.unsignedIntegerValue ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
     }
     
 }

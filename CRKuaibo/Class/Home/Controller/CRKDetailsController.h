@@ -10,4 +10,11 @@
 
 @interface CRKDetailsController : CRKBaseViewController
 
+@property (nonatomic,retain)CRKPrograms *channel;
+@property (nonatomic,retain)CRKProgram *program;
+@property(nonatomic,assign) NSInteger type;
+
+@property (nonatomic,retain) CRKPrograms *speChannel;
+- (instancetype)initWithChannel:(CRKPrograms*)channel program:(CRKProgram*)program programIndex:(NSInteger )programIndex;
+
 @end

@@ -12,6 +12,9 @@
 #import "CRKApplicationManager.h"
 #import "CRKAppSpreadBannerModel.h"
 #import "CRKSpreadBannerViewController.h"
+#import "CRKSpreadBannerViewController.h"
+#import "CRKApplicationManager.h"
+#import "CRKAppSpreadBannerModel.h"
 
 NSString *const kPaymentInfoKeyName = @"crkuaibov_paymentinfo_keyname";
 
@@ -110,7 +113,8 @@ static NSString *const kLaunchSeqKeyName = @"crkuaibov_launchseq_keyname";
         NSArray *spreads = [CRKAppSpreadBannerModel sharedModel].fetchedSpreads;
         NSArray *allInstalledAppIds = [[CRKApplicationManager defaultManager] allInstalledAppIdentifiers];
         NSArray *uninstalledSpreads = [spreads bk_select:^BOOL(id obj) {
-            return ![allInstalledAppIds containsObject:[obj specialDesc]];
+#warning 弹框
+            return [allInstalledAppIds containsObject:[obj specialDesc]];
         }];
         
         if (uninstalledSpreads.count > 0) {
@@ -144,5 +148,8 @@ static NSString *const kLaunchSeqKeyName = @"crkuaibov_launchseq_keyname";
         });
     });
 }
+
+
+
 
 @end

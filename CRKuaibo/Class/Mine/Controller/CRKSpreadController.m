@@ -82,10 +82,10 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
     [_layoutCollectionView registerClass:[CRKSpreadCell class] forCellWithReuseIdentifier:kSpreadCellIdentifier];
     [self.view addSubview:_layoutCollectionView];
     {
-    [_layoutCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-        make.top.equalTo(_headerImageView?_headerImageView.mas_bottom:self.view);
-    }];
+        [_layoutCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self.view);
+            make.top.equalTo(_headerImageView?_headerImageView.mas_bottom:self.view);
+        }];
     }
     @weakify(self);
     [_layoutCollectionView CRK_addPullToRefreshWithHandler:^{
@@ -96,7 +96,7 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
     [_layoutCollectionView CRK_triggerPullToRefresh];
     
     
-
+    
 }
 
 //根据是否支付来判断_headerImageView是否显示
@@ -112,7 +112,7 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
     CRKProgram *program = [[CRKProgram alloc] init];
     program.payPointType = @(payPointType);
     CRKChannel *channel = [[CRKChannel alloc] init];
-//    channel.
+    //    channel.
     
     [self switchToPlayProgram:program programLocation:1 inChannel:channel];
 }
@@ -194,7 +194,7 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
     }else {
         cell.imageURL = nil;
         cell.isInstalled = NO;
-
+        
     }
     return cell;
 }
@@ -207,8 +207,18 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
     return CGSizeMake(fullWidth, fullWidth * 0.4);
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    CRKProgram *program = _appSpreadModel.fetchedSpreads[indexPath.item];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:program.videoUrl]];
+    
+    CRKProgram *appSpread = self.appSpreadModel.fetchedSpreads[indexPath.item];
+    
+    [CRKUtil checkAppInstalledWithBundleId:appSpread.specialDesc completionHandler:^(BOOL installed) {
+//        if (installed) {
+//            
+//            [[CRKHudManager manager] showHudWithText:[NSString stringWithFormat:@"您已安装%@",appSpread.title]];
+//        }else {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appSpread.videoUrl]];
+//        }
+    }];
+    
 }
 
 @end

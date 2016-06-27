@@ -13,7 +13,7 @@
 
 #define CRK_CHANNEL_NO           [CRKConfiguration sharedConfig].channelNo
 #define CRK_REST_APP_ID          @"QUBA_2022"
-#define CRK_REST_PV              @100
+#define CRK_REST_PV              @99  //100
 #define CRK_PAYMENT_PV           @100
 #define CRK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd."
 #define CRK_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", CRK_REST_APP_ID, CRK_CHANNEL_NO]
@@ -21,11 +21,13 @@
 #define CRK_BASE_URL             @"http://120.24.252.114:8093" //@"http://iv.ihuiyx.com"//
 #define CRK_UMENG_APP_ID         @"56e653d767e58e0eb7002156"
 
-#define CRK_HOME_VIDEO_URL              @"/iosvideo/homePage.htm"
+#define CRK_HOME_VIDEO_URL              @"/iosvideo/channelRanking.htm"//@"/iosvideo/homePage.htm"//首页
+#define CRK_HOME_SUB_VIDEO_URL    @"/iosvideo/columnProgram.htm"
+
 //#define CRK_VIDEO_LIB_URL               @"/iosvideo/hotVideo.htm"
 #define CRK_HOT_VIDEO_URL               @"/iosvideo/hotFilm.htm"
 
-#define CRK_CHANNEL_URL                 @"/iosvideo/channelRanking.htm"
+#define CRK_CHANNEL_URL                 @"/iosvideo/channel.htm"
 #define CRK_CHANNEL_PROGRAM_URL         @"/iosvideo/program.htm"
 
 #define CRK_VIP_VIDEO_URL               @"/iosvideo/vipvideo.htm"

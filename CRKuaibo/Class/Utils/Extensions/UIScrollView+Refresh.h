@@ -25,7 +25,8 @@ typedef NS_ENUM(NSUInteger, CRKPullToRefreshStyle) {
 - (void)CRK_triggerPullToRefresh;
 - (void)CRK_endPullToRefresh;
 
-- (void)CRK_addPagingRefreshWithHandler:(void (^)(void))handler;
+//- (void)CRK_addPagingRefreshWithHandler:(void (^)(void))handler;
+- (void)CRK_addPagingRefreshWithIsLoadAll:(BOOL)isLoadAll Handler:(void (^)(void))handler;
 - (void)CRK_pagingRefreshNoMoreData;
 
 @end

@@ -6,99 +6,48 @@
 ////  Copyright © 2016年 iqu8. All rights reserved.
 ////
 //
-//#import "CRKUniverSalityModel.h"
+#import "CRKUniverSalityModel.h"
+
+//@implementation CRKSubProgram
 //
+//@end
+
 //@implementation CRKHomeProgramResponse
-//
-//- (Class)columnListElementClass {
+
+//- (Class)programListElementClass {
 //    return [CRKProgram class];
 //}
+
 //@end
-//
-//@implementation CRKUniverSalityModel
-//
-//+ (Class)responseClass {
-//    return [CRKHomeProgramResponse class];
-//}
-//
-//+ (BOOL)shouldPersistURLResponse {
-//    return YES;
-//}
-//
-//- (instancetype)init {
-//    self = [super init];
-//    if (self) {
-//        CRKHomeProgramResponse *resp = (CRKHomeProgramResponse *)self.response;
-//        _fetchedProgramList = resp.columnList;
-//        
-////        [self filterProgramTypes];
-//    }
-//    return self;
-//}
-//
-//- (BOOL)fetchProgramsWithCompletionHandler:(CRKCompletionHandler)handler {
-//    @weakify(self);
-//    BOOL success = [self requestURLPath:CRK_HOME_VIDEO_URL
-//                         standbyURLPath:CRK_STANDBY_HOME_VIDEO_URL
-//                             withParams:nil
-//                        responseHandler:^(CRKURLResponseStatus respStatus, NSString *errorMessage)
-//                    {
-//                        @strongify(self);
-//                        
-//                        if (!self) {
-//                            return ;
-//                        }
-//                        
-//                        NSArray *programs;
-//                        if (respStatus == CRKURLResponseSuccess) {
-//                            CRKHomeProgramResponse *resp = (CRKHomeProgramResponse *)self.response;
-//                            programs = resp.columnList;
-//                            self->_fetchedProgramList = programs;
-//                            
-////                            [self filterProgramTypes];
-//                        }
-//                        
-//                        if (handler) {
-//                            handler(respStatus==CRKURLResponseSuccess, programs);
-//                        }
-//                    }];
-//    return success;
-//}
-//
-////- (void)filterProgramTypes {
-////    _fetchedVideoAndAdProgramList = [self.fetchedProgramList bk_select:^BOOL(id obj)
-////                                     {
-////                                         CRKProgramType type = ((CRKProgram *)obj).type.unsignedIntegerValue;
-////                                         return type == CRKProgramTypeVideo || type == CRKProgramTypeSpread;
-////                                     }];
-////    
-////    NSArray<CRKProgram *> *bannerProgramList = [self.fetchedProgramList bk_select:^BOOL(id obj)
-////                                                 {
-////                                                     CRKProgramType type = ((CRKProgram *)obj).type.unsignedIntegerValue;
-////                                                     return type == CRKProgramTypeBanner;
-////                                                 }];
-////    
-////    NSMutableArray *bannerPrograms = [NSMutableArray array];
-////    [bannerProgramList enumerateObjectsUsingBlock:^(CRKProgram * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-////        if (obj.programList.count > 0) {
-////            [bannerPrograms addObjectsFromArray:obj.programList];
-////        }
-////    }];
-////    _fetchedBannerPrograms = bannerPrograms;
-////    
-////    NSArray<CRKProgram *> *trailProgramList = [self.fetchedProgramList bk_select:^BOOL(id obj) {
-////        CRKProgramType type = ((CRKProgram *)obj).type.unsignedIntegerValue;
-////        return type == CRKProgramTypeTrial;
-////    }];
-////    
-////    NSMutableArray<CRKProgram *> *trialPrograms = [NSMutableArray array];
-////    [trailProgramList enumerateObjectsUsingBlock:^(CRKProgram * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-////        if (obj.programList.count > 0) {
-////            [trialPrograms addObjectsFromArray:obj.programList];
-////        }
-////    }];
-////    _fetchedTrialVideos = trialPrograms;
-////}
-//
-//
-//@end
+
+@implementation CRKHomeSubResponse
+- (Class)columnListElementClass {
+    return [CRKPrograms class];
+}
+
+@end
+
+
+@implementation CRKUniverSalityModel
++ (Class)responseClass {
+    
+    return [CRKHomeSubResponse class];
+}
+
+- (BOOL)fetchProgramsWithColumnId:(NSNumber *)columnId pageNo:(NSUInteger)pageNo pageSize:(NSUInteger)pageSize completionHandler:(CRKFetchChannelProgramCompletionHandler)handler{
+    NSDictionary *params = @{@"columnId":columnId,@"isProgram":@(1)};//isProgram ,@"page":@(pageNo),@"pageSize":@(pageSize)
+    BOOL rect = [self requestURLPath:CRK_HOME_SUB_VIDEO_URL standbyURLPath:nil withParams:params responseHandler:^(CRKURLResponseStatus respStatus, NSString *errorMessage) {
+        CRKHomeSubResponse *resp;
+        if (respStatus == CRKURLResponseSuccess) {
+            resp = self.response;
+            _fetchChannels = resp.columnList;
+        }
+        if (handler) {
+            handler(respStatus == CRKURLResponseSuccess,_fetchChannels);
+        }
+    }];
+    
+    return rect;
+}
+
+@end

@@ -54,6 +54,7 @@ typedef NS_ENUM(NSUInteger, CRKProgramType) {
 //@property (nonatomic) NSNumber *page;
 //@property (nonatomic) NSNumber *pageSize;
 
+@property (nonatomic) NSString *spreadUrl;
 @property (nonatomic) NSNumber *columnId;
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *columnImg;

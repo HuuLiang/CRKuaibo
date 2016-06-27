@@ -7,20 +7,26 @@
 //
 
 #import "CRKEncryptedURLRequest.h"
-#import "CRKProgram.h"
 
-@interface CRKHomeProgramResponse : CRKURLResponse
-@property (nonatomic,retain) NSArray<CRKProgram *> *columnList;
+
+//@interface CRKHomeProgramResponse : CRKPrograms
+////@property (nonatomic)NSString *spreadUrl;
+//
+//@end
+
+@interface CRKHomeSubResponse : CRKURLResponse
+@property (nonatomic,retain)NSArray <CRKPrograms *>*columnList;
+
 @end
+
+typedef void(^CRKFetchChannelProgramCompletionHandler)(BOOL success, NSArray<CRKPrograms *>*programs);
 
 @interface CRKUniverSalityModel : CRKEncryptedURLRequest
 
-@property (nonatomic,retain,readonly) NSArray<CRKProgram *> *fetchedProgramList;
-@property (nonatomic,retain,readonly) NSArray<CRKProgram *> *fetchedVideoAndAdProgramList;
+@property (nonatomic,retain) NSArray <CRKPrograms *>*fetchChannels;
 
-@property (nonatomic,retain,readonly) NSArray<CRKProgram *> *fetchedBannerPrograms;
-@property (nonatomic,retain,readonly) NSArray<CRKProgram *> *fetchedTrialVideos;
-
-- (BOOL)fetchProgramsWithCompletionHandler:(CRKCompletionHandler)handler;
-
+- (BOOL)fetchProgramsWithColumnId:(NSNumber *)columnId
+                           pageNo:(NSUInteger)pageNo
+                         pageSize:(NSUInteger)pageSize
+                completionHandler:(CRKFetchChannelProgramCompletionHandler)handler;
 @end

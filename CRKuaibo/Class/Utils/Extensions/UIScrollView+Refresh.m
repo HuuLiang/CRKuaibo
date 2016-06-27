@@ -92,11 +92,14 @@ static const void *kCRKShowStateAssociatedKey = &kCRKShowStateAssociatedKey;
     }
 }
 
-- (void)CRK_addPagingRefreshWithHandler:(void (^)(void))handler {
+- (void)CRK_addPagingRefreshWithIsLoadAll:(BOOL)isLoadAll Handler:(void (^)(void))handler {
     if (!self.footer) {
         MJRefreshAutoNormalFooter *refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:handler];
 //        refreshFooter.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
         refreshFooter.stateLabel.textColor = [self CRK_refreshTextColor];
+        if (isLoadAll && ![CRKUtil isPaid]) {
+            [refreshFooter setTitle:@"⬆️成为VIP，上拉或者点击加载更多" forState:MJRefreshStateIdle];
+        }
         self.footer = refreshFooter;
     }
 }

@@ -13,4 +13,13 @@
 @property(nonatomic,assign) BOOL isHaveFreeVideo;
 @property(nonatomic,assign) BOOL isFirstVC;
 
+@property (nonatomic) BOOL hasShownSpreadBanner;//弹框
+
+//@property (nonatomic) NSInteger homePage;
+//@property (nonatomic) NSInteger currentVC;
+@property (nonatomic) NSNumber *coloumId;
+
+//- (instancetype)initWith:(CRKCurrentHomePage)homePage currentVC:(NSInteger)currentVC;
+- (instancetype)initWith:(NSNumber *)coloumId;
+
 @end

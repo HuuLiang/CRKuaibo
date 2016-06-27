@@ -85,7 +85,8 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
         
     }];
     [_tableView CRK_triggerPullToRefresh];
-    [_tableView CRK_addPagingRefreshWithHandler:^{
+    
+    [_tableView CRK_addPagingRefreshWithIsLoadAll:NO Handler:^{
         @strongify(self);
         if (![CRKUtil isPaid]) {
             //弹出提示框
@@ -191,6 +192,10 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
         
         
     }
+    
+}
+- (void)dealloc {
+    
     
 }
 

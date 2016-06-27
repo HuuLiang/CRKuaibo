@@ -14,6 +14,7 @@
 #import "CRKAppSpreadBannerModel.h"
 #import "CRKPaymentManager.h"
 #import "MobClick.h"
+#import "CRKLaunchView.h"
 
 // Tab View Controllers
 #import "CRKHomeViewController.h"
@@ -160,6 +161,9 @@
     [self setupCommonStyles];
     [self setupMobStatistics];
     [self.window makeKeyAndVisible];
+    
+    CRKLaunchView *launchView = [[CRKLaunchView alloc] init];
+    [launchView show];
     
     if (![CRKUtil isRegistered]) {
         [[CRKActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {

@@ -24,14 +24,14 @@
     if (self) {
         
         _subLabel = [[UILabel alloc] init];
-        _subLabel.font = [UIFont systemFontOfSize:11.];
+        _subLabel.font = [UIFont systemFontOfSize:12.];
         _subLabel.textColor = [UIColor blackColor];
         _subLabel.backgroundColor = [UIColor whiteColor];
         [self addSubview:_subLabel];
         {
             [_subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.bottom.left.right.mas_equalTo(self);
-                make.height.mas_equalTo(15);
+                make.height.mas_equalTo(20);
             }];
         }
         
@@ -45,7 +45,7 @@
             }];
         }
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.font = [UIFont systemFontOfSize:13.];
+        _titleLabel.font = [UIFont systemFontOfSize:13.5];
         _titleLabel.textColor = [UIColor blackColor];
         _titleLabel.backgroundColor = [UIColor colorWithWhite:0.65 alpha:0.55];
         [_imageView addSubview:_titleLabel];
@@ -62,13 +62,13 @@
 
 - (void)setTitle:(NSString *)title {
     _title = title;
-    _titleLabel.text = title;
+    _titleLabel.text = [NSString stringWithFormat:@"  %@",title];
     
 }
 
 - (void)setSubTitle:(NSString *)subTitle {
     _subTitle = subTitle;
-    _subLabel.text = subTitle;
+    _subLabel.text = [NSString stringWithFormat:@"  %@",subTitle];
     
 }
 

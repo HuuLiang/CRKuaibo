@@ -1,7 +1,6 @@
 //
 //  CRKController.m
 //  CRKuaibo
-//
 //  Created by ylz on 16/6/7.
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
@@ -28,10 +27,32 @@ NSInteger const KDetailsSections = 2;//组数
     UIScrollView *_picScrollView;
     
 }
+@property (nonatomic,retain)NSMutableArray *programArr;
 
 @end
 
 @implementation CRKDetailsController
+
+- (instancetype)initWithChannel:(CRKPrograms*)channel program:(CRKProgram*)program programIndex:(NSInteger )programIndex {
+
+    if (self = [self init]) {
+            NSMutableArray *tempArr = [NSMutableArray array];
+        [tempArr addObject:@(programIndex)];
+            for (int i = 0; i< 4; ++i) {
+                int temp;
+                do {
+                    temp = arc4random_uniform((int)channel.programList.count);
+                } while ([tempArr containsObject:@(temp)]);
+                [tempArr addObject:@(temp)];
+            }
+        [tempArr removeObject:@(programIndex)];
+            _programArr = tempArr;
+        }
+        _program = program;
+        _channel = channel;
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,7 +101,7 @@ NSInteger const KDetailsSections = 2;//组数
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (section == 0) {
-        return 2;
+        return _type == 5 ? 1:2;//是否是免费视频
     }else {
         return 4;
     }
@@ -92,58 +113,63 @@ NSInteger const KDetailsSections = 2;//组数
         if (indexPath.item==0) {
             
             CRKVideoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kVideoCellIdentifier forIndexPath:indexPath];
-            cell.imageUrl = @"http://apkcdn.mquba.com/wysy/tuji/img_pic/20150823mnyh.jpg";
+            cell.imageUrl = _program.coverImg;
             @weakify(self);
             //播放视频
             cell.playVideo = ^(BOOL freeVideo){
                 @strongify(self);
-                CRKProgram *program = [[CRKProgram alloc] init];
-                CRKChannel *channel = [[CRKChannel alloc] init];
-                if (freeVideo) {
+//                CRKProgram *program = _program;
+//                CRKChannel *channel = [[CRKChannel alloc] init];
+                if (_type == 5) {
                     //是否是付费,是否是试播进行判断
-                    [self playVideo:program videoLocation:0 inChannel:channel withTimeControl:NO shouldPopPayment:YES];
+                    [self playVideo:_program videoLocation:0 inChannel:(CRKChannel*)_channel withTimeControl:NO shouldPopPayment:YES];
                 } else {
                     if ([CRKUtil isPaid]) {
-                        [self playVideo:program videoLocation:0 inChannel:channel withTimeControl:YES shouldPopPayment:NO];
+                        [self playVideo:_program videoLocation:0 inChannel:(CRKChannel*)_channel  withTimeControl:YES shouldPopPayment:NO];
                     }else {
-                        [self switchToPlayProgram:program programLocation:1 inChannel:channel];
+                        [self switchToPlayProgram:_program programLocation:1 inChannel:(CRKChannel*)_channel];
                     }
                     
                 }
                 
             };
             
-            //点击图片详情 支付
-            cell.action = ^(id sender){
-                @strongify(self);
-                CRKProgram *program = [[CRKProgram alloc] init];
-                CRKChannel *channel = [[CRKChannel alloc] init];
-                [self switchToPlayProgram:program programLocation:1 inChannel:channel];
-                
-            };
-            //支付完成后点击图片会查看大图
-            cell.popImageBloc = ^(NSArray*imageArr,NSIndexPath *indexPath){
-                @strongify(self);
-                UIView *popView = [self creatPictureBrowserWithImageArr:imageArr indexPath:indexPath];
-                //                _popPictureView = popView;
-                [self.view addSubview:popView];
-                [UIView animateWithDuration:0.3 animations:^{
-                    popView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-                }];
-                
-            };
+//            //点击图片详情 支付
+//            cell.action = ^(id sender){
+//                @strongify(self);
+//                CRKProgram *program = [[CRKProgram alloc] init];
+//                CRKChannel *channel = [[CRKChannel alloc] init];
+//                [self switchToPlayProgram:program programLocation:1 inChannel:channel];
+//                
+//            };
+//            //支付完成后点击图片会查看大图
+//            cell.popImageBloc = ^(NSArray*imageArr,NSIndexPath *indexPath){
+//                @strongify(self);
+//                UIView *popView = [self creatPictureBrowserWithImageArr:imageArr indexPath:indexPath];
+//                //                _popPictureView = popView;
+//                [self.view addSubview:popView];
+//                [UIView animateWithDuration:0.3 animations:^{
+//                    popView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+//                }];
+//                
+//            };
             return cell;
         }else {
             CRKHomeSpreeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifier forIndexPath:indexPath];
-            cell.imageUrl = @"http://apkcdn.mquba.com/wysy/tuji/img_pic/20151217b2.jpg";
+            cell.imageUrl = _speChannel.columnImg;
             return cell;
         }
         
     }else {
         CRKHomeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellIdentifier forIndexPath:indexPath];
-        cell.imageUrl = @"http://apkcdn.mquba.com/wysy/video/imgcover/20160526x2.png";
-        cell.title = @"title";
-        cell.subTitle = @"sbutitle";
+        if (_programArr.count-1 < indexPath.item) {
+            return nil;
+        }
+        NSNumber *programIdx = _programArr[indexPath.item];
+        CRKProgram *program = _channel.programList[programIdx.integerValue];
+        cell.imageUrl = program.coverImg;
+        cell.title = program.title;
+        cell.subTitle = program.specialDesc;
         return cell;
     }
 }
@@ -151,14 +177,24 @@ NSInteger const KDetailsSections = 2;//组数
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         
+        if (indexPath.item == 1){
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_speChannel.spreadUrl]];
+        }
+    }else if (indexPath.section == 1 ){
+        NSNumber *programIdx = _programArr[indexPath.item];
+        CRKProgram *program = _channel.programList[programIdx.integerValue];
+        _program = program;
+        _type = _channel.type.integerValue;
+        [_collectionView reloadData];
     }
+    
     
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.item == 0) {
-            return CGSizeMake(kScreenWidth,kScreenWidth *0.8);
+            return CGSizeMake(kScreenWidth,kScreenWidth *0.6);
         }else {
             return CGSizeMake(kScreenWidth, kScreenWidth *0.2);
         }
@@ -217,7 +253,7 @@ NSInteger const KDetailsSections = 2;//组数
     //        
     //    }
     
-    UIScrollView *picScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (1- 350/568.)*kScreenHeight/3, kScreenWidth, 350/568.*kScreenHeight)];
+    UIScrollView *picScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (1- 500/568.)*kScreenHeight/3, kScreenWidth, 450/568.*kScreenHeight)];
     picScrollView.backgroundColor = [UIColor whiteColor];
     picScrollView.contentSize = CGSizeMake(imageArr.count *kScreenWidth, 0);
     _picScrollView = picScrollView;

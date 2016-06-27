@@ -11,9 +11,12 @@
 #import "CRKHomeSpreeCell.h"
 #import "CRKHomeHeaderReusableView.h"
 #import "CRKDetailsController.h"
+#import "CRKHomePageModel.h"
+#import "CRKUniverSalityModel.h"
 
 CGFloat const kHomespace = 2.5;
-CGFloat const kHomeSection = 2;
+NSInteger const kHomeSize = 6;
+
 static NSString *const kHomeCellIdentifer = @"khomecellidentifers";
 static NSString *const kHomeSpreeCellIdentifer = @"khomespreecellidentifers";
 static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusableIdentifier";
@@ -24,12 +27,46 @@ static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusabl
     
 }
 
+@property (nonatomic,retain)CRKHomePageModel *homePageModel;
+@property (nonatomic,retain)NSMutableArray *univerSlityModels;
+@property (nonatomic,retain)NSArray <CRKProgram *>*allModel;//总共的推荐的节目数量
+@property (nonatomic,retain)NSMutableArray <CRKProgram *>*currentProgramModel;
+
+@property (nonatomic,retain)CRKUniverSalityModel *homeUniverModel;
+@property (nonatomic,retain)CRKPrograms *videoChannel;
+
+@property (nonatomic,retain)CRKPrograms *specChannel;//推广
+
+@property (nonatomic) NSUInteger currentPage;//当前页
+
+
 @end
 
 @implementation CRKUniversalityController
+DefineLazyPropertyInitialization(CRKHomePageModel, homePageModel)
+DefineLazyPropertyInitialization(NSMutableArray,univerSlityModels)
+DefineLazyPropertyInitialization(CRKUniverSalityModel, homeUniverModel)
+DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
+
+//- (instancetype)initWith:(CRKCurrentHomePage)homePage currentVC:(NSInteger)currentVC{
+//    if (self = [self init]) {
+//        _homePage = homePage;
+//        _currentVC = currentVC;
+//    }
+//    return self;
+//}
+
+- (instancetype)initWith:(NSNumber *)coloumId{
+    if (self = [self init]) {
+        _coloumId = coloumId;
+    }
+    return self;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setUpCollectionView];
     
 }
@@ -62,46 +99,168 @@ static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusabl
             //            make.top.mas_equalTo(self.view).mas_offset(3);
         }];
     }
+    @weakify(self);
+    [_collectinView CRK_addPullToRefreshWithHandler:^{
+        @strongify(self);
+//        [self.univerSlityModels removeAllObjects];
+        [_currentProgramModel removeAllObjects];
+        _currentPage = 0;
+        [self loadModel];
+    }];
+    [_collectinView CRK_triggerPullToRefresh];
+    
+    [_collectinView CRK_addPagingRefreshWithIsLoadAll:YES Handler:^{
+        @strongify(self);
+        if ([CRKUtil isPaid]) {
+            [self loadLastModel];
+        }else {
+            //弹出提示框
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1. * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self joinVipUIAlertView];
+                [self->_collectinView CRK_endPullToRefresh];
+            });
+        
+        }
+    }];
+    
+}
+- (void)joinVipUIAlertView {
+    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"友情提示" message:@"加入会员查看更多" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"成为会员", nil];
+    [alerView show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+//        NSIndexPath *indexPath = [_tableView indexPathForSelectedRow];
+//        CRKProgram *program = _channelPrograms[indexPath.section];
+        [self switchToPlayProgram:nil programLocation:0 inChannel:nil];
+        return;
+    }
+    
+}
+- (void)loadModel{
+    @weakify(self);
+    
+    [self.homeUniverModel fetchProgramsWithColumnId:_coloumId pageNo:_currentPage pageSize:kHomeSize completionHandler:^(BOOL success, NSArray<CRKPrograms *>*programs) {
+        @strongify(self);
+        if (!self) {
+            return ;
+        }
+        if (success && programs) {
+//        NSInteger  kHomeSizes = (programs.count - kHomeSize*_currentPage) > kHomeSize ? kHomeSize : (programs.count - kHomeSize*_currentPage);
+        [programs enumerateObjectsUsingBlock:^(CRKPrograms * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.type.integerValue == 1) {
+                _allModel = obj.programList;
+            }
+        }];
+            [self.univerSlityModels addObjectsFromArray:programs];
+            [self loadMoreProgram];
+            [_collectinView reloadData];
+            [_collectinView CRK_endPullToRefresh];
+            if (_hasShownSpreadBanner) {
+                
+                [CRKUtil showSpreadBanner];
+                _hasShownSpreadBanner = NO;
+            }
+        }
+    }];
+    
 }
 
+- (void)loadLastModel {
+    @weakify(self);
+    //判断是否已经全部加载
+    if (_allModel.count == _currentProgramModel.count) {
+         [_collectinView CRK_endPullToRefresh];
+        return;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1. * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        @strongify(self);
+        [self loadMoreProgram];
+        [_collectinView reloadData];
+        [_collectinView CRK_endPullToRefresh];
+    });
+    
+}
+
+
+- (void) loadMoreProgram {
+    if (_allModel.count == _currentProgramModel.count) {
+        return;
+    }
+    NSInteger  homeSizes = (_allModel.count - kHomeSize*_currentPage) > kHomeSize ? kHomeSize : (_allModel.count - kHomeSize*_currentPage);
+    NSMutableArray *programs = [NSMutableArray array];
+    [programs addObjectsFromArray:_currentProgramModel];
+    if (_allModel.count<=0) {
+        return;
+    }
+    for (NSInteger i = _currentProgramModel.count; i < homeSizes + _currentProgramModel.count; ++i) {
+        [programs addObject:_allModel[i]];
+    }
+    _currentProgramModel = programs;
+      _currentPage ++;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 #pragma mark collectionViewDatasoure collectionViewDelegate
+
+- (CRKProgram *)programWithIndexPath:(NSIndexPath *)indexPath {
+    CRKPrograms *channel = (CRKPrograms*)_univerSlityModels[indexPath.section];
+    CRKProgram *program = channel.programList[indexPath.item];
+    return program;
+}
+
+- (CRKPrograms *)channelWithIndePath:(NSIndexPath *)indexPath {
+    CRKPrograms *channel = (CRKPrograms*)_univerSlityModels[indexPath.section];
+    return channel;
+}
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return kHomeSection;
+    //    DLog(@"%ld----->>>",_univerSlityModels.count);
+    return _univerSlityModels.count;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 3;
+    CRKPrograms *channel = (CRKPrograms*)_univerSlityModels[section];
+    if (channel.type.integerValue == 3) {
+        return 1;
     }
-    return kHomeSection*3;
+    else if (channel.type.integerValue == 1){
+        return _currentProgramModel.count;
+    }
+    return channel.programList.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 ) {
-        if (indexPath.item == 2) {
-            CRKHomeSpreeCell *spreeCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifer forIndexPath:indexPath];
-            spreeCell.imageUrl = @"http://apkcdn.mquba.com/wysy/tuji/img_pic/20151217b2.jpg";
-            return spreeCell;
-        }
+    CRKPrograms *channel = [self channelWithIndePath:indexPath];
+    if (channel.type.integerValue == 3 ) {
+        _specChannel = channel;
+        CRKHomeSpreeCell *spreeCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifer forIndexPath:indexPath];
+        
+        spreeCell.imageUrl = channel.columnImg;
+        
+        return spreeCell;
+        
     }
-    
+    if (channel.type.integerValue == 1) {
+        _videoChannel = channel;
+//        _allModel = channel.programList;
+    }
     CRKHomeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellIdentifer forIndexPath:indexPath];
     //    cell.i
-    cell.imageUrl = @"http://apkcdn.mquba.com/wysy/video/imgcover/20160526x2.png";
-    cell.title = @"title";
-    cell.subTitle = @"sbutitle";
+    CRKProgram *program = [self programWithIndexPath:indexPath];
+    cell.imageUrl = program.coverImg;
+    cell.title = program.title;
+    cell.subTitle = program.specialDesc;
     return cell;
     
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat kwidth = (kScreenWidth - kHomespace*3)/2;
-    if (indexPath.section == 0) {
-        if (indexPath.item == 2) {
-            return CGSizeMake(kScreenWidth, kwidth*2/5);
-        }
+    
+    CRKPrograms *channel = [self channelWithIndePath:indexPath];
+    if (channel.type.integerValue == 3) {
+        return CGSizeMake(kScreenWidth, kwidth*2/5);
     }
     
     return CGSizeMake(kwidth, kwidth/3*2);
@@ -113,8 +272,9 @@ static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusabl
         return nil;
     }
     CRKHomeHeaderReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kSectionHeaderReusableIdentifier forIndexPath:indexPath];
+    CRKPrograms *channel = [self channelWithIndePath:indexPath];
     headerView.backgroundColor = self.view.backgroundColor;
-    if (indexPath.section == 0 && _isHaveFreeVideo ) {
+    if (channel.type.integerValue == 5 && _isHaveFreeVideo ) {
         headerView.isFreeVideo = YES;
         return headerView;
     }else {
@@ -123,22 +283,25 @@ static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusabl
     }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    if (section == 0 ){
-        if (_isHaveFreeVideo) {
-            
-            return CGSizeMake(0, 30);
-        }else {
-            return CGSizeMake(0, 0);
-        }
+    CRKPrograms *channel = (CRKPrograms *)_univerSlityModels[section];
+    if (channel.type.integerValue == 3 ){
+        return CGSizeMake(0, 0);
     }
     
     return CGSizeMake(0, 34);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    CRKDetailsController *detailsVC = [[CRKDetailsController alloc] init];
-    detailsVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detailsVC animated:YES];
+    CRKPrograms *channel = [self channelWithIndePath:indexPath];
+    if (channel.type.integerValue == 3) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:channel.spreadUrl]];
+    }else{
+        CRKDetailsController *detailsVC = [[CRKDetailsController alloc] initWithChannel:_videoChannel program:channel.programList[indexPath.item] programIndex:indexPath.item];
+        detailsVC.speChannel = _specChannel;
+        detailsVC.type = channel.type.integerValue;
+        detailsVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detailsVC animated:YES];
+    }
 }
 
 

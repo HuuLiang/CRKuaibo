@@ -39,6 +39,17 @@ typedef NS_ENUM(NSUInteger, CRKVideoSpec) {
     CRKVideoSpecHD,
     CRKVideoSpecFree
 };
+
+typedef NS_ENUM(NSUInteger, CRKCurrentHomePage) {
+    CRKHomePageOM,
+    CRKHomePageRH,
+    CRKHomePageDL
+};
+
+//typedef NS_ENUM(NSUInteger, CRKChannelType) {
+// 
+//};
+
 // DLog
 #ifdef  DEBUG
 #define DLog(fmt,...) {NSLog((@"%s [Line:%d]" fmt),__PRETTY_FUNCTION__,__LINE__,##__VA_ARGS__);}

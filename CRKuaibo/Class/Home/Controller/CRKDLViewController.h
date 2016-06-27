@@ -7,7 +7,13 @@
 //
 
 #import "CRKBaseViewController.h"
+#import "CRKHomePageModel.h"
 
 @interface CRKDLViewController : CRKBaseViewController
+
+@property (nonatomic,retain)CRKHomePage *homePage;
+//@property (nonatomic,retain)CRKHomePageProgram *subHomePage;
+
+- (instancetype)initWithHomePage:( CRKHomePage*)homePage ;
 
 @end
