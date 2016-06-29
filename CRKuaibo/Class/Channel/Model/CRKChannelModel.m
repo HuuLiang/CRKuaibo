@@ -11,7 +11,7 @@
 @implementation CRKChannelModelResponse
 
 - (Class)columnListElementClass{
-    return [CRKChannels class];
+    return [CRKChannel class];
 }
 
 @end

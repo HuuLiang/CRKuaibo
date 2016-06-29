@@ -22,7 +22,7 @@
 
 @implementation CRKHomeSubResponse
 - (Class)columnListElementClass {
-    return [CRKPrograms class];
+    return [CRKChannel class];
 }
 
 @end

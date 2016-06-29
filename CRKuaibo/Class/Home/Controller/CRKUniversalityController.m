@@ -33,9 +33,9 @@ static NSString *const kSectionHeaderReusableIdentifier = @"SectionHeaderReusabl
 @property (nonatomic,retain)NSMutableArray <CRKProgram *>*currentProgramModel;
 
 @property (nonatomic,retain)CRKUniverSalityModel *homeUniverModel;
-@property (nonatomic,retain)CRKPrograms *videoChannel;
+@property (nonatomic,retain)CRKChannel *videoChannel;
 
-@property (nonatomic,retain)CRKPrograms *specChannel;//推广
+@property (nonatomic,retain)CRKChannel *specChannel;//推广
 
 @property (nonatomic) NSUInteger currentPage;//当前页
 
@@ -141,14 +141,14 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
 - (void)loadModel{
     @weakify(self);
     
-    [self.homeUniverModel fetchProgramsWithColumnId:_coloumId pageNo:_currentPage pageSize:kHomeSize completionHandler:^(BOOL success, NSArray<CRKPrograms *>*programs) {
+    [self.homeUniverModel fetchProgramsWithColumnId:_coloumId pageNo:_currentPage pageSize:kHomeSize completionHandler:^(BOOL success, NSArray<CRKChannel *>*programs) {
         @strongify(self);
         if (!self) {
             return ;
         }
         if (success && programs) {
             
-            [programs enumerateObjectsUsingBlock:^(CRKPrograms * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [programs enumerateObjectsUsingBlock:^(CRKChannel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if (obj.type.integerValue == 1) {
                     _allModel = obj.programList;
                 }
@@ -206,14 +206,14 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
         }
         
     }else {
-      NSInteger  sizes = (homeSizes + _currentProgramModel.count) > _allModel.count ? _allModel.count : (homeSizes + _currentProgramModel.count);
+        NSInteger  sizes = (homeSizes + _currentProgramModel.count) > _allModel.count ? _allModel.count : (homeSizes + _currentProgramModel.count);
         for (NSInteger i = _currentProgramModel.count; i < sizes; ++i) {
             [programs addObject:_allModel[i]];
         }
-           _currentPage ++;
+        _currentPage ++;
     }
     _currentProgramModel = programs;
- 
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -222,13 +222,13 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
 #pragma mark collectionViewDatasoure collectionViewDelegate
 
 - (CRKProgram *)programWithIndexPath:(NSIndexPath *)indexPath {
-    CRKPrograms *channel = (CRKPrograms*)_univerSlityModels[indexPath.section];
+    CRKChannel *channel = (CRKChannel*)_univerSlityModels[indexPath.section];
     CRKProgram *program = channel.programList[indexPath.item];
     return program;
 }
 
-- (CRKPrograms *)channelWithIndePath:(NSIndexPath *)indexPath {
-    CRKPrograms *channel = (CRKPrograms*)_univerSlityModels[indexPath.section];
+- (CRKChannel *)channelWithIndePath:(NSIndexPath *)indexPath {
+    CRKChannel *channel = (CRKChannel*)_univerSlityModels[indexPath.section];
     return channel;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -236,7 +236,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     return _univerSlityModels.count;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    CRKPrograms *channel = (CRKPrograms*)_univerSlityModels[section];
+    CRKChannel *channel = (CRKChannel*)_univerSlityModels[section];
     if (channel.type.integerValue == 3) {
         return 1;
     }
@@ -246,12 +246,12 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     return channel.programList.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CRKPrograms *channel = [self channelWithIndePath:indexPath];
+    CRKChannel *channel = [self channelWithIndePath:indexPath];
     if (channel.type.integerValue == 3 ) {
         _specChannel = channel;
         CRKHomeSpreeCell *spreeCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifer forIndexPath:indexPath];
-        
-//        spreeCell.imageUrl = channel.columnImg;
+        //不让当前界面显示推广
+        //        spreeCell.imageUrl = channel.columnImg;
         
         return spreeCell;
         
@@ -274,7 +274,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat kwidth = (kScreenWidth - kHomespace*3)/2;
     
-    CRKPrograms *channel = [self channelWithIndePath:indexPath];
+    CRKChannel *channel = [self channelWithIndePath:indexPath];
     if (channel.type.integerValue == 3) {
         return CGSizeMake(0, 1);
     }
@@ -288,7 +288,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
         return nil;
     }
     CRKHomeHeaderReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kSectionHeaderReusableIdentifier forIndexPath:indexPath];
-    CRKPrograms *channel = [self channelWithIndePath:indexPath];
+    CRKChannel *channel = [self channelWithIndePath:indexPath];
     headerView.backgroundColor = self.view.backgroundColor;
     if (channel.type.integerValue == 5 && _isHaveFreeVideo ) {
         headerView.isFreeVideo = YES;
@@ -299,7 +299,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    CRKPrograms *channel = (CRKPrograms *)_univerSlityModels[section];
+    CRKChannel *channel = (CRKChannel *)_univerSlityModels[section];
     if (channel.type.integerValue == 3 ){
         return CGSizeMake(0, 0);
     }
@@ -308,7 +308,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    CRKPrograms *channel = [self channelWithIndePath:indexPath];
+    CRKChannel *channel = [self channelWithIndePath:indexPath];
     if (channel.type.integerValue == 3) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:channel.spreadUrl]];
     }else{

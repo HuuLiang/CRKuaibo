@@ -7,10 +7,10 @@
 //
 
 #import "CRKEncryptedURLRequest.h"
-#import "CRKChannels.h"
+//#import "CRKChannels.h"
 
 @interface CRKChannelModelResponse : CRKURLResponse
-@property (nonatomic,retain)NSArray <CRKChannels> *columnList;
+@property (nonatomic,retain)NSArray <CRKChannel*> *columnList;
 
 @end
 

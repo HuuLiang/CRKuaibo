@@ -7,21 +7,20 @@
 //
 
 #import "CRKChannel.h"
-#import "CRKProgram.h"
 
 @implementation CRKChannel
 
-- (BOOL)isEqual:(id)object {
-    if (![object isKindOfClass:[CRKChannel class]]) {
-        return NO;
-    }
-    
-    return [self.columnId isEqualToNumber:[object columnId]];
-}
-
-- (NSUInteger)hash {
-    return self.columnId.hash;
-}
+//- (BOOL)isEqual:(id)object {
+//    if (![object isKindOfClass:[CRKChannel class]]) {
+//        return NO;
+//    }
+//    
+//    return [self.columnId isEqualToNumber:[object columnId]];
+//}
+//
+//- (NSUInteger)hash {
+//    return self.columnId.hash;
+//}
 
 - (Class)programListElementClass {
     return [CRKProgram class];

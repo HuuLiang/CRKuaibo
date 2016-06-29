@@ -8,7 +8,7 @@
 
 #import "CRKEncryptedURLRequest.h"
 
-#import "CRKProgram.h"
+//#import "CRKProgram.h"
 
 @interface CRKAppSpreadResponse : CRKURLResponse
 @property (nonatomic,retain)NSArray <CRKProgram*>*programList;
@@ -16,6 +16,6 @@
 
 @interface CRKRecommendModel : CRKEncryptedURLRequest
 
-@property (nonatomic,retain)NSArray<CRKProgram*>*fetchedSpreads;
+@property (nonatomic,retain)NSArray<CRKChannel*>*fetchedSpreads;
 - (BOOL)fetchAppSpreadWithCompletionHandler:(CRKCompletionHandler)handler;
 @end

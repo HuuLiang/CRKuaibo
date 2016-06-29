@@ -47,7 +47,7 @@ DefineLazyPropertyInitialization(NSArray, segmentTitles);
     [super viewDidLoad];
     [self setSegmentControll];
     [self setPageCtroller];
-//    [self loadChannel];
+    //    [self loadChannel];
     
 }
 
@@ -58,8 +58,8 @@ DefineLazyPropertyInitialization(NSArray, segmentTitles);
     [self.homePageModel fetchWiithCompletionHandler:^(BOOL success, NSArray<CRKHomePage *>*programs) {
         if (success) {
             
-           
-//            [self setPageCtroller];
+            
+            //            [self setPageCtroller];
         }
     }];
     
@@ -104,7 +104,7 @@ DefineLazyPropertyInitialization(NSArray, segmentTitles);
         [segmentTitleArr addObject:obj.name];
     }];
     
-    _segmentTitles =  segmentTitleArr.copy ; //@[@"欧美",@"日韩",@"大陆"];//
+    _segmentTitles =  segmentTitleArr.count != 0 ? segmentTitleArr.copy :  @[@"欧美",@"日韩",@"大陆"]; //@[@"欧美",@"日韩",@"大陆"];//
     UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:_segmentTitles];
     _segmentCtrolller = segment;
     segment.selectedSegmentIndex = 0;

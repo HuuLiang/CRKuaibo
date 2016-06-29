@@ -96,10 +96,10 @@ static NSString *const kVideoHistoryKeyName = @"crkuaibov_video_history_keyname"
 }
 @end
 //
-@implementation CRKPrograms
-
-- (Class)programListElementClass {
-    return [CRKProgram class];
-}
-
-@end
+//@implementation CRKPrograms
+//
+//- (Class)programListElementClass {
+//    return [CRKProgram class];
+//}
+//
+//@end

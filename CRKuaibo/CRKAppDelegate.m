@@ -166,6 +166,10 @@ DefineLazyPropertyInitialization(CRKHomePageModel, homePageModel);
             [self.window makeKeyAndVisible];
             CRKLaunchView *launchView = [[CRKLaunchView alloc] init];
             [launchView show];
+        }else {
+            [self.window makeKeyAndVisible];
+            CRKLaunchView *launchView = [[CRKLaunchView alloc] init];
+            [launchView show];
         }
     }];
     

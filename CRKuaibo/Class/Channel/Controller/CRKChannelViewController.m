@@ -120,7 +120,7 @@ DefineLazyPropertyInitialization(NSMutableArray,channels)
     if (indexPath.item>7) {
         return nil;
     }else {
-        CRKChannels *channel = _channels[indexPath.item];
+        CRKChannel *channel = _channels[indexPath.item];
         cell.title = channel.name;
         cell.picUrl = channel.columnImg;
         return cell;

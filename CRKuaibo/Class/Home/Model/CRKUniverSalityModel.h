@@ -15,15 +15,15 @@
 //@end
 
 @interface CRKHomeSubResponse : CRKURLResponse
-@property (nonatomic,retain)NSArray <CRKPrograms *>*columnList;
+@property (nonatomic,retain)NSArray <CRKChannel *>*columnList;
 
 @end
 
-typedef void(^CRKFetchChannelProgramCompletionHandler)(BOOL success, NSArray<CRKPrograms *>*programs);
+typedef void(^CRKFetchChannelProgramCompletionHandler)(BOOL success, NSArray<CRKChannel *>*programs);
 
 @interface CRKUniverSalityModel : CRKEncryptedURLRequest
 
-@property (nonatomic,retain) NSArray <CRKPrograms *>*fetchChannels;
+@property (nonatomic,retain) NSArray <CRKChannel *>*fetchChannels;
 
 - (BOOL)fetchProgramsWithColumnId:(NSNumber *)columnId
                            pageNo:(NSUInteger)pageNo

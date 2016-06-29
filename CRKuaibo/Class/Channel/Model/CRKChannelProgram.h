@@ -24,8 +24,8 @@
 
 @end
 
-@interface CRKChannelPrograms : CRKPrograms
-@property (nonatomic) NSNumber *items;
-@property (nonatomic) NSNumber *page;
-@property (nonatomic) NSNumber *pageSize;
+@interface CRKChannelPrograms : CRKChannel
+//@property (nonatomic) NSNumber *items;
+//@property (nonatomic) NSNumber *page;
+//@property (nonatomic) NSNumber *pageSize;
 @end

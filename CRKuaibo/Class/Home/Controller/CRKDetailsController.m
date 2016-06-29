@@ -33,7 +33,7 @@ NSInteger const KDetailsSections = 2;//组数
 
 @implementation CRKDetailsController
 
-- (instancetype)initWithChannel:(CRKPrograms*)channel program:(CRKProgram*)program programIndex:(NSInteger )programIndex {
+- (instancetype)initWithChannel:(CRKChannel*)channel program:(CRKProgram*)program programIndex:(NSInteger )programIndex {
 
     if (self = [self init]) {
             NSMutableArray *tempArr = [NSMutableArray array];
