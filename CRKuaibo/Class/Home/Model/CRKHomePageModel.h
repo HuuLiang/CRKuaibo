@@ -69,10 +69,10 @@ typedef void (^CRKFetchChannelsCompletionHandler)(BOOL success, NSArray<CRKHomeP
 @property (nonatomic,retain) CRKHomePage *homePageDL;
 
 //@property (nonatomic,retain) NSArray<CRKHomePageProgram*>*fetcheSubHomePage;
-
-@property (nonatomic,retain) NSArray <CRKUniverSlity*>*fetchUniverSlityOM;
-@property (nonatomic,retain) NSArray <CRKUniverSlity*>*fetchUniverSlityRH;
-@property (nonatomic,retain) NSArray <CRKUniverSlity*>*fetchUniverSlityDL;
+//
+//@property (nonatomic,retain) NSArray <CRKUniverSlity*>*fetchUniverSlityOM;
+//@property (nonatomic,retain) NSArray <CRKUniverSlity*>*fetchUniverSlityRH;
+//@property (nonatomic,retain) NSArray <CRKUniverSlity*>*fetchUniverSlityDL;
 
 - (BOOL)fetchWiithCompletionHandler:(CRKFetchChannelsCompletionHandler)handler;
 

@@ -71,7 +71,7 @@
                 make.left.mas_equalTo(_nameLabel);
                 make.top.mas_equalTo(_nameLabel.mas_bottom).mas_offset(8);
             }];
-        
+            
         }
         
         //播放次数
@@ -90,13 +90,13 @@
         _starView = [self creatStarView];
         [self addSubview:_starView];
         {
-        [_starView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-8);
-            make.left.mas_equalTo(_nameLabel.mas_left);
-            make.right.mas_equalTo(self);
-            make.height.mas_equalTo(12);
-        }];
-        
+            [_starView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-8);
+                make.left.mas_equalTo(_nameLabel.mas_left);
+                make.right.mas_equalTo(self);
+                make.height.mas_equalTo(12);
+            }];
+            
         }
         
         //
@@ -121,7 +121,7 @@
 - (UIView *)creatStarView{
     UIView *starView = [[UIView alloc] init];
     starView.backgroundColor = self.backgroundColor;
-
+    
     for (int i = 0; i< KStarts; i++) {
         UIImageView *starImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"star"]];
         starImage.frame = CGRectMake(i *12, 0, 10, 10);
@@ -133,22 +133,6 @@
 - (void)setName:(NSString *)name {
     _name = name;
     _nameLabel.text = name;
-    NSInteger playNumbers = arc4random_uniform(9000) + 1000;
-    _playNumber.text = [NSString stringWithFormat:@"播放: %ld",playNumbers];
-//    _starView.hidden = YES;
-    
-    int starsCount = arc4random_uniform(4)+3;
-    
-    for (int i = 0; i < KStarts; i++) {
-        if (i>starsCount-1) {
-            _starView.subviews[i].hidden = YES;
-        }else{
-            _starView.subviews[i].hidden = NO;
-        }
-    }
-    
-//    NSLog(@">>>>>>>>%ld",_starView.subviews.count);
-    
 }
 
 - (void)setIntroduction:(NSString *)introduction {
@@ -159,6 +143,23 @@
 - (void)setPicUrl:(NSString *)picUrl {
     _picUrl = picUrl;
     [_imageView sd_setImageWithURL:[NSURL URLWithString:picUrl]];
+}
+
+- (void)setSpeStarts:(NSString *)speStarts {
+    _speStarts = speStarts;
+    for (int i = 0; i < KStarts; i++) {
+        if (i>speStarts.integerValue-1) {
+            _starView.subviews[i].hidden = YES;
+        }else{
+            _starView.subviews[i].hidden = NO;
+        }
+    }
+}
+
+- (void)setAttentPerson:(NSString *)attentPerson {
+    _attentPerson = attentPerson;
+    _playNumber.text = [NSString stringWithFormat:@"播放: %@",attentPerson];
+    
 }
 
 @end

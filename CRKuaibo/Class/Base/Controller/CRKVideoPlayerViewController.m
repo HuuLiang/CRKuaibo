@@ -73,6 +73,9 @@
 }
 
 - (void)dismissAndPopPayment {
+    if ([CRKUtil isPaid]) {
+        return;
+    }
     [[CRKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view.window
                                                         forProgram:(CRKProgram *)self.video
                                                    programLocation:self.videoLocation

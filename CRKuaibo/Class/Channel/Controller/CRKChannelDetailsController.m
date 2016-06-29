@@ -12,8 +12,12 @@
 #import "CRKChannelProgramModel.h"
 #import "CRKChannel.h"
 
+static NSString *kChannelAttentionArr = @"kchannelattentionarr";
+static NSString *kChannelStarts = @"kchannelstarts";
+
+
 static NSString *kDetailsCellIdentifier = @"kdetailscellidentifier";
-static const NSUInteger kDefaultPageSize = 7;
+static const NSUInteger kDefaultPageSize = 9;
 
 @interface CRKChannelDetailsController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
@@ -23,6 +27,11 @@ static const NSUInteger kDefaultPageSize = 7;
 @property (nonatomic,retain)CRKChannelProgramModel *program;
 
 @property (nonatomic) NSUInteger currentPage;//当前页
+
+
+@property (nonatomic,retain)NSArray *attentArr;//关注人数
+@property (nonatomic,retain)NSArray *changePerson;//
+@property (nonatomic,retain)NSArray *specStarts;//推荐星数
 
 @end
 
@@ -46,9 +55,6 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (!_program) {
-        _program = [[CRKChannelProgramModel alloc] init];
-    }
     
     [self setUpTableView];
     
@@ -80,13 +86,13 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
         @strongify(self);
         
         [self.channelPrograms removeAllObjects];
-        _currentPage = 0;
-        [self loadChannelProgramModel];
+        _currentPage = 1;
+        [self loadChannelProgramModelWithIsPullUpRefresh:YES];
         
     }];
     [_tableView CRK_triggerPullToRefresh];
     
-    [_tableView CRK_addPagingRefreshWithIsLoadAll:NO Handler:^{
+    [_tableView CRK_addPagingRefreshWithIsLoadAll:YES Handler:^{
         @strongify(self);
         if (![CRKUtil isPaid]) {
             //弹出提示框
@@ -96,15 +102,15 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
                 [self->_tableView CRK_endPullToRefresh];
             });
         }else{
-            [self loadChannelProgramModel];
+            [self loadChannelProgramModelWithIsPullUpRefresh:NO];
         }
     }];
     
 }
 
-- (void)loadChannelProgramModel{
+- (void)loadChannelProgramModelWithIsPullUpRefresh:(BOOL)isPullUpRefresh{
     @weakify(self);
-    [_program fetchProgramsWithColumnId:_channel.columnId
+    [self.program fetchProgramsWithColumnId:_channel.columnId
                                  pageNo:_currentPage++
                                pageSize:kDefaultPageSize
                       completionHandler:^(BOOL success, CRKChannel *programs) {
@@ -114,6 +120,10 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
                               return ;
                           }
                           if (success && programs.programList) {
+                              if (isPullUpRefresh) {
+                                  [self attentPerson];
+                              }
+                              
                               [_channelPrograms addObjectsFromArray:programs.programList];
                               [self->_tableView reloadData];
                           }
@@ -124,6 +134,50 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
                           }
                           
                       }];
+}
+//关注的人数以及星数(客户端随机生成)
+- (void)attentPerson{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.specStarts = [defaults objectForKey:kChannelStarts];
+    
+    if (_specStarts.count == 0 || _specStarts.count != _program.fetchedChannel.items.integerValue) {
+        NSMutableArray *starArr = [NSMutableArray array];
+        
+        for (int i = 0; i<_program.fetchedChannel.items.integerValue; i++) {
+            NSInteger temp = arc4random_uniform(5) + 2;
+            NSString *str = [NSString stringWithFormat:@"%ld",(long)temp];
+            [starArr addObject:str];
+            
+        }
+        _specStarts = starArr;
+        [defaults setObject:starArr forKey:kChannelStarts];
+    }
+    
+    
+    _attentArr = [defaults objectForKey:kChannelAttentionArr];
+    if (_attentArr.count != _program.fetchedChannel.items.integerValue || _attentArr.count==0 ) {
+        
+        NSMutableArray *attarr = [NSMutableArray array];
+        
+        for (int i = 0; i<_program.fetchedChannel.items.integerValue; i++) {
+            NSInteger temp = (arc4random()%50 + 10)*100;
+            NSString *str = [NSString stringWithFormat:@"%ld",(long)temp];
+            [attarr addObject:str];
+            
+        }
+        _attentArr = attarr;
+        [defaults setObject:attarr forKey:kChannelAttentionArr];
+    }
+    
+    NSMutableArray *changeArr = [NSMutableArray array];
+    for (int i = 0; i<_program.fetchedChannel.items.integerValue; i++) {
+        NSInteger change = arc4random_uniform(60)+40;
+        NSString *changeStr = [NSString stringWithFormat:@"%ld",(long)change];
+        [changeArr addObject:changeStr];
+    }
+    self.changePerson = changeArr.copy;
+    
 }
 
 - (void)joinVipUIAlertView {
@@ -152,15 +206,23 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CRKDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:kDetailsCellIdentifier forIndexPath:indexPath];
-    if (indexPath.item<self.channelPrograms.count) {
+    if (indexPath.section<self.channelPrograms.count) {
         CRKProgram *program = self.channelPrograms[indexPath.section];
         cell.name = program.title;
         cell.introduction = program.specialDesc;
         cell.picUrl = program.coverImg;
-    }
+        NSString *attentText = nil;
+        if (indexPath.section < self.attentArr.count) {
+            NSString *attent = self.attentArr[indexPath.section];
+            NSString *change = self.changePerson[indexPath.section];
+            attentText = [NSString stringWithFormat:@"%d",(attent.integerValue + change.integerValue)];
+            cell.attentPerson = attentText;
+            cell.speStarts = _specStarts[indexPath.section];
+        } }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
@@ -189,14 +251,9 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
     }else {
         //如果已经付费,进入播放界面
         [self playVideo:program videoLocation:indexPath.section inChannel:_channel withTimeControl:YES shouldPopPayment:NO];
-        
-        
     }
     
 }
-- (void)dealloc {
-    
-    
-}
+
 
 @end

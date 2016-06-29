@@ -82,6 +82,7 @@ static NSString *const kLaunchSeqKeyName = @"crkuaibov_launchseq_keyname";
 }
 
 + (BOOL)isPaid {
+//    return YES;
     return [self successfulPaymentInfo] != nil;
 }
 
@@ -114,7 +115,7 @@ static NSString *const kLaunchSeqKeyName = @"crkuaibov_launchseq_keyname";
         NSArray *allInstalledAppIds = [[CRKApplicationManager defaultManager] allInstalledAppIdentifiers];
         NSArray *uninstalledSpreads = [spreads bk_select:^BOOL(id obj) {
 #warning 弹框
-            return [allInstalledAppIds containsObject:[obj specialDesc]];
+            return ![allInstalledAppIds containsObject:[obj specialDesc]];
         }];
         
         if (uninstalledSpreads.count > 0) {

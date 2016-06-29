@@ -18,21 +18,23 @@
 
 // Tab View Controllers
 #import "CRKHomeViewController.h"
+#import "CRKHomePageModel.h"
+
 #import "CRKChannelViewController.h"
 #import "CRKMineViewController.h"
 
 @interface CRKAppDelegate ()
-
+@property (nonatomic,retain)CRKHomePageModel *homePageModel;
 @end
 
 @implementation CRKAppDelegate
-
+DefineLazyPropertyInitialization(CRKHomePageModel, homePageModel);
 - (UIWindow *)window {
     if (_window) {
         return _window;
     }
     
-    CRKHomeViewController *homeVC = [[CRKHomeViewController alloc] init];
+    CRKHomeViewController *homeVC = [[CRKHomeViewController alloc] initWithHomeModel:_homePageModel];
     homeVC.title = @"首页";
     
     UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:homeVC];
@@ -154,16 +156,31 @@
     
 }
 
+/**
+ *  加载首页数据模型
+ */
+- (void)loadChannel {
+    [self.homePageModel fetchWiithCompletionHandler:^(BOOL success, NSArray<CRKHomePage *>*programs) {
+        if (success) {
+//            [self setPageCtroller];
+            [self.window makeKeyAndVisible];
+            CRKLaunchView *launchView = [[CRKLaunchView alloc] init];
+            [launchView show];
+        }
+    }];
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self loadChannel];
     [CRKUtil accumateLaunchSeq];
     [[CRKPaymentManager sharedManager] setup];
     [[CRKErrorHandler sharedHandler] initialize];
     [self setupCommonStyles];
     [self setupMobStatistics];
-    [self.window makeKeyAndVisible];
+//    [self.window makeKeyAndVisible];
     
-    CRKLaunchView *launchView = [[CRKLaunchView alloc] init];
-    [launchView show];
+    
     
     if (![CRKUtil isRegistered]) {
         [[CRKActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {

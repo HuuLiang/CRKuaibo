@@ -15,6 +15,8 @@
 
 @property (nonatomic) BOOL hasShownSpreadBanner;//弹框
 
+@property (nonatomic)BOOL isFirstLoadCounts;//第一次加载
+
 //@property (nonatomic) NSInteger homePage;
 //@property (nonatomic) NSInteger currentVC;
 @property (nonatomic) NSNumber *coloumId;

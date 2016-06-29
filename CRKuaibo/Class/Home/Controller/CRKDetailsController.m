@@ -170,6 +170,7 @@ NSInteger const KDetailsSections = 2;//组数
         cell.imageUrl = program.coverImg;
         cell.title = program.title;
         cell.subTitle = program.specialDesc;
+        cell.type = _channel.type;
         return cell;
     }
 }
@@ -195,13 +196,19 @@ NSInteger const KDetailsSections = 2;//组数
     if (indexPath.section == 0) {
         if (indexPath.item == 0) {
             return CGSizeMake(kScreenWidth,kScreenWidth *0.6);
+        }else{
+        if (_speChannel.columnImg) {
+            
+            return CGSizeMake(kScreenWidth, 75);
         }else {
-            return CGSizeMake(kScreenWidth, kScreenWidth *0.2);
+            return CGSizeMake(0, 0);
         }
+        }
+        
     }
     CGFloat kwidth = (kScreenWidth - 3*kDetailspace)/2;
     
-    return CGSizeMake(kwidth, kwidth*0.85);
+    return CGSizeMake(kwidth, kwidth*0.6+20);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {

@@ -27,7 +27,9 @@ static NSString *const kChannelIdentifier = @"kchannelidentifier";
 @end
 
 @implementation CRKChannelViewController
+
 DefineLazyPropertyInitialization(CRKChannelModel,fetchChannel)
+
 DefineLazyPropertyInitialization(NSMutableArray,channels)
 
 - (void)viewDidLoad {
@@ -36,7 +38,7 @@ DefineLazyPropertyInitialization(NSMutableArray,channels)
     _fetchChannel = nil;
     [self setUpCollectionView];
     
-    [self loadChannels];
+//    [self loadChannels];
     
 }
 
@@ -82,11 +84,9 @@ DefineLazyPropertyInitialization(NSMutableArray,channels)
 }
 
 - (void)loadChannels {
-    if (!_fetchChannel) {
-        _fetchChannel = [[CRKChannelModel alloc] init];
-    }
+
     @weakify(self);
-    [_fetchChannel fetchWithPage:_currentPage++ withCompletionHandler:^(BOOL success, id obj) {
+    [self.fetchChannel fetchWithPage:_currentPage++ withCompletionHandler:^(BOOL success, id obj) {
         @strongify(self);
         if (!self) {
             return ;
@@ -142,7 +142,7 @@ DefineLazyPropertyInitialization(NSMutableArray,channels)
 #pragma mark flowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat kwidth = (kScreenWidth - kspace*3)/2;
-    CGFloat kheight = (kScreenHeight + kspace)/5;
+    CGFloat kheight = kwidth/5*3.6;
     return CGSizeMake(kwidth, kheight);
     
 }

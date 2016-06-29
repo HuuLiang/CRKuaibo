@@ -22,12 +22,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         _thumbImageView = [[UIImageView alloc] init];
-        _thumbImageView.contentMode = UIViewContentModeScaleAspectFill;
+//        _thumbImageView.contentMode = UIViewContentModeScaleAspectFill;
         _thumbImageView.clipsToBounds = YES;
         [self addSubview:_thumbImageView];
         {
             [_thumbImageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.equalTo(self);
+                make.top.mas_equalTo(self).mas_offset(2.5);
+                make.bottom.mas_equalTo(self).mas_offset(-2.5);
             }];
         }
 

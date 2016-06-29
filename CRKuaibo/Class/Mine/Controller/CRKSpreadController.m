@@ -21,6 +21,7 @@ static NSString *const kSpreadCellIdentifier = @"kspreadcellidentifer";
 }
 @property (nonatomic,retain)CRKRecommendModel *appSpreadModel;
 
+@property (nonatomic,retain)CRKProgram *speProgram;
 @end
 
 @implementation CRKSpreadController
@@ -41,7 +42,7 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
         {
             [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(_headerImageView);
-                make.top.equalTo(_headerImageView.mas_centerY);
+                make.bottom.equalTo(_headerImageView.mas_centerY).mas_offset(2);
                 make.width.equalTo(_headerImageView).multipliedBy(0.1);
                 
             }];
@@ -58,7 +59,7 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
         {
             [_headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.equalTo(self.view);
-                make.height.equalTo(_headerImageView.mas_width).multipliedBy(210./900);
+                make.height.equalTo(_headerImageView.mas_width).multipliedBy(250./900);
             }];
         }
     }
@@ -204,21 +205,30 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
     const CGFloat fullWidth = CGRectGetWidth(collectionView.bounds) - layout.sectionInset.left - layout.sectionInset.right;
     //    const CGFloat itemWidth = (fullWidth - 2 * layout.minimumInteritemSpacing) / 3;
     //    const CGFloat itemHeight = itemWidth + 20;
-    return CGSizeMake(fullWidth, fullWidth * 0.4);
+    return CGSizeMake(fullWidth, fullWidth * 0.35);
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     CRKProgram *appSpread = self.appSpreadModel.fetchedSpreads[indexPath.item];
-    
+    _speProgram = appSpread;
     [CRKUtil checkAppInstalledWithBundleId:appSpread.specialDesc completionHandler:^(BOOL installed) {
-//        if (installed) {
-//            
+        if (installed) {
+            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"友情提示" message:[NSString stringWithFormat:@"您已安装%@是否再次安装该应用",appSpread.title] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [alerView show];
 //            [[CRKHudManager manager] showHudWithText:[NSString stringWithFormat:@"您已安装%@",appSpread.title]];
-//        }else {
+        }else {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appSpread.videoUrl]];
-//        }
+        }
     }];
     
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_speProgram.videoUrl]];
+        return;
+    }
+    
+}
 @end

@@ -14,4 +14,6 @@
 @property (nonatomic,copy)NSString *imageUrl;
 @property (nonatomic,copy)NSString *subTitle;
 
+@property (nonatomic)NSNumber *type;
+
 @end

@@ -21,6 +21,7 @@ typedef NS_ENUM (NSUInteger , SegmentIndex){
 @interface CRKHomeViewController ()<UIPageViewControllerDelegate>
 {
     UIPageViewController *_pageViewCtroller;
+    UISegmentedControl *_segmentCtrolller;
     
 }
 @property (nonatomic,retain)NSMutableArray <UIViewController*>*viewCtrollers;
@@ -35,13 +36,21 @@ DefineLazyPropertyInitialization(NSMutableArray,viewCtrollers);
 DefineLazyPropertyInitialization(CRKHomePageModel, homePageModel);
 DefineLazyPropertyInitialization(NSArray, segmentTitles);
 
+- (instancetype)initWithHomeModel:(CRKHomePageModel*)homePageModel{
+    if (self = [self init]) {
+        _homePageModel = homePageModel;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadChannel];
-    
     [self setSegmentControll];
+    [self setPageCtroller];
+//    [self loadChannel];
     
 }
+
 /**
  *  加载数据
  */
@@ -49,8 +58,8 @@ DefineLazyPropertyInitialization(NSArray, segmentTitles);
     [self.homePageModel fetchWiithCompletionHandler:^(BOOL success, NSArray<CRKHomePage *>*programs) {
         if (success) {
             
-            
-            [self setPageCtroller];
+           
+//            [self setPageCtroller];
         }
     }];
     
@@ -80,6 +89,8 @@ DefineLazyPropertyInitialization(NSArray, segmentTitles);
     [self.view addSubview:_pageViewCtroller.view];
     [_pageViewCtroller didMoveToParentViewController:self];
     
+    _segmentCtrolller.selectedSegmentIndex = 1;
+    
 }
 
 
@@ -87,8 +98,15 @@ DefineLazyPropertyInitialization(NSArray, segmentTitles);
  *  设置SegmentControll
  */
 - (void)setSegmentControll {
-    _segmentTitles = @[@"欧美",@"日韩",@"大陆"];
+    
+    NSMutableArray *segmentTitleArr = [NSMutableArray arrayWithCapacity:_homePageModel.fetchHomePage.count];
+    [_homePageModel.fetchHomePage enumerateObjectsUsingBlock:^(CRKHomePage * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [segmentTitleArr addObject:obj.name];
+    }];
+    
+    _segmentTitles =  segmentTitleArr.copy ; //@[@"欧美",@"日韩",@"大陆"];//
     UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:_segmentTitles];
+    _segmentCtrolller = segment;
     segment.selectedSegmentIndex = 0;
     segment.frame = CGRectMake(0, 0, kScreenWidth*0.5, 31);
     segment.tintColor = [UIColor colorWithWhite:1 alpha:0.5];

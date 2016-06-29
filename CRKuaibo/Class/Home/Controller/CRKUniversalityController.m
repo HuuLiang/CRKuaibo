@@ -15,7 +15,7 @@
 #import "CRKUniverSalityModel.h"
 
 CGFloat const kHomespace = 2.5;
-NSInteger const kHomeSize = 6;
+NSInteger const kHomeSize = 6;//下拉加载的个数
 
 static NSString *const kHomeCellIdentifer = @"khomecellidentifers";
 static NSString *const kHomeSpreeCellIdentifer = @"khomespreecellidentifers";
@@ -102,7 +102,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     @weakify(self);
     [_collectinView CRK_addPullToRefreshWithHandler:^{
         @strongify(self);
-//        [self.univerSlityModels removeAllObjects];
+        //        [self.univerSlityModels removeAllObjects];
         [_currentProgramModel removeAllObjects];
         _currentPage = 0;
         [self loadModel];
@@ -120,7 +120,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
                 [self joinVipUIAlertView];
                 [self->_collectinView CRK_endPullToRefresh];
             });
-        
+            
         }
     }];
     
@@ -131,8 +131,8 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-//        NSIndexPath *indexPath = [_tableView indexPathForSelectedRow];
-//        CRKProgram *program = _channelPrograms[indexPath.section];
+        //        NSIndexPath *indexPath = [_tableView indexPathForSelectedRow];
+        //        CRKProgram *program = _channelPrograms[indexPath.section];
         [self switchToPlayProgram:nil programLocation:0 inChannel:nil];
         return;
     }
@@ -147,14 +147,15 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
             return ;
         }
         if (success && programs) {
-//        NSInteger  kHomeSizes = (programs.count - kHomeSize*_currentPage) > kHomeSize ? kHomeSize : (programs.count - kHomeSize*_currentPage);
-        [programs enumerateObjectsUsingBlock:^(CRKPrograms * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj.type.integerValue == 1) {
-                _allModel = obj.programList;
-            }
-        }];
-            [self.univerSlityModels addObjectsFromArray:programs];
-            [self loadMoreProgram];
+            
+            [programs enumerateObjectsUsingBlock:^(CRKPrograms * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj.type.integerValue == 1) {
+                    _allModel = obj.programList;
+                }
+            }];
+            //            [self.univerSlityModels addObjectsFromArray:programs];
+            self.univerSlityModels = programs;
+            [self loadMoreProgramWithFirstLoad:YES];
             [_collectinView reloadData];
             [_collectinView CRK_endPullToRefresh];
             if (_hasShownSpreadBanner) {
@@ -171,20 +172,21 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     @weakify(self);
     //判断是否已经全部加载
     if (_allModel.count == _currentProgramModel.count) {
-         [_collectinView CRK_endPullToRefresh];
+        [_collectinView CRK_endPullToRefresh];
+        [_collectinView CRK_pagingRefreshNoMoreData];
         return;
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1. * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         @strongify(self);
-        [self loadMoreProgram];
+        [self loadMoreProgramWithFirstLoad:NO];
         [_collectinView reloadData];
         [_collectinView CRK_endPullToRefresh];
     });
     
 }
 
-
-- (void) loadMoreProgram {
+//加载精品推荐
+- (void) loadMoreProgramWithFirstLoad:(BOOL) isFirstLoad {
     if (_allModel.count == _currentProgramModel.count) {
         return;
     }
@@ -194,11 +196,24 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     if (_allModel.count<=0) {
         return;
     }
-    for (NSInteger i = _currentProgramModel.count; i < homeSizes + _currentProgramModel.count; ++i) {
-        [programs addObject:_allModel[i]];
+    if (isFirstLoad){
+        NSInteger firstLoadCounts = _isFirstLoadCounts ? 20:16;
+        firstLoadCounts = firstLoadCounts >= _allModel.count ? _allModel.count : firstLoadCounts;
+        
+        for (NSInteger i = _currentProgramModel.count; i < firstLoadCounts ; ++i) {
+            
+            [programs addObject:_allModel[i]];
+        }
+        
+    }else {
+      NSInteger  sizes = (homeSizes + _currentProgramModel.count) > _allModel.count ? _allModel.count : (homeSizes + _currentProgramModel.count);
+        for (NSInteger i = _currentProgramModel.count; i < sizes; ++i) {
+            [programs addObject:_allModel[i]];
+        }
+           _currentPage ++;
     }
     _currentProgramModel = programs;
-      _currentPage ++;
+ 
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -236,14 +251,14 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
         _specChannel = channel;
         CRKHomeSpreeCell *spreeCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifer forIndexPath:indexPath];
         
-        spreeCell.imageUrl = channel.columnImg;
+//        spreeCell.imageUrl = channel.columnImg;
         
         return spreeCell;
         
     }
     if (channel.type.integerValue == 1) {
         _videoChannel = channel;
-//        _allModel = channel.programList;
+        //        _allModel = channel.programList;
     }
     CRKHomeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellIdentifer forIndexPath:indexPath];
     //    cell.i
@@ -251,6 +266,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     cell.imageUrl = program.coverImg;
     cell.title = program.title;
     cell.subTitle = program.specialDesc;
+    cell.type = channel.type;
     return cell;
     
 }
@@ -260,10 +276,10 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     
     CRKPrograms *channel = [self channelWithIndePath:indexPath];
     if (channel.type.integerValue == 3) {
-        return CGSizeMake(kScreenWidth, kwidth*2/5);
+        return CGSizeMake(0, 1);
     }
     
-    return CGSizeMake(kwidth, kwidth/3*2);
+    return CGSizeMake(kwidth, (kwidth)*0.6 +20);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {

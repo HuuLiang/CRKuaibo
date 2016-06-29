@@ -202,7 +202,7 @@ NSString *const kSystemConfigModelSVipKeyPrice = @"crkuaibov_systemconfigModel_s
     
     NSUInteger payA = _payAmount;
     
-    if (payAmount) {
+    if (payAmount.integerValue>0) {
         payA = payAmount.integerValue;
     }
     

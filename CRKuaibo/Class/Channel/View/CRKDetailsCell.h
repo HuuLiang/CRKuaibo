@@ -14,4 +14,7 @@
 @property (nonatomic,copy)NSString *introduction;
 @property (nonatomic,copy)NSString *picUrl;
 
+@property (nonatomic)NSString *speStarts;
+@property (nonatomic)NSString *attentPerson;
+
 @end
