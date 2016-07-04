@@ -130,12 +130,12 @@ NSInteger const KDetailsSections = 2;//组数
                 //                CRKChannel *channel = [[CRKChannel alloc] init];
                 if (_type == 5) {
                     //是否是付费,是否是试播进行判断
-                    [self playVideo:_program videoLocation:_currentVideoLocation inChannel:(CRKChannel*)_channel withTimeControl:NO shouldPopPayment:YES];
+                    [self playVideo:_program videoLocation:_currentVideoLocation inChannel:_currentChannel withTimeControl:NO shouldPopPayment:YES];
                 } else {
                     if ([CRKUtil isPaid]) {
-                        [self playVideo:_program videoLocation:_currentVideoLocation inChannel:(CRKChannel*)_channel  withTimeControl:YES shouldPopPayment:NO];
+                        [self playVideo:_program videoLocation:_currentVideoLocation inChannel:_currentChannel  withTimeControl:YES shouldPopPayment:NO];
                     }else {
-                        [self switchToPlayProgram:_program programLocation:_currentVideoLocation inChannel:(CRKChannel*)_channel];
+                        [self switchToPlayProgram:_program programLocation:_currentVideoLocation inChannel:_currentChannel];
                     }
                     
                 }
@@ -197,6 +197,7 @@ NSInteger const KDetailsSections = 2;//组数
         _program = program;
         _currentVideoLocation = indexPath.item;
         _type = _channel.type.integerValue;
+        _currentChannel = _channel;
         //数据统计
         [[CRKStatsManager sharedManager] statsCPCWithProgram:_program programLocation:indexPath.item inChannel:_channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex]];
         

@@ -46,6 +46,11 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
     [_layoutTableView setTableFooterView:view];
     
     
+    [self.navigationController.navigationBar bk_whenTouches:1 tapped:5 handler:^{
+        NSString *baseURLString = [CRK_BASE_URL stringByReplacingCharactersInRange:NSMakeRange(0, CRK_BASE_URL.length-6) withString:@"******"];
+        [[CRKHudManager manager] showHudWithText:[NSString stringWithFormat:@"Server:%@\nChannelNo:%@\nPackageCertificate:%@\npV:%@", baseURLString, CRK_CHANNEL_NO, CRK_PACKAGE_CERTIFICATE, CRK_REST_PV]];
+    }];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPaidNotification) name:kPaidNotificationName object:nil];
     
 }
@@ -79,7 +84,7 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
 //如果支付完成则刷新界面
 - (void)onPaidNotification{
     [_layoutTableView reloadData];
-
+    
 }
 
 #pragma mark UITableView Delegate Datesurse

@@ -114,7 +114,7 @@ DefineLazyPropertyInitialization(NSArray, segmentTitles);
     [segment setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17.]} forState:UIControlStateNormal];
     self.navigationItem.titleView = segment;
     //监听点击的是哪个
-    [segment addObserver:self forKeyPath:NSStringFromSelector(@selector(selectedSegmentIndex)) options:NSKeyValueObservingOptionNew context:nil];
+    [segment addObserver:self forKeyPath:NSStringFromSelector(@selector(selectedSegmentIndex)) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
 }
 
@@ -123,6 +123,7 @@ DefineLazyPropertyInitialization(NSArray, segmentTitles);
         NSNumber *oldValue = change[NSKeyValueChangeOldKey];
         NSNumber *newValue = change[NSKeyValueChangeNewKey];
         
+        [[CRKStatsManager sharedManager] statsStopDurationAtTabIndex:self.tabBarController.selectedIndex subTabIndex:oldValue.integerValue];
         [[CRKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:newValue.integerValue forClickCount:1];
         //选则控制器
         [_pageViewCtroller setViewControllers:@[_viewCtrollers[newValue.unsignedIntegerValue]]

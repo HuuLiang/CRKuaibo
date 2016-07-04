@@ -315,6 +315,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
         CRKDetailsController *detailsVC = [[CRKDetailsController alloc] initWithChannel:_videoChannel program:channel.programList[indexPath.item] programIndex:indexPath.item];
         detailsVC.speChannel = _specChannel;
         detailsVC.type = channel.type.integerValue;
+        detailsVC.currentChannel = channel;
         detailsVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:detailsVC animated:YES];
         [[CRKStatsManager sharedManager] statsCPCWithProgram:channel.programList[indexPath.item] programLocation:indexPath.item inChannel:channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex]];

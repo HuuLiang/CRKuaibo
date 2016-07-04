@@ -14,6 +14,8 @@
 @property (nonatomic,retain)CRKProgram *program;
 @property(nonatomic,assign) NSInteger type;
 
+@property (nonatomic,retain)CRKChannel *currentChannel;
+
 @property (nonatomic,retain) CRKChannel *speChannel;
 - (instancetype)initWithChannel:(CRKChannel*)channel program:(CRKProgram*)program programIndex:(NSInteger )programIndex;
 
