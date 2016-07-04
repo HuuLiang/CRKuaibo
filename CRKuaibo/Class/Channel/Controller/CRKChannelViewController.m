@@ -131,6 +131,8 @@ DefineLazyPropertyInitialization(NSMutableArray,channels)
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     CRKChannelCell *cell = (CRKChannelCell *)[collectionView cellForItemAtIndexPath:indexPath];
     CRKChannel *channel = _channels[indexPath.item];
+    //数据统计
+    [[CRKStatsManager sharedManager] statsCPCWithChannel:channel inTabIndex:self.tabBarController.selectedIndex];
     //创建detailsVC的同时把channel模型传递过去
     CRKChannelDetailsController *detailsVC = [[CRKChannelDetailsController alloc] initWithChannel:channel];
     detailsVC.title = cell.title;
@@ -144,6 +146,12 @@ DefineLazyPropertyInitialization(NSMutableArray,channels)
     CGFloat kwidth = (kScreenWidth - kspace*3)/2;
     CGFloat kheight = kwidth/5*3.6;
     return CGSizeMake(kwidth, kheight);
+    
+}
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate  {
+    [[CRKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex] forSlideCount:1];
     
 }
 

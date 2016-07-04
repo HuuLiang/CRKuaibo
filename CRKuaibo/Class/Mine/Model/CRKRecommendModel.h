@@ -16,6 +16,6 @@
 
 @interface CRKRecommendModel : CRKEncryptedURLRequest
 
-@property (nonatomic,retain)NSArray<CRKChannel*>*fetchedSpreads;
+@property (nonatomic,retain)NSArray<CRKProgram*>*fetchedSpreads;
 - (BOOL)fetchAppSpreadWithCompletionHandler:(CRKCompletionHandler)handler;
 @end

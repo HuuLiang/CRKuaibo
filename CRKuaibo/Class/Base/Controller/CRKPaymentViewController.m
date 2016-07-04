@@ -55,7 +55,7 @@
     
     _popView = [[CRKPaymentPopView alloc] init];
     _popView.backgroundColor = [UIColor colorWithHexString:@"#121212"];
-//    _popView.headerImageURL = [NSURL URLWithString:[CRKSystemConfigModel sharedModel].hasDiscount ? [CRKSystemConfigModel sharedModel].discountImage : [CRKSystemConfigModel sharedModel].paymentImage];
+    //    _popView.headerImageURL = [NSURL URLWithString:[CRKSystemConfigModel sharedModel].hasDiscount ? [CRKSystemConfigModel sharedModel].discountImage : [CRKSystemConfigModel sharedModel].paymentImage];
     _popView.footerImage = [UIImage imageNamed:@"payment_footer"];
     
     if ([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & CRKSubPayTypeAlipay) {
@@ -69,25 +69,28 @@
             Pay(CRKPaymentTypeIAppPay, CRKPaymentTypeWeChatPay);
         }];
     }
-//    if (([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & CRKIAppPayTypeWeChat)
-//        || [CRKPaymentConfig sharedConfig].weixinInfo) {
-//        BOOL useBuildInWeChatPay = [CRKPaymentConfig sharedConfig].weixinInfo != nil;
-//        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信客户端支付" available:YES action:^(id sender) {
-//            Pay(useBuildInWeChatPay?CRKPaymentTypeWeChatPay:CRKPaymentTypeIAppPay, useBuildInWeChatPay?CRKPaymentTypeNone:CRKPaymentTypeWeChatPay);
-//        }];
-//    }
-//    
-//    if (([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & CRKIAppPayTypeAlipay)
-//        || [CRKPaymentConfig sharedConfig].alipayInfo) {
-//        BOOL useBuildInAlipay = [CRKPaymentConfig sharedConfig].alipayInfo != nil;
-//        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-//            Pay(useBuildInAlipay?CRKPaymentTypeAlipay:CRKPaymentTypeIAppPay, useBuildInAlipay?CRKPaymentTypeNone:CRKPaymentTypeAlipay);
-//        }];
-//    }
-//    
+    //    if (([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & CRKIAppPayTypeWeChat)
+    //        || [CRKPaymentConfig sharedConfig].weixinInfo) {
+    //        BOOL useBuildInWeChatPay = [CRKPaymentConfig sharedConfig].weixinInfo != nil;
+    //        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信客户端支付" available:YES action:^(id sender) {
+    //            Pay(useBuildInWeChatPay?CRKPaymentTypeWeChatPay:CRKPaymentTypeIAppPay, useBuildInWeChatPay?CRKPaymentTypeNone:CRKPaymentTypeWeChatPay);
+    //        }];
+    //    }
+    //    
+    //    if (([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & CRKIAppPayTypeAlipay)
+    //        || [CRKPaymentConfig sharedConfig].alipayInfo) {
+    //        BOOL useBuildInAlipay = [CRKPaymentConfig sharedConfig].alipayInfo != nil;
+    //        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
+    //            Pay(useBuildInAlipay?CRKPaymentTypeAlipay:CRKPaymentTypeIAppPay, useBuildInAlipay?CRKPaymentTypeNone:CRKPaymentTypeAlipay);
+    //        }];
+    //    }
+    //    
     _popView.closeAction = ^(id sender){
         @strongify(self);
         [self hidePayment];
+        
+        [[CRKStatsManager sharedManager] statsPayWithOrderNo:nil payAction:CRKStatsPayActionClose payResult:PAYRESULT_UNKNOWN forProgram:self.programToPayFor programLocation:self.programLocationToPayFor inChannel:self.channelToPayFor andTabIndex:[CRKUtil currentTabPageIndex] subTabIndex:[CRKUtil currentSubTabPageIndex]];
+        
     };
     return _popView;
 }
@@ -156,9 +159,9 @@
 }
 
 - (void)setPayAmount:(NSNumber *)payAmount {
-//#ifdef DEBUG
-//    payAmount = @(0.1);
-//#endif
+    //#ifdef DEBUG
+    //    payAmount = @(0.1);
+    //#endif
     _payAmount = payAmount;
     self.popView.showPrice = @(payAmount.doubleValue / 100);
 }
@@ -193,15 +196,21 @@
     }
     
     @weakify(self);
-    [[CRKPaymentManager sharedManager] startPaymentWithType:paymentType
-                                                    subType:paymentSubType
-                                                      price:self.payAmount.unsignedIntegerValue
-                                                 forProgram:self.programToPayFor
-                                          completionHandler:^(PAYRESULT payResult, CRKPaymentInfo *paymentInfo)
-    {
-        @strongify(self);
-        [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
-    }];
+    CRKPaymentInfo *paymentInfo = [[CRKPaymentManager sharedManager] startPaymentWithType:paymentType
+                                                                                  subType:paymentSubType
+                                                                                    price:self.payAmount.unsignedIntegerValue
+                                                                               forProgram:self.programToPayFor
+                                                                                inChannel:self.channelToPayFor
+                                                                          programLocation:self.programLocationToPayFor
+                                                                        completionHandler:^(PAYRESULT payResult, CRKPaymentInfo *paymentInfo)
+                                   {
+                                       @strongify(self);
+                                       [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
+                                   }];
+    if (paymentInfo) {
+        [[CRKStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo forPayAction:CRKStatsPayActionGoToPay andTabIndex:[CRKUtil currentTabPageIndex] subTabIndex:[CRKUtil currentSubTabPageIndex]];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -235,6 +244,8 @@
     }
     
     [[CRKPaymentModel sharedModel] commitPaymentInfo:paymentInfo];
+    
+    [[CRKStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo forPayAction:CRKStatsPayActionPayBack andTabIndex:[CRKUtil currentTabPageIndex] subTabIndex:[CRKUtil currentSubTabPageIndex]];
 }
 
 @end

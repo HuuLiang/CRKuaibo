@@ -35,4 +35,8 @@
 #import "CRKPaymentManager.h"
 #import "CRKLocalNotificationManager.h"
 
+#import "DBHandler.h"
+#import "CRKNetworkInfo.h"
+#import "CRKStatsManager.h"
+
 #endif /* CRKPrefixHeader_pch */

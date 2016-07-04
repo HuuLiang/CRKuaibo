@@ -7,11 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8FB2647088A7ACB5D3871C64 /* libPods-CRKuaibo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA21FB7DFE0EAD9178F5A545 /* libPods-CRKuaibo.a */; };
 		B3044B101CFFD45800BFB26C /* CRKChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3044B0F1CFFD45800BFB26C /* CRKChannelCell.m */; };
 		B3044B131CFFDB9D00BFB26C /* CRKChannelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3044B121CFFDB9D00BFB26C /* CRKChannelModel.m */; };
 		B3044B161D0002FD00BFB26C /* NSArray+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = B3044B151D0002FD00BFB26C /* NSArray+Log.m */; };
 		B3086C5A1D02D35F0072ECCD /* CRKHomeHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3086C591D02D35F0072ECCD /* CRKHomeHeaderReusableView.m */; };
 		B3086C5D1D02D8750072ECCD /* CRKHomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3086C5C1D02D8750072ECCD /* CRKHomeCollectionViewCell.m */; };
+		B31BDB8D1D2A03AB00942DD7 /* NSObject+DictionaryRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDB8C1D2A03AB00942DD7 /* NSObject+DictionaryRepresentation.m */; };
+		B31BDB961D2A041600942DD7 /* DBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDB901D2A041600942DD7 /* DBHandler.m */; };
+		B31BDB971D2A041600942DD7 /* DBPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDB931D2A041600942DD7 /* DBPersistence.m */; };
+		B31BDB981D2A041600942DD7 /* DBTableVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDB951D2A041600942DD7 /* DBTableVersion.m */; };
+		B31BDBA21D2A050400942DD7 /* CRKCPCStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDB9B1D2A050400942DD7 /* CRKCPCStatsModel.m */; };
+		B31BDBA31D2A050400942DD7 /* CRKPayStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDB9D1D2A050400942DD7 /* CRKPayStatsModel.m */; };
+		B31BDBA41D2A050400942DD7 /* CRKStatsBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDB9F1D2A050400942DD7 /* CRKStatsBaseModel.m */; };
+		B31BDBA51D2A050400942DD7 /* CRKTabStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDBA11D2A050400942DD7 /* CRKTabStatsModel.m */; };
+		B31BDBAA1D2A068D00942DD7 /* CRKNetworkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDBA71D2A068D00942DD7 /* CRKNetworkInfo.m */; };
+		B31BDBAB1D2A068D00942DD7 /* CRKStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDBA91D2A068D00942DD7 /* CRKStatsManager.m */; };
 		B3341ACC1CF571C90002C674 /* CRKRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3341ACB1CF571C90002C674 /* CRKRecommendCell.m */; };
 		B33BCD091D06C50200D8E62F /* CRKDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCD081D06C50200D8E62F /* CRKDetailsController.m */; };
 		B33BCD0D1D06C52900D8E62F /* CRKVideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCD0C1D06C52900D8E62F /* CRKVideoCollectionViewCell.m */; };
@@ -21,7 +32,6 @@
 		B33BCD1A1D07F6E000D8E62F /* CRKVideoImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCD191D07F6E000D8E62F /* CRKVideoImageCollectionViewCell.m */; };
 		B343BFD01CF7FA58004D7C7D /* CRKRecommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B343BFCF1CF7FA58004D7C7D /* CRKRecommendModel.m */; };
 		B35BB66A1D1CE7AF003CF5B6 /* CRKHomePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB6691D1CE7AF003CF5B6 /* CRKHomePageModel.m */; };
-		B3692EBB1D00224F006F03AE /* CRKChannels.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692EBA1D00224F006F03AE /* CRKChannels.m */; };
 		B3692EBE1D0023C4006F03AE /* CRKChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692EBD1D0023C4006F03AE /* CRKChannel.m */; };
 		B3692EC11D00279D006F03AE /* CRKChannelDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692EC01D00279D006F03AE /* CRKChannelDetailsController.m */; };
 		B3692EC41D002D62006F03AE /* CRKDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3692EC31D002D62006F03AE /* CRKDetailsCell.m */; };
@@ -109,12 +119,11 @@
 		BC83B92F1CEEC3160084AAC6 /* CRKPaymentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC83B92C1CEEC3160084AAC6 /* CRKPaymentModel.m */; };
 		BC83B93A1CEEC4150084AAC6 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC83B9321CEEC4150084AAC6 /* libMobClickLibrary.a */; };
 		BC83B93B1CEEC4160084AAC6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC83B9361CEEC4150084AAC6 /* libWeChatSDK.a */; };
-		FF48FF9498996A70B5EA4CE2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA63CD89DBE208B2476BDF6B /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1ABCE6B2C227521B0472ED5B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		ADBE3C6249DAB5D5CAA28A9E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6A545EAD34420544C56D8D4A /* Pods-CRKuaibo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CRKuaibo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CRKuaibo/Pods-CRKuaibo.debug.xcconfig"; sourceTree = "<group>"; };
+		6B3BF103B67AA18B4492D351 /* Pods-CRKuaibo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CRKuaibo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CRKuaibo/Pods-CRKuaibo.release.xcconfig"; sourceTree = "<group>"; };
 		B3044B0E1CFFD45800BFB26C /* CRKChannelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannelCell.h; sourceTree = "<group>"; };
 		B3044B0F1CFFD45800BFB26C /* CRKChannelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKChannelCell.m; sourceTree = "<group>"; };
 		B3044B111CFFDB9D00BFB26C /* CRKChannelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannelModel.h; sourceTree = "<group>"; };
@@ -125,6 +134,27 @@
 		B3086C591D02D35F0072ECCD /* CRKHomeHeaderReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKHomeHeaderReusableView.m; sourceTree = "<group>"; };
 		B3086C5B1D02D8750072ECCD /* CRKHomeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKHomeCollectionViewCell.h; sourceTree = "<group>"; };
 		B3086C5C1D02D8750072ECCD /* CRKHomeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKHomeCollectionViewCell.m; sourceTree = "<group>"; };
+		B31BDB8B1D2A03AB00942DD7 /* NSObject+DictionaryRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DictionaryRepresentation.h"; sourceTree = "<group>"; };
+		B31BDB8C1D2A03AB00942DD7 /* NSObject+DictionaryRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DictionaryRepresentation.m"; sourceTree = "<group>"; };
+		B31BDB8F1D2A041600942DD7 /* DBHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHandler.h; sourceTree = "<group>"; };
+		B31BDB901D2A041600942DD7 /* DBHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHandler.m; sourceTree = "<group>"; };
+		B31BDB911D2A041600942DD7 /* DBMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMigration.h; sourceTree = "<group>"; };
+		B31BDB921D2A041600942DD7 /* DBPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPersistence.h; sourceTree = "<group>"; };
+		B31BDB931D2A041600942DD7 /* DBPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPersistence.m; sourceTree = "<group>"; };
+		B31BDB941D2A041600942DD7 /* DBTableVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTableVersion.h; sourceTree = "<group>"; };
+		B31BDB951D2A041600942DD7 /* DBTableVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBTableVersion.m; sourceTree = "<group>"; };
+		B31BDB9A1D2A050400942DD7 /* CRKCPCStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKCPCStatsModel.h; sourceTree = "<group>"; };
+		B31BDB9B1D2A050400942DD7 /* CRKCPCStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKCPCStatsModel.m; sourceTree = "<group>"; };
+		B31BDB9C1D2A050400942DD7 /* CRKPayStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKPayStatsModel.h; sourceTree = "<group>"; };
+		B31BDB9D1D2A050400942DD7 /* CRKPayStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKPayStatsModel.m; sourceTree = "<group>"; };
+		B31BDB9E1D2A050400942DD7 /* CRKStatsBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKStatsBaseModel.h; sourceTree = "<group>"; };
+		B31BDB9F1D2A050400942DD7 /* CRKStatsBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKStatsBaseModel.m; sourceTree = "<group>"; };
+		B31BDBA01D2A050400942DD7 /* CRKTabStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKTabStatsModel.h; sourceTree = "<group>"; };
+		B31BDBA11D2A050400942DD7 /* CRKTabStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKTabStatsModel.m; sourceTree = "<group>"; };
+		B31BDBA61D2A068D00942DD7 /* CRKNetworkInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKNetworkInfo.h; sourceTree = "<group>"; };
+		B31BDBA71D2A068D00942DD7 /* CRKNetworkInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKNetworkInfo.m; sourceTree = "<group>"; };
+		B31BDBA81D2A068D00942DD7 /* CRKStatsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKStatsManager.h; sourceTree = "<group>"; };
+		B31BDBA91D2A068D00942DD7 /* CRKStatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKStatsManager.m; sourceTree = "<group>"; };
 		B3341ACA1CF571C90002C674 /* CRKRecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommendCell.h; sourceTree = "<group>"; };
 		B3341ACB1CF571C90002C674 /* CRKRecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommendCell.m; sourceTree = "<group>"; };
 		B33BCD071D06C50200D8E62F /* CRKDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKDetailsController.h; sourceTree = "<group>"; };
@@ -143,8 +173,6 @@
 		B343BFCF1CF7FA58004D7C7D /* CRKRecommendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommendModel.m; sourceTree = "<group>"; };
 		B35BB6681D1CE7AF003CF5B6 /* CRKHomePageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKHomePageModel.h; sourceTree = "<group>"; };
 		B35BB6691D1CE7AF003CF5B6 /* CRKHomePageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKHomePageModel.m; sourceTree = "<group>"; };
-		B3692EB91D00224F006F03AE /* CRKChannels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannels.h; sourceTree = "<group>"; };
-		B3692EBA1D00224F006F03AE /* CRKChannels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKChannels.m; sourceTree = "<group>"; };
 		B3692EBC1D0023C4006F03AE /* CRKChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannel.h; sourceTree = "<group>"; };
 		B3692EBD1D0023C4006F03AE /* CRKChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKChannel.m; sourceTree = "<group>"; };
 		B3692EBF1D00279D006F03AE /* CRKChannelDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKChannelDetailsController.h; sourceTree = "<group>"; };
@@ -321,7 +349,7 @@
 		BC83B9371CEEC4150084AAC6 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		BC83B9381CEEC4150084AAC6 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		BC83B9391CEEC4150084AAC6 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		FA63CD89DBE208B2476BDF6B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA21FB7DFE0EAD9178F5A545 /* libPods-CRKuaibo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CRKuaibo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,35 +360,64 @@
 				BC0F71281CF30802000894A3 /* CoreTelephony.framework in Frameworks */,
 				BC0F71261CF307E1000894A3 /* libz.tbd in Frameworks */,
 				BC0F71241CF307D6000894A3 /* libsqlite3.tbd in Frameworks */,
-				FF48FF9498996A70B5EA4CE2 /* libPods.a in Frameworks */,
 				BC293A081CF2E05B000128E2 /* AlipaySDK.framework in Frameworks */,
 				BC83B93A1CEEC4150084AAC6 /* libMobClickLibrary.a in Frameworks */,
 				BC293A0A1CF2E05B000128E2 /* IapppayAlphaKit.framework in Frameworks */,
 				BC83B93B1CEEC4160084AAC6 /* libWeChatSDK.a in Frameworks */,
+				8FB2647088A7ACB5D3871C64 /* libPods-CRKuaibo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		244C3C9B8FAFEB227E30D9A8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6A545EAD34420544C56D8D4A /* Pods-CRKuaibo.debug.xcconfig */,
+				6B3BF103B67AA18B4492D351 /* Pods-CRKuaibo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		47178656E19AB0708FC76F87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				BC0F71271CF30802000894A3 /* CoreTelephony.framework */,
 				BC0F71251CF307E1000894A3 /* libz.tbd */,
 				BC0F71231CF307D6000894A3 /* libsqlite3.tbd */,
-				FA63CD89DBE208B2476BDF6B /* libPods.a */,
+				DA21FB7DFE0EAD9178F5A545 /* libPods-CRKuaibo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		551F48DDD6ECF46FE912EABE /* Pods */ = {
+		B31BDB8E1D2A041600942DD7 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
-				1ABCE6B2C227521B0472ED5B /* Pods.debug.xcconfig */,
-				ADBE3C6249DAB5D5CAA28A9E /* Pods.release.xcconfig */,
+				B31BDB8F1D2A041600942DD7 /* DBHandler.h */,
+				B31BDB901D2A041600942DD7 /* DBHandler.m */,
+				B31BDB911D2A041600942DD7 /* DBMigration.h */,
+				B31BDB921D2A041600942DD7 /* DBPersistence.h */,
+				B31BDB931D2A041600942DD7 /* DBPersistence.m */,
+				B31BDB941D2A041600942DD7 /* DBTableVersion.h */,
+				B31BDB951D2A041600942DD7 /* DBTableVersion.m */,
 			);
-			name = Pods;
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		B31BDB991D2A050400942DD7 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				B31BDB9A1D2A050400942DD7 /* CRKCPCStatsModel.h */,
+				B31BDB9B1D2A050400942DD7 /* CRKCPCStatsModel.m */,
+				B31BDB9C1D2A050400942DD7 /* CRKPayStatsModel.h */,
+				B31BDB9D1D2A050400942DD7 /* CRKPayStatsModel.m */,
+				B31BDB9E1D2A050400942DD7 /* CRKStatsBaseModel.h */,
+				B31BDB9F1D2A050400942DD7 /* CRKStatsBaseModel.m */,
+				B31BDBA01D2A050400942DD7 /* CRKTabStatsModel.h */,
+				B31BDBA11D2A050400942DD7 /* CRKTabStatsModel.m */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 		B3341AC31CF569780002C674 /* Model */ = {
@@ -446,8 +503,6 @@
 		B374859D1CFED8F0001288F3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B3692EB91D00224F006F03AE /* CRKChannels.h */,
-				B3692EBA1D00224F006F03AE /* CRKChannels.m */,
 				B3044B111CFFDB9D00BFB26C /* CRKChannelModel.h */,
 				B3044B121CFFDB9D00BFB26C /* CRKChannelModel.m */,
 				B3692ECA1D012C77006F03AE /* CRKChannelProgram.h */,
@@ -601,8 +656,8 @@
 				B3044B151D0002FD00BFB26C /* NSArray+Log.m */,
 				BC5B52E61CEDF5FD00CAA1A1 /* CRKuaibo */,
 				BC5B52E51CEDF5FD00CAA1A1 /* Products */,
-				551F48DDD6ECF46FE912EABE /* Pods */,
 				47178656E19AB0708FC76F87 /* Frameworks */,
+				244C3C9B8FAFEB227E30D9A8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -682,6 +737,7 @@
 		BC83B89F1CEEADB00084AAC6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B31BDB991D2A050400942DD7 /* Stats */,
 				BC83B9261CEEC3160084AAC6 /* Payment */,
 				BC83B8A01CEEADB00084AAC6 /* CRKActivateModel.h */,
 				BC83B8A11CEEADB00084AAC6 /* CRKActivateModel.m */,
@@ -710,6 +766,7 @@
 		BC83B8B61CEEB0440084AAC6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B31BDB8E1D2A041600942DD7 /* DataBase */,
 				BC83B91F1CEEB96D0084AAC6 /* Payment */,
 				BC83B8BF1CEEB0440084AAC6 /* Extensions */,
 				BC83B8E71CEEB0440084AAC6 /* rac_extobjc */,
@@ -728,6 +785,10 @@
 				BC0F71111CF2F135000894A3 /* CRKApplicationManager.m */,
 				BC0F71201CF305FE000894A3 /* CRKLocalNotificationManager.h */,
 				BC0F71211CF305FE000894A3 /* CRKLocalNotificationManager.m */,
+				B31BDBA61D2A068D00942DD7 /* CRKNetworkInfo.h */,
+				B31BDBA71D2A068D00942DD7 /* CRKNetworkInfo.m */,
+				B31BDBA81D2A068D00942DD7 /* CRKStatsManager.h */,
+				B31BDBA91D2A068D00942DD7 /* CRKStatsManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -746,6 +807,8 @@
 				BC83B8C71CEEB0440084AAC6 /* NSObject+Properties.m */,
 				BC83B8C81CEEB0440084AAC6 /* NSObject+PropertyAccessInspecting.h */,
 				BC83B8C91CEEB0440084AAC6 /* NSObject+PropertyAccessInspecting.m */,
+				B31BDB8B1D2A03AB00942DD7 /* NSObject+DictionaryRepresentation.h */,
+				B31BDB8C1D2A03AB00942DD7 /* NSObject+DictionaryRepresentation.m */,
 				BC83B8CA1CEEB0440084AAC6 /* NSString+crypt.h */,
 				BC83B8CB1CEEB0440084AAC6 /* NSString+crypt.m */,
 				BC83B8CC1CEEB0440084AAC6 /* NSString+FilterHTML.h */,
@@ -869,12 +932,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BC5B52FB1CEDF5FD00CAA1A1 /* Build configuration list for PBXNativeTarget "CRKuaibo" */;
 			buildPhases = (
-				C42DEBAE475D16B2CCB3256A /* Check Pods Manifest.lock */,
+				BFD74809FA3EDE3B031F8B52 /* [CP] Check Pods Manifest.lock */,
 				BC5B52E01CEDF5FD00CAA1A1 /* Sources */,
 				BC5B52E11CEDF5FD00CAA1A1 /* Frameworks */,
 				BC5B52E21CEDF5FD00CAA1A1 /* Resources */,
-				517BA3C3280AE78CE4A0F446 /* Embed Pods Frameworks */,
-				239092312CEB6B54D245914F /* Copy Pods Resources */,
+				D207F95939E0391ED08C5EA1 /* [CP] Embed Pods Frameworks */,
+				1288FEA967A11C640C71E498 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -896,7 +959,6 @@
 				TargetAttributes = {
 					BC5B52E31CEDF5FD00CAA1A1 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 7VHT3KAS56;
 					};
 				};
 			};
@@ -934,49 +996,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		239092312CEB6B54D245914F /* Copy Pods Resources */ = {
+		1288FEA967A11C640C71E498 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CRKuaibo/Pods-CRKuaibo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		517BA3C3280AE78CE4A0F446 /* Embed Pods Frameworks */ = {
+		BFD74809FA3EDE3B031F8B52 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C42DEBAE475D16B2CCB3256A /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D207F95939E0391ED08C5EA1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CRKuaibo/Pods-CRKuaibo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -991,15 +1053,22 @@
 				B37485991CFED37A001288F3 /* CRKUniverSalityModel.m in Sources */,
 				B37485841CFEA856001288F3 /* CRKOccidentController.m in Sources */,
 				BC83B91B1CEEB7FE0084AAC6 /* NSDictionary+CRKSign.m in Sources */,
+				B31BDBA31D2A050400942DD7 /* CRKPayStatsModel.m in Sources */,
+				B31BDBA41D2A050400942DD7 /* CRKStatsBaseModel.m in Sources */,
 				B3692EBE1D0023C4006F03AE /* CRKChannel.m in Sources */,
+				B31BDBA51D2A050400942DD7 /* CRKTabStatsModel.m in Sources */,
 				BC0F710D1CF2F055000894A3 /* CRKPaymentViewController.m in Sources */,
 				BC83B9011CEEB0440084AAC6 /* NSString+crypt.m in Sources */,
 				BC0F711F1CF3054D000894A3 /* CRKSpreadBannerViewController.m in Sources */,
+				B31BDB981D2A041600942DD7 /* DBTableVersion.m in Sources */,
+				B31BDBA21D2A050400942DD7 /* CRKCPCStatsModel.m in Sources */,
 				BC83B8B51CEEADB00084AAC6 /* CRKUserAccessModel.m in Sources */,
 				BC0F71091CF2EF60000894A3 /* CRKPaymentPopView.m in Sources */,
 				BC0F71121CF2F135000894A3 /* CRKApplication.m in Sources */,
 				BC83B9141CEEB0440084AAC6 /* WXUtil.mm in Sources */,
+				B31BDB971D2A041600942DD7 /* DBPersistence.m in Sources */,
 				B37485931CFEBA74001288F3 /* UIView+Extension.m in Sources */,
+				B31BDBAA1D2A068D00942DD7 /* CRKNetworkInfo.m in Sources */,
 				BC83B8B31CEEADB00084AAC6 /* CRKURLRequest.m in Sources */,
 				BC83B91E1CEEB8270084AAC6 /* CRKUtil.m in Sources */,
 				BC83B9001CEEB0440084AAC6 /* NSObject+PropertyAccessInspecting.m in Sources */,
@@ -1034,6 +1103,7 @@
 				BC83B9121CEEB0440084AAC6 /* WeChatPayManager.m in Sources */,
 				BC0F71181CF2FCC6000894A3 /* CRKSystemConfig.m in Sources */,
 				B343BFD01CF7FA58004D7C7D /* CRKRecommendModel.m in Sources */,
+				B31BDBAB1D2A068D00942DD7 /* CRKStatsManager.m in Sources */,
 				BC5B53001CEDF6B000CAA1A1 /* CRKAppDelegate.m in Sources */,
 				BC83B90E1CEEB0440084AAC6 /* UIViewExt.m in Sources */,
 				BC0F71131CF2F135000894A3 /* CRKApplicationManager.m in Sources */,
@@ -1041,7 +1111,6 @@
 				BC0F71311CF309BD000894A3 /* CRKHomeViewController.m in Sources */,
 				BC83B8AF1CEEADB00084AAC6 /* CRKActivateModel.m in Sources */,
 				BC83B90F1CEEB0440084AAC6 /* RACEXTRuntimeExtensions.m in Sources */,
-				B3692EBB1D00224F006F03AE /* CRKChannels.m in Sources */,
 				BC83B9021CEEB0440084AAC6 /* NSString+FilterHTML.m in Sources */,
 				BC0F711C1CF3029B000894A3 /* CRKAppSpreadBannerModel.m in Sources */,
 				B37485871CFEA8A2001288F3 /* CRKRHViewController.m in Sources */,
@@ -1062,9 +1131,11 @@
 				BC83B9071CEEB0440084AAC6 /* UIColor+hexColor.m in Sources */,
 				B374B9AE1CFD2D5C0063C1C6 /* CRKInputViewController.m in Sources */,
 				BC83B92E1CEEC3160084AAC6 /* CRKPaymentConfigModel.m in Sources */,
+				B31BDB961D2A041600942DD7 /* DBHandler.m in Sources */,
 				B33BCD091D06C50200D8E62F /* CRKDetailsController.m in Sources */,
 				BC83B9101CEEB0440084AAC6 /* ApiXml.mm in Sources */,
 				B3692EC11D00279D006F03AE /* CRKChannelDetailsController.m in Sources */,
+				B31BDB8D1D2A03AB00942DD7 /* NSObject+DictionaryRepresentation.m in Sources */,
 				B374B9BA1CFD5F9E0063C1C6 /* CRKUserProtolController.m in Sources */,
 				B3692ECC1D012C77006F03AE /* CRKChannelProgram.m in Sources */,
 				B33BCD1A1D07F6E000D8E62F /* CRKVideoImageCollectionViewCell.m in Sources */,
@@ -1181,12 +1252,12 @@
 		};
 		BC5B52FC1CEDF5FD00CAA1A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1ABCE6B2C227521B0472ED5B /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 6A545EAD34420544C56D8D4A /* Pods-CRKuaibo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CRKuaibo/Class/Vendor/iAppPay/DependenceSDK",
@@ -1201,9 +1272,9 @@
 					"$(PROJECT_DIR)/CRKuaibo/Class/Vendor/Umeng",
 					"$(PROJECT_DIR)/CRKuaibo/Class/Vendor/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.photolibrary2016.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cryingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "cc820395-af37-4511-8d69-481cf1218340";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -1211,12 +1282,12 @@
 		};
 		BC5B52FD1CEDF5FD00CAA1A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADBE3C6249DAB5D5CAA28A9E /* Pods.release.xcconfig */;
+			baseConfigurationReference = 6B3BF103B67AA18B4492D351 /* Pods-CRKuaibo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CRKuaibo/Class/Vendor/iAppPay/DependenceSDK",
@@ -1231,9 +1302,9 @@
 					"$(PROJECT_DIR)/CRKuaibo/Class/Vendor/Umeng",
 					"$(PROJECT_DIR)/CRKuaibo/Class/Vendor/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.photolibrary2016.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cryingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "cc820395-af37-4511-8d69-481cf1218340";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};

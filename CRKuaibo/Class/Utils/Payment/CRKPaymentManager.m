@@ -50,20 +50,22 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 
 - (void)handleOpenURL:(NSURL *)url {
     [[IapppayAlphaKit sharedInstance] handleOpenUrl:url];
-//    [WXApi handleOpenURL:url delegate:self];
+    //    [WXApi handleOpenURL:url delegate:self];
 }
 
-- (BOOL)startPaymentWithType:(CRKPaymentType)type
-                     subType:(CRKPaymentType)subType
-                       price:(NSUInteger)price
-                  forProgram:(CRKProgram *)program
-           completionHandler:(CRKPaymentCompletionHandler)handler
+- (CRKPaymentInfo *)startPaymentWithType:(CRKPaymentType)type
+                                 subType:(CRKPaymentType)subType
+                                   price:(NSUInteger)price
+                              forProgram:(CRKProgram *)program
+                               inChannel:(CRKChannel *)channel
+                         programLocation:(NSInteger)programLocation
+                       completionHandler:(CRKPaymentCompletionHandler)handler
 {
     if (type == CRKPaymentTypeNone || (type == CRKPaymentTypeIAppPay && subType == CRKPaymentTypeNone)) {
         if (self.completionHandler) {
             self.completionHandler(PAYRESULT_FAIL, nil);
         }
-        return NO;
+        return nil;
     }
 //    price = 1;
     NSString *channelNo = CRK_CHANNEL_NO;
@@ -72,6 +74,11 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
     
     CRKPaymentInfo *paymentInfo = [[CRKPaymentInfo alloc] init];
+    
+    paymentInfo.columnId = channel.realColumnId;
+    paymentInfo.columnType = channel.type;
+    paymentInfo.contentLocation = @(programLocation+1);
+    
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
     paymentInfo.contentId = program.programId;
@@ -105,7 +112,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                                              @(CRKPaymentTypeWeChatPay):@(IapppayAlphaKitWeChatPayType)};
         NSNumber *payType = paymentTypeMapping[@(subType)];
         if (!payType) {
-            return NO;
+            return nil;
         }
         
         IapppayAlphaOrderUtils *order = [[IapppayAlphaOrderUtils alloc] init];
@@ -114,8 +121,8 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         order.cpOrderId = orderNo;
 #warning 支付
 #ifdef DEBUG
-//        order.waresId = @"2";
-         order.waresId = [CRKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
+        //        order.waresId = @"2";
+        order.waresId = [CRKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
 #else
         order.waresId = [CRKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
 #endif
@@ -135,7 +142,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         }
     }
     
-    return success;
+    return success ? paymentInfo : nil;
 }
 
 - (void)checkPayment {

@@ -17,11 +17,18 @@ typedef void (^CRKPaymentCompletionHandler)(PAYRESULT payResult, CRKPaymentInfo 
 + (instancetype)sharedManager;
 
 - (void)setup;
-- (BOOL)startPaymentWithType:(CRKPaymentType)type
-                     subType:(CRKPaymentType)subType
-                       price:(NSUInteger)price
-                  forProgram:(CRKProgram *)program
-           completionHandler:(CRKPaymentCompletionHandler)handler;
+//- (BOOL)startPaymentWithType:(CRKPaymentType)type
+//                     subType:(CRKPaymentType)subType
+//                       price:(NSUInteger)price
+//                  forProgram:(CRKProgram *)program
+//           completionHandler:(CRKPaymentCompletionHandler)handler;
+- (CRKPaymentInfo *)startPaymentWithType:(CRKPaymentType)type
+                                 subType:(CRKPaymentType)subType
+                                   price:(NSUInteger)price
+                              forProgram:(CRKProgram *)program
+                               inChannel:(CRKChannel *)channel
+                         programLocation:(NSInteger)programLocation
+                       completionHandler:(CRKPaymentCompletionHandler)handler;
 
 - (void)handleOpenURL:(NSURL *)url;
 - (void)checkPayment;

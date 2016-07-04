@@ -212,6 +212,10 @@ typedef NS_ENUM(NSInteger , CRKSideMenuRow) {
 }
 
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate  {
+    [[CRKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex] forSlideCount:1];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

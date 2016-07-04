@@ -21,7 +21,7 @@ typedef NS_ENUM (NSUInteger , SegmentIndex){
 @interface CRKHomeViewController ()<UIPageViewControllerDelegate>
 {
     UIPageViewController *_pageViewCtroller;
-    UISegmentedControl *_segmentCtrolller;
+
     
 }
 @property (nonatomic,retain)NSMutableArray <UIViewController*>*viewCtrollers;
@@ -122,6 +122,8 @@ DefineLazyPropertyInitialization(NSArray, segmentTitles);
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(selectedSegmentIndex))]) {
         NSNumber *oldValue = change[NSKeyValueChangeOldKey];
         NSNumber *newValue = change[NSKeyValueChangeNewKey];
+        
+        [[CRKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:newValue.integerValue forClickCount:1];
         //选则控制器
         [_pageViewCtroller setViewControllers:@[_viewCtrollers[newValue.unsignedIntegerValue]]
                                     direction:newValue.unsignedIntegerValue>oldValue.unsignedIntegerValue ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];

@@ -111,29 +111,29 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
 - (void)loadChannelProgramModelWithIsPullUpRefresh:(BOOL)isPullUpRefresh{
     @weakify(self);
     [self.program fetchProgramsWithColumnId:_channel.columnId
-                                 pageNo:_currentPage++
-                               pageSize:kDefaultPageSize
-                      completionHandler:^(BOOL success, CRKChannel *programs) {
-                          
-                          @strongify(self);
-                          if (!self) {
-                              return ;
-                          }
-                          if (success && programs.programList) {
-                              if (isPullUpRefresh) {
-                                  [self attentPerson];
+                                     pageNo:_currentPage++
+                                   pageSize:kDefaultPageSize
+                          completionHandler:^(BOOL success, CRKChannel *programs) {
+                              
+                              @strongify(self);
+                              if (!self) {
+                                  return ;
+                              }
+                              if (success && programs.programList) {
+                                  if (isPullUpRefresh) {
+                                      [self attentPerson];
+                                  }
+                                  
+                                  [_channelPrograms addObjectsFromArray:programs.programList];
+                                  [self->_tableView reloadData];
                               }
                               
-                              [_channelPrograms addObjectsFromArray:programs.programList];
-                              [self->_tableView reloadData];
-                          }
-                          
-                          [self->_tableView CRK_endPullToRefresh];//结束刷新
-                          if (self.channelPrograms.count >= programs.items.unsignedIntegerValue) {
-                              [self->_tableView CRK_pagingRefreshNoMoreData];
-                          }
-                          
-                      }];
+                              [self->_tableView CRK_endPullToRefresh];//结束刷新
+                              if (self.channelPrograms.count >= programs.items.unsignedIntegerValue) {
+                                  [self->_tableView CRK_pagingRefreshNoMoreData];
+                              }
+                              
+                          }];
 }
 //关注的人数以及星数(客户端随机生成)
 - (void)attentPerson{
@@ -187,9 +187,8 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        NSIndexPath *indexPath = [_tableView indexPathForSelectedRow];
-        CRKProgram *program = _channelPrograms[indexPath.section];
-        [self switchToPlayProgram:program programLocation:indexPath.section inChannel:self.channel];
+       
+        [self switchToPlayProgram:nil programLocation:0 inChannel:self.channel];
         return;
     }
     
@@ -215,7 +214,7 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
         if (indexPath.section < self.attentArr.count) {
             NSString *attent = self.attentArr[indexPath.section];
             NSString *change = self.changePerson[indexPath.section];
-            attentText = [NSString stringWithFormat:@"%d",(attent.integerValue + change.integerValue)];
+            attentText = [NSString stringWithFormat:@"%ld",(attent.integerValue + change.integerValue)];
             cell.attentPerson = attentText;
             cell.speStarts = _specStarts[indexPath.section];
         } }
@@ -245,6 +244,8 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CRKProgram *program = _channelPrograms[indexPath.section];
+    //数据统计
+    [[CRKStatsManager sharedManager] statsCPCWithProgram:program programLocation:indexPath.section inChannel:_channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex]];
     if (![CRKUtil isPaid]) {
         [self switchToPlayProgram:program programLocation:indexPath.section inChannel:self.channel];
         return;
@@ -255,5 +256,10 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
     
 }
 
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate  {
+    [[CRKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex] forSlideCount:1];
+    
+}
 
 @end

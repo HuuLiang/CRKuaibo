@@ -23,7 +23,8 @@
 #import "CRKChannelViewController.h"
 #import "CRKMineViewController.h"
 
-@interface CRKAppDelegate ()
+@interface CRKAppDelegate ()<UITabBarControllerDelegate>
+
 @property (nonatomic,retain)CRKHomePageModel *homePageModel;
 @end
 
@@ -65,6 +66,7 @@ DefineLazyPropertyInitialization(CRKHomePageModel, homePageModel);
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[homeNav,channelNav,mineNav];
     tabBarController.tabBar.translucent = NO;
+    tabBarController.delegate = self;
     
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     _window.rootViewController = tabBarController;
@@ -162,7 +164,7 @@ DefineLazyPropertyInitialization(CRKHomePageModel, homePageModel);
 - (void)loadChannel {
     [self.homePageModel fetchWiithCompletionHandler:^(BOOL success, NSArray<CRKHomePage *>*programs) {
         if (success) {
-//            [self setPageCtroller];
+            //            [self setPageCtroller];
             [self.window makeKeyAndVisible];
             CRKLaunchView *launchView = [[CRKLaunchView alloc] init];
             [launchView show];
@@ -182,8 +184,8 @@ DefineLazyPropertyInitialization(CRKHomePageModel, homePageModel);
     [[CRKErrorHandler sharedHandler] initialize];
     [self setupCommonStyles];
     [self setupMobStatistics];
-//    [self.window makeKeyAndVisible];
-    
+    //    [self.window makeKeyAndVisible];
+    [[CRKNetworkInfo sharedInfo] startMonitoring];//判断网络状态
     
     
     if (![CRKUtil isRegistered]) {
@@ -199,6 +201,15 @@ DefineLazyPropertyInitialization(CRKHomePageModel, homePageModel);
     
     [[CRKPaymentModel sharedModel] startRetryingToCommitUnprocessedOrders];
     [[CRKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+        
+        
+        NSUInteger statsTimeInterval = 180;
+        if ([CRKSystemConfigModel sharedModel].loaded && [CRKSystemConfigModel sharedModel].statsTimeInterval > 0) {
+            statsTimeInterval = [CRKSystemConfigModel sharedModel].statsTimeInterval;
+        }
+        statsTimeInterval = 20;
+        [[CRKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+        
         
         if (!success) {
             return ;
@@ -263,6 +274,19 @@ DefineLazyPropertyInitialization(CRKHomePageModel, homePageModel);
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     [[CRKPaymentManager sharedManager] handleOpenURL:url];
+    return YES;
+}
+
+#pragma mark UITabbarControllerDelegate
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    [[CRKStatsManager sharedManager] statsTabIndex:tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex] forClickCount:1];
+
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+
+    [[CRKStatsManager sharedManager] statsStopDurationAtTabIndex:tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex]];
+    
     return YES;
 }
 

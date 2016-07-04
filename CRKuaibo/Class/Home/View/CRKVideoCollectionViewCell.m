@@ -41,7 +41,7 @@ static NSString *const kVideoImageIdentifier = @"kVideoImageIdentifier";
         playImage.userInteractionEnabled = YES;
         _imageView.userInteractionEnabled = YES;
         //点击播放按钮
-        [playImage bk_whenTapped:^{
+        [_imageView bk_whenTapped:^{
             if (self.playVideo) {
                 self.playVideo(_isFreeVideo);
             }

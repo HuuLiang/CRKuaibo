@@ -11,6 +11,7 @@
 
 @interface CRKHomeViewController : CRKBaseViewController
 
+@property (nonatomic,retain)UISegmentedControl *segmentCtrolller;
 - (instancetype)initWithHomeModel:(CRKHomePageModel*)homePageModel;
 
 @end

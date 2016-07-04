@@ -18,4 +18,6 @@
   withTimeControl:(BOOL)hasTimeControl
  shouldPopPayment:(BOOL)shouldPopPayment;
 
+- (NSUInteger)currentIndex;
+
 @end

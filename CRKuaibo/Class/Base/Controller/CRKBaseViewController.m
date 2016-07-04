@@ -20,6 +20,10 @@
 
 @implementation CRKBaseViewController
 
+- (NSUInteger)currentIndex {
+    return NSNotFound;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

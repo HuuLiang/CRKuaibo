@@ -40,7 +40,7 @@
 #define CRK_AGREEMENT_NOTPAID_URL       @"/iosvideo/agreement.html"
 #define CRK_AGREEMENT_PAID_URL          @"/iosvideo/agreement-paid.html"
 
-#define CRK_STATS_BASE_URL              @"http://stats.iqu8.cn"
+#define CRK_STATS_BASE_URL              @"http://stats.iqu8.cn"//@"http://120.24.252.114"//
 #define CRK_STATS_CPC_URL               @"/stats/cpcs.service"
 #define CRK_STATS_TAB_URL               @"/stats/tabStat.service"
 #define CRK_STATS_PAY_URL               @"/stats/payRes.service"

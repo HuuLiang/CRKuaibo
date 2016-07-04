@@ -69,6 +69,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     
     [self setUpCollectionView];
     
+    
 }
 /**
  *  collectionView
@@ -232,7 +233,6 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     return channel;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    //    DLog(@"%ld----->>>",_univerSlityModels.count);
     return _univerSlityModels.count;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -317,7 +317,16 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
         detailsVC.type = channel.type.integerValue;
         detailsVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:detailsVC animated:YES];
+        [[CRKStatsManager sharedManager] statsCPCWithProgram:channel.programList[indexPath.item] programLocation:indexPath.item inChannel:channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex]];
     }
+    
+    
+}
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate  {
+    [[CRKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex] forSlideCount:1];
+    
 }
 
 

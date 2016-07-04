@@ -15,6 +15,8 @@
 #import "CRKSpreadBannerViewController.h"
 #import "CRKApplicationManager.h"
 #import "CRKAppSpreadBannerModel.h"
+#import "CRKBaseViewController.h"
+#import "CRKHomeViewController.h"
 
 NSString *const kPaymentInfoKeyName = @"crkuaibov_paymentinfo_keyname";
 
@@ -151,6 +153,35 @@ static NSString *const kLaunchSeqKeyName = @"crkuaibov_launchseq_keyname";
 }
 
 
++ (NSUInteger)currentTabPageIndex {
+    UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabVC = (UITabBarController *)rootVC;
+        return tabVC.selectedIndex;
+    }
+    return 0;
+}
+
++ (NSUInteger)currentSubTabPageIndex {
+    UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabVC = (UITabBarController *)rootVC;
+        if ([tabVC.selectedViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navVC = (UINavigationController *)tabVC.selectedViewController;
+            if ([navVC.visibleViewController isKindOfClass:[CRKBaseViewController class]]) {
+                
+                if ([navVC.viewControllers.firstObject isKindOfClass:[CRKHomeViewController class]]){
+                    CRKHomeViewController *homeVC = (CRKHomeViewController *)navVC.viewControllers.firstObject;
+                    return homeVC.segmentCtrolller.selectedSegmentIndex;
+                    
+                }
+                CRKBaseViewController *baseVC = (CRKBaseViewController *)navVC.visibleViewController;
+                return [baseVC currentIndex];
+            }
+        }
+    }
+    return NSNotFound;
+}
 
 
 @end

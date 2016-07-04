@@ -161,7 +161,7 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
                  if (image) {
                      NSUInteger showPrice = systemConfigModel.payAmount ;
                      BOOL showInteger = showPrice % 100 == 0;
-                     self->_priceLabel.text = showInteger ? [NSString stringWithFormat:@"%u", showPrice/100] : [NSString stringWithFormat:@"%.2f", showPrice/100.];
+                     self->_priceLabel.text = showInteger ? [NSString stringWithFormat:@"%lu", showPrice/100] : [NSString stringWithFormat:@"%.2f", showPrice/100.];
                  } else {
                      self->_priceLabel.text = nil;
                  }
@@ -211,6 +211,9 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
     
     CRKProgram *appSpread = self.appSpreadModel.fetchedSpreads[indexPath.item];
     _speProgram = appSpread;
+//数据统计
+    [[CRKStatsManager sharedManager] statsCPCWithProgram:appSpread programLocation:indexPath.item inChannel:nil andTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex]];
+    
     [CRKUtil checkAppInstalledWithBundleId:appSpread.specialDesc completionHandler:^(BOOL installed) {
         if (installed) {
             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"友情提示" message:[NSString stringWithFormat:@"您已安装%@是否再次安装该应用",appSpread.title] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -229,6 +232,13 @@ DefineLazyPropertyInitialization(CRKRecommendModel,appSpreadModel);
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_speProgram.videoUrl]];
         return;
     }
+    
+}
+
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate  {
+    [[CRKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex] forSlideCount:1];
     
 }
 @end

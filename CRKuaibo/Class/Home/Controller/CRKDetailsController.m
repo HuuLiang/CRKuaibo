@@ -28,28 +28,31 @@ NSInteger const KDetailsSections = 2;//组数
     
 }
 @property (nonatomic,retain)NSMutableArray *programArr;
+@property (nonatomic)NSInteger currentVideoLocation;
 
 @end
 
 @implementation CRKDetailsController
 
 - (instancetype)initWithChannel:(CRKChannel*)channel program:(CRKProgram*)program programIndex:(NSInteger )programIndex {
-
+    
     if (self = [self init]) {
-            NSMutableArray *tempArr = [NSMutableArray array];
+        //随机获取下面的热门推荐的四个节目列表
+        NSMutableArray *tempArr = [NSMutableArray array];
         [tempArr addObject:@(programIndex)];
-            for (int i = 0; i< 4; ++i) {
-                int temp;
-                do {
-                    temp = arc4random_uniform((int)channel.programList.count);
-                } while ([tempArr containsObject:@(temp)]);
-                [tempArr addObject:@(temp)];
-            }
-        [tempArr removeObject:@(programIndex)];
-            _programArr = tempArr;
+        for (int i = 0; i< 4; ++i) {
+            int temp;
+            do {
+                temp = arc4random_uniform((int)channel.programList.count);
+            } while ([tempArr containsObject:@(temp)]);
+            [tempArr addObject:@(temp)];
         }
-        _program = program;
-        _channel = channel;
+        [tempArr removeObject:@(programIndex)];
+        _programArr = tempArr;
+    }
+    _program = program;
+    _channel = channel;
+    _currentVideoLocation = programIndex;
     
     return self;
 }
@@ -92,6 +95,11 @@ NSInteger const KDetailsSections = 2;//组数
     
 }
 
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate  {
+    [[CRKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex] forSlideCount:1];
+    
+}
 #pragma mark CollectionViewDelegate Datasoure
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -118,41 +126,41 @@ NSInteger const KDetailsSections = 2;//组数
             //播放视频
             cell.playVideo = ^(BOOL freeVideo){
                 @strongify(self);
-//                CRKProgram *program = _program;
-//                CRKChannel *channel = [[CRKChannel alloc] init];
+                //                CRKProgram *program = _program;
+                //                CRKChannel *channel = [[CRKChannel alloc] init];
                 if (_type == 5) {
                     //是否是付费,是否是试播进行判断
-                    [self playVideo:_program videoLocation:0 inChannel:(CRKChannel*)_channel withTimeControl:NO shouldPopPayment:YES];
+                    [self playVideo:_program videoLocation:_currentVideoLocation inChannel:(CRKChannel*)_channel withTimeControl:NO shouldPopPayment:YES];
                 } else {
                     if ([CRKUtil isPaid]) {
-                        [self playVideo:_program videoLocation:0 inChannel:(CRKChannel*)_channel  withTimeControl:YES shouldPopPayment:NO];
+                        [self playVideo:_program videoLocation:_currentVideoLocation inChannel:(CRKChannel*)_channel  withTimeControl:YES shouldPopPayment:NO];
                     }else {
-                        [self switchToPlayProgram:_program programLocation:1 inChannel:(CRKChannel*)_channel];
+                        [self switchToPlayProgram:_program programLocation:_currentVideoLocation inChannel:(CRKChannel*)_channel];
                     }
                     
                 }
                 
             };
             
-//            //点击图片详情 支付
-//            cell.action = ^(id sender){
-//                @strongify(self);
-//                CRKProgram *program = [[CRKProgram alloc] init];
-//                CRKChannel *channel = [[CRKChannel alloc] init];
-//                [self switchToPlayProgram:program programLocation:1 inChannel:channel];
-//                
-//            };
-//            //支付完成后点击图片会查看大图
-//            cell.popImageBloc = ^(NSArray*imageArr,NSIndexPath *indexPath){
-//                @strongify(self);
-//                UIView *popView = [self creatPictureBrowserWithImageArr:imageArr indexPath:indexPath];
-//                //                _popPictureView = popView;
-//                [self.view addSubview:popView];
-//                [UIView animateWithDuration:0.3 animations:^{
-//                    popView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-//                }];
-//                
-//            };
+            //            //点击图片详情 支付
+            //            cell.action = ^(id sender){
+            //                @strongify(self);
+            //                CRKProgram *program = [[CRKProgram alloc] init];
+            //                CRKChannel *channel = [[CRKChannel alloc] init];
+            //                [self switchToPlayProgram:program programLocation:1 inChannel:channel];
+            //                
+            //            };
+            //            //支付完成后点击图片会查看大图
+            //            cell.popImageBloc = ^(NSArray*imageArr,NSIndexPath *indexPath){
+            //                @strongify(self);
+            //                UIView *popView = [self creatPictureBrowserWithImageArr:imageArr indexPath:indexPath];
+            //                //                _popPictureView = popView;
+            //                [self.view addSubview:popView];
+            //                [UIView animateWithDuration:0.3 animations:^{
+            //                    popView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            //                }];
+            //                
+            //            };
             return cell;
         }else {
             CRKHomeSpreeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifier forIndexPath:indexPath];
@@ -180,12 +188,18 @@ NSInteger const KDetailsSections = 2;//组数
         
         if (indexPath.item == 1){
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_speChannel.spreadUrl]];
+            //数据统计
+            [[CRKStatsManager sharedManager] statsCPCWithProgram:nil programLocation:indexPath.item inChannel:_speChannel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex]];
         }
     }else if (indexPath.section == 1 ){
         NSNumber *programIdx = _programArr[indexPath.item];
         CRKProgram *program = _channel.programList[programIdx.integerValue];
         _program = program;
+        _currentVideoLocation = indexPath.item;
         _type = _channel.type.integerValue;
+        //数据统计
+        [[CRKStatsManager sharedManager] statsCPCWithProgram:_program programLocation:indexPath.item inChannel:_channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[CRKUtil currentSubTabPageIndex]];
+        
         [_collectionView reloadData];
     }
     
@@ -197,12 +211,12 @@ NSInteger const KDetailsSections = 2;//组数
         if (indexPath.item == 0) {
             return CGSizeMake(kScreenWidth,kScreenWidth *0.6);
         }else{
-        if (_speChannel.columnImg) {
-            
-            return CGSizeMake(kScreenWidth, 75);
-        }else {
-            return CGSizeMake(0, 0);
-        }
+            if (_speChannel.columnImg) {
+                
+                return CGSizeMake(kScreenWidth, 75);
+            }else {
+                return CGSizeMake(0, 0);
+            }
         }
         
     }
@@ -231,7 +245,7 @@ NSInteger const KDetailsSections = 2;//组数
 }
 
 /**
- *  图片浏览
+ *  图片浏览,该功能暂时舍弃
  */
 - (UIView*)creatPictureBrowserWithImageArr:(NSArray *)imageArr indexPath:(NSIndexPath *)indexPath {
     _picScrollView.hidden = NO;
@@ -290,13 +304,5 @@ NSInteger const KDetailsSections = 2;//组数
     return popView;
 }
 
-
-
-
-
-- (void)dealloc {
-    
-    
-}
 
 @end
