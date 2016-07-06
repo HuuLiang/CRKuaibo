@@ -207,7 +207,7 @@ DefineLazyPropertyInitialization(CRKHomePageModel, homePageModel);
         if ([CRKSystemConfigModel sharedModel].loaded && [CRKSystemConfigModel sharedModel].statsTimeInterval > 0) {
             statsTimeInterval = [CRKSystemConfigModel sharedModel].statsTimeInterval;
         }
-        statsTimeInterval = 20;
+//        statsTimeInterval = 20;
         [[CRKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
         
         
