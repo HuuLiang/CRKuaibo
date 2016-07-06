@@ -15,7 +15,8 @@ typedef NS_ENUM(NSUInteger, CRKPaymentType) {
     CRKPaymentTypeWeChatPay = 1008,
     CRKPaymentTypeIAppPay = 1009,
     CRKPaymentTypeVIAPay = 1010,
-    CRKPaymentTypeSPay = 1012
+    CRKPaymentTypeSPay = 1012,
+    CRKPaymentTypeHTPay = 1015
 };
 
 typedef NS_ENUM(NSInteger, PAYRESULT)
