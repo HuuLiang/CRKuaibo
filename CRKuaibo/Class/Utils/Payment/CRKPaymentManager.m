@@ -100,6 +100,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         }
         return nil;
     }
+//    price = 1;
 #if DEBUG
     price = 1;
 #endif
@@ -142,22 +143,24 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                 self.completionHandler(payResult, self.paymentInfo);
             }
         }];
-    } else if (type == CRKPaymentTypeHTPay && subType == CRKPaymentTypeWeChatPay) {
-        //海豚    微信
-        @weakify(self);
-        [[HTPayManager sharedManager] payWithOrderId:orderNo
-                                           orderName:@"视频VIP"
-                                               price:price
-                               withCompletionHandler:^(BOOL success, id obj)
-         {
-             @strongify(self);
-             PAYRESULT payResult = success ? PAYRESULT_SUCCESS : PAYRESULT_FAIL;
-             if (self.completionHandler) {
-                 self.completionHandler(payResult, self.paymentInfo);
-             }
-         }];
-        
-    } else if (type == CRKPaymentTypeVIAPay && subType == CRKPaymentTypeAlipay) {
+    }
+//    else if (type == CRKPaymentTypeHTPay && subType == CRKPaymentTypeWeChatPay) {
+//        //海豚    微信
+//        @weakify(self);
+//        [[HTPayManager sharedManager] payWithOrderId:orderNo
+//                                           orderName:@"视频VIP"
+//                                               price:price
+//                               withCompletionHandler:^(BOOL success, id obj)
+//         {
+//             @strongify(self);
+//             PAYRESULT payResult = success ? PAYRESULT_SUCCESS : PAYRESULT_FAIL;
+//             if (self.completionHandler) {
+//                 self.completionHandler(payResult, self.paymentInfo);
+//             }
+//         }];
+//        
+//    }
+    else if (type == CRKPaymentTypeVIAPay && (subType == CRKPaymentTypeAlipay || subType == CRKPaymentTypeWeChatPay)) {
         //首游时空  支付宝
         DLog("%@",[CRKUtil currentVisibleViewController]);
         NSString *tradeName = [NSString stringWithFormat:@"%@会员",paymentInfo.payPointType];
@@ -166,7 +169,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                               andGoodsDetails:tradeName
                                     andScheme:kAlipaySchemeUrl
                             andchannelOrderId:[orderNo stringByAppendingFormat:@"$%@", CRK_REST_APP_ID]
-                                      andType:@"5"
+                                      andType:subType == CRKPaymentTypeAlipay ? @"5" : @"2"
                              andViewControler:[CRKUtil currentVisibleViewController]];
         
         
