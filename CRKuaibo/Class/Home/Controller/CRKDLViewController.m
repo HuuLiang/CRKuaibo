@@ -47,8 +47,8 @@
         [slider addChildViewController:vc title:titleArr[i]];
         [vcArr addObject:vc];
     }
-    CRKUniversalityController *vc1 = vcArr.firstObject;
-    vc1.isHaveFreeVideo = YES;
+//    CRKUniversalityController *vc1 = vcArr.firstObject;
+//    vc1.isHaveFreeVideo = YES;
   
     [slider setSlideHeadView];
     

@@ -290,7 +290,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     CRKHomeHeaderReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kSectionHeaderReusableIdentifier forIndexPath:indexPath];
     CRKChannel *channel = [self channelWithIndePath:indexPath];
     headerView.backgroundColor = self.view.backgroundColor;
-    if (channel.type.integerValue == 5 && _isHaveFreeVideo ) {
+    if (channel.type.integerValue == 5) {
         headerView.isFreeVideo = YES;
         return headerView;
     }else {

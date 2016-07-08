@@ -49,7 +49,7 @@
         [vcArr addObject:vc];
     }
     CRKUniversalityController *vc1 = vcArr.firstObject;
-    vc1.isHaveFreeVideo = YES;//是否有试播内容
+//    vc1.isHaveFreeVideo = YES;//是否有试播内容
     vc1.hasShownSpreadBanner = YES;//是否要弹框
     vc1.isFirstLoadCounts = YES;//加载的数量
     

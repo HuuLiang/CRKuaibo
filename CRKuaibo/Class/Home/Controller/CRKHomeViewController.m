@@ -21,7 +21,7 @@ typedef NS_ENUM (NSUInteger , SegmentIndex){
 @interface CRKHomeViewController ()<UIPageViewControllerDelegate>
 {
     UIPageViewController *_pageViewCtroller;
-
+    
     
 }
 @property (nonatomic,retain)NSMutableArray <UIViewController*>*viewCtrollers;
@@ -73,13 +73,23 @@ DefineLazyPropertyInitialization(NSArray, segmentTitles);
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    //    CRKOccidentController *occidentVC = [[CRKOccidentController alloc] initWithHomePage:_homePageModel.homePageOM];
+    //    [self.viewCtrollers addObject:occidentVC];
+    //    CRKRHViewController *riHanVC = [[CRKRHViewController alloc] initWithHomePage:_homePageModel.homePageRH];
+    //    [self.viewCtrollers addObject:riHanVC];
+    //    CRKDLViewController *mainLandVC = [[CRKDLViewController alloc] initWithHomePage:_homePageModel.homePageDL];
+    //    [self.viewCtrollers addObject:mainLandVC];
     
-    CRKOccidentController *occidentVC = [[CRKOccidentController alloc] initWithHomePage:_homePageModel.homePageOM];
-    [self.viewCtrollers addObject:occidentVC];
-    CRKRHViewController *riHanVC = [[CRKRHViewController alloc] initWithHomePage:_homePageModel.homePageRH];
-    [self.viewCtrollers addObject:riHanVC];
-    CRKDLViewController *mainLandVC = [[CRKDLViewController alloc] initWithHomePage:_homePageModel.homePageDL];
-    [self.viewCtrollers addObject:mainLandVC];
+    //CRKRHViewController 和 CRKDLViewController两个控制器舍弃
+    
+    for (int i = 0; i <_segmentTitles.count; ++i) {
+        
+        CRKOccidentController *VC = [[CRKOccidentController alloc] initWithHomePage:_homePageModel.fetchHomePage[i]];
+        VC.segementName = _segmentTitles[i];
+        VC.currentSegmentName = _segmentTitles[1];
+        [self.viewCtrollers addObject:VC];
+        
+    }
     
     _pageViewCtroller = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     _pageViewCtroller.delegate = self;

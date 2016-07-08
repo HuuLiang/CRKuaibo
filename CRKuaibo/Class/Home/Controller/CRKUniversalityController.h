@@ -10,8 +10,8 @@
 
 @interface CRKUniversalityController : CRKBaseViewController
 
-@property(nonatomic,assign) BOOL isHaveFreeVideo;
-@property(nonatomic,assign) BOOL isFirstVC;
+//@property(nonatomic,assign) BOOL isHaveFreeVideo;
+//@property(nonatomic,assign) BOOL isFirstVC;
 
 @property (nonatomic) BOOL hasShownSpreadBanner;//弹框
 
