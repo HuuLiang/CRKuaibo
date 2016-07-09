@@ -37,6 +37,8 @@ typedef NS_ENUM(NSUInteger, CRKSubPayType) {
 @property (nonatomic) NSString *notifyUrl;
 @property (nonatomic) NSNumber *waresid;
 @property (nonatomic) NSNumber *supportPayTypes;
+@property (nonatomic) NSString *publicKey;
+
 
 //+ (instancetype)defaultConfig;
 @end

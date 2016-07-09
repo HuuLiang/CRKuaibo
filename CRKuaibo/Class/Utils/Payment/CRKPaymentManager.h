@@ -31,6 +31,9 @@ typedef void (^CRKPaymentCompletionHandler)(PAYRESULT payResult, CRKPaymentInfo 
                        completionHandler:(CRKPaymentCompletionHandler)handler;
 
 - (void)handleOpenURL:(NSURL *)url;
-- (void)checkPayment;
+//- (void)checkPayment;
+
+- (CRKPaymentType)wechatPaymentType;
+- (CRKPaymentType)alipayPaymentType;
 
 @end

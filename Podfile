@@ -12,5 +12,5 @@ target 'CRKuaibo' do
     pod 'SFHFKeychainUtils', '~> 0.0.1'
     pod 'SDCycleScrollView', '~> 1.64'
     pod 'FMDB', '~> 2.6.2'
-    
+    pod 'XMLReader-Arc', '~> 1.1'
 end

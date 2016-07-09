@@ -61,6 +61,8 @@ typedef void (^CRKFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic,readonly) BOOL loaded;
 @property (nonatomic,readonly) BOOL hasDiscount;
 
+
+
 + (instancetype)sharedModel;
 
 - (BOOL)fetchSystemConfigWithCompletionHandler:(CRKFetchSystemConfigCompletionHandler)handler;
