@@ -53,7 +53,7 @@ NSString *const kSystemConfigModelSVipKeyPrice = @"crkuaibov_systemconfigModel_s
     @weakify(self);
     BOOL success = [self requestURLPath:CRK_SYSTEM_CONFIG_URL
                          standbyURLPath:CRK_STANDBY_SYSTEM_CONFIG_URL
-                             withParams:nil
+                             withParams:@{@"type" : @([CRKUtil deviceType])}
                         responseHandler:^(CRKURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);

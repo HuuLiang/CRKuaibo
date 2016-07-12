@@ -9,6 +9,21 @@
 #ifndef CRKCommonDef_h
 #define CRKCommonDef_h
 
+typedef NS_ENUM(NSUInteger, CRKDeviceType) {
+    CRKDeviceTypeUnknown,
+    CRKDeviceType_iPhone4,
+    CRKDeviceType_iPhone4S,
+    CRKDeviceType_iPhone5,
+    CRKDeviceType_iPhone5C,
+    CRKDeviceType_iPhone5S,
+    CRKDeviceType_iPhone6,
+    CRKDeviceType_iPhone6P,
+    CRKDeviceType_iPhone6S,
+    CRKDeviceType_iPhone6SP,
+    CRKDeviceType_iPhoneSE,
+    CRKDeviceType_iPad = 100
+};
+
 typedef NS_ENUM(NSUInteger, CRKPaymentType) {
     CRKPaymentTypeNone,
     CRKPaymentTypeAlipay = 1001,

@@ -198,7 +198,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
         return;
     }
     if (isFirstLoad){
-        NSInteger firstLoadCounts = _isFirstLoadCounts ? 20:16;
+        NSInteger firstLoadCounts = _isFirstLoadCounts ? 20:12;
         firstLoadCounts = firstLoadCounts >= _allModel.count ? _allModel.count : firstLoadCounts;
         
         for (NSInteger i = _currentProgramModel.count; i < firstLoadCounts ; ++i) {

@@ -113,6 +113,35 @@ static NSString *const kLaunchSeqKeyName = @"crkuaibov_launchseq_keyname";
     return name;
 }
 
+
++ (CRKDeviceType)deviceType {
+    NSString *deviceName = [self deviceName];
+    if ([deviceName rangeOfString:@"iPhone3,"].location == 0) {
+        return CRKDeviceType_iPhone4;
+    } else if ([deviceName rangeOfString:@"iPhone4,"].location == 0) {
+        return CRKDeviceType_iPhone4S;
+    } else if ([deviceName rangeOfString:@"iPhone5,1"].location == 0 || [deviceName rangeOfString:@"iPhone5,2"].location == 0) {
+        return CRKDeviceType_iPhone5;
+    } else if ([deviceName rangeOfString:@"iPhone5,3"].location == 0 || [deviceName rangeOfString:@"iPhone5,4"].location == 0) {
+        return CRKDeviceType_iPhone5C;
+    } else if ([deviceName rangeOfString:@"iPhone6,"].location == 0) {
+        return CRKDeviceType_iPhone5S;
+    } else if ([deviceName rangeOfString:@"iPhone7,1"].location == 0) {
+        return CRKDeviceType_iPhone6P;
+    } else if ([deviceName rangeOfString:@"iPhone7,2"].location == 0) {
+        return CRKDeviceType_iPhone6;
+    } else if ([deviceName rangeOfString:@"iPhone8,1"].location == 0) {
+        return CRKDeviceType_iPhone6S;
+    } else if ([deviceName rangeOfString:@"iPhone8,2"].location == 0) {
+        return CRKDeviceType_iPhone6SP;
+    } else if ([deviceName rangeOfString:@"iPhone8,4"].location == 0) {
+        return CRKDeviceType_iPhoneSE;
+    } else {
+        return CRKDeviceTypeUnknown;
+    }
+}
+
+
 + (void)showSpreadBanner {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSArray *spreads = [CRKAppSpreadBannerModel sharedModel].fetchedSpreads;

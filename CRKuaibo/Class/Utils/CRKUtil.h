@@ -26,6 +26,7 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSString *)deviceName;
 + (NSString *)appVersion;
 + (NSString *)paymentReservedData;
++ (CRKDeviceType)deviceType;
 
 + (void)showSpreadBanner;
 + (NSUInteger)launchSeq;
