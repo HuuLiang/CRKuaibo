@@ -54,7 +54,7 @@
         [self addSubview:_nameLabel];
         {
             [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(self.mas_top).mas_offset(15);
+                make.top.mas_equalTo(self.mas_top).mas_offset(15/667.*kScreenHeight);
                 make.left.mas_equalTo(_imageView.mas_right).mas_offset(7);
             }];
         }
@@ -69,7 +69,7 @@
         {
             [introduceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(_nameLabel);
-                make.top.mas_equalTo(_nameLabel.mas_bottom).mas_offset(8);
+                make.top.mas_equalTo(_nameLabel.mas_bottom).mas_offset(8/667.*kScreenHeight);
             }];
             
         }
@@ -83,7 +83,7 @@
         {
             [_playNumber mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(_nameLabel.mas_left);
-                make.centerY.mas_equalTo(_imageView.mas_centerY).mas_offset(14);
+                make.centerY.mas_equalTo(_imageView.mas_centerY).mas_offset(14/667.*kScreenHeight);
             }];
         }
         //推荐星数
@@ -91,10 +91,10 @@
         [self addSubview:_starView];
         {
             [_starView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-8);
+                make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-8/667.*kScreenHeight);
                 make.left.mas_equalTo(_nameLabel.mas_left);
                 make.right.mas_equalTo(self);
-                make.height.mas_equalTo(12);
+                make.height.mas_equalTo(12/667.*kScreenHeight);
             }];
             
         }
@@ -108,7 +108,7 @@
         {
             [recommend mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(_nameLabel);
-                make.bottom.mas_equalTo(_starView.mas_top).mas_offset(-8);
+                make.bottom.mas_equalTo(_starView.mas_top).mas_offset(-8/667.*kScreenHeight);
             }];
             
         }

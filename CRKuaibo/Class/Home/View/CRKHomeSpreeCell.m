@@ -23,22 +23,24 @@
         _imageView = [[UIImageView alloc] init];
         [self addSubview:_imageView];
         {
-        [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(self);
-            make.left.mas_equalTo(self).mas_offset(-2.5);
-        }];
-        
+            [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                            make.edges.equalTo(self);
+                make.top.bottom.mas_equalTo(self);
+                make.left.mas_equalTo(self).mas_offset(-2.5);
+                make.right.mas_equalTo(self);
+            }];
+            
         }
     }
-
+    
     return self;
 }
 
 - (void)setImageUrl:(NSString *)imageUrl {
-
+    
     _imageUrl = imageUrl;
     [_imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
-
+    
 }
 
 

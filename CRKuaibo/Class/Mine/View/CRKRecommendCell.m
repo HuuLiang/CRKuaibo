@@ -40,7 +40,7 @@
         {
             [_vipImageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(self);
-                make.top.equalTo(self).offset(30);
+                make.top.equalTo(self).offset(30/667.*kScreenHeight);
             }];
         }
         _memberButton = [[UIButton alloc] init];
@@ -64,12 +64,9 @@
                 make.height.mas_equalTo(44/667.*kScreenHeight);
             }];
         }
-  
-        
-        
         
     }
-
+    
     return self;
 }
 
@@ -117,11 +114,11 @@
 //        }
 //        //刷新控件
 //        [self loadSpreadApps];
-        //        @weakify(self);
-        //        [_collectionView CRK_addPullToRefreshWithHandler:^{
-        //            @strongify(self);
-        //            [self loadSpreadApps];
-        //        }];
+//        @weakify(self);
+//        [_collectionView CRK_addPullToRefreshWithHandler:^{
+//            @strongify(self);
+//            [self loadSpreadApps];
+//        }];
 //    }
 //    return self;
 //}

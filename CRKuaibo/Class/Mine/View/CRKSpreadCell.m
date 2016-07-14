@@ -28,8 +28,8 @@
         {
             [_thumbImageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.equalTo(self);
-                make.top.mas_equalTo(self).mas_offset(2.5);
-                make.bottom.mas_equalTo(self).mas_offset(-2.5);
+                make.top.mas_equalTo(self);//.mas_offset(2.5);
+                make.bottom.mas_equalTo(self);//.mas_offset(-2.5);
             }];
         }
 

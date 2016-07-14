@@ -89,7 +89,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     _collectinView.showsVerticalScrollIndicator = NO;
     
     [_collectinView registerClass:[CRKHomeCollectionViewCell class] forCellWithReuseIdentifier:kHomeCellIdentifer];
-    [_collectinView registerClass:[CRKHomeSpreeCell class] forCellWithReuseIdentifier:kHomeSpreeCellIdentifer];
+    [_collectinView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kHomeSpreeCellIdentifer];
     
     [_collectinView registerClass:[CRKHomeHeaderReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kSectionHeaderReusableIdentifier];
     
@@ -249,7 +249,7 @@ DefineLazyPropertyInitialization(NSMutableArray,currentProgramModel )
     CRKChannel *channel = [self channelWithIndePath:indexPath];
     if (channel.type.integerValue == 3 ) {
         _specChannel = channel;
-        CRKHomeSpreeCell *spreeCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifer forIndexPath:indexPath];
+        UICollectionViewCell *spreeCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifer forIndexPath:indexPath];//首页推广舍弃
         //不让当前界面显示推广
         //        spreeCell.imageUrl = channel.columnImg;
         

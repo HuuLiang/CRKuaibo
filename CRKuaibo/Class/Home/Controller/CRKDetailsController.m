@@ -72,7 +72,7 @@ NSInteger const KDetailsSections = 2;//组数
     layout.minimumInteritemSpacing = kDetailspace;
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     
-    _collectionView.contentInset = UIEdgeInsetsMake(-2.5, 2.5, 2.5, 2.5);
+    _collectionView.contentInset = UIEdgeInsetsMake(-2.5, 2.5, 0, 2.5);
     
     _collectionView.backgroundColor = self.view.backgroundColor;
     
@@ -164,6 +164,7 @@ NSInteger const KDetailsSections = 2;//组数
             return cell;
         }else {
             CRKHomeSpreeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifier forIndexPath:indexPath];
+
             cell.imageUrl = _speChannel.columnImg;
             return cell;
         }
