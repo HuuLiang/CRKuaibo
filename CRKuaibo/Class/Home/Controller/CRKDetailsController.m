@@ -72,7 +72,7 @@ NSInteger const KDetailsSections = 2;//组数
     layout.minimumInteritemSpacing = kDetailspace;
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     
-    _collectionView.contentInset = UIEdgeInsetsMake(-2.5, 2.5, 0, 2.5);
+    //    _collectionView.contentInset = UIEdgeInsetsMake(-2.5, 2.5, 0, 2.5);
     
     _collectionView.backgroundColor = self.view.backgroundColor;
     
@@ -111,6 +111,7 @@ NSInteger const KDetailsSections = 2;//组数
     if (section == 0) {
         return _type == 5 ? 1:2;//是否是免费视频
     }else {
+        
         return 4;
     }
     
@@ -164,7 +165,7 @@ NSInteger const KDetailsSections = 2;//组数
             return cell;
         }else {
             CRKHomeSpreeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeSpreeCellIdentifier forIndexPath:indexPath];
-
+            
             cell.imageUrl = _speChannel.columnImg;
             return cell;
         }
@@ -306,5 +307,14 @@ NSInteger const KDetailsSections = 2;//组数
     return popView;
 }
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    if (section == 0) {
+        return UIEdgeInsetsMake(0, 0, 0, 0);
+    }else{
+    
+        return UIEdgeInsetsMake(0, 2.5, 0, 2.5);
+    }
+
+}
 
 @end

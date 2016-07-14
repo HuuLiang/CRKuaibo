@@ -34,6 +34,7 @@ static NSString *const kVideoImageIdentifier = @"kVideoImageIdentifier";
             [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.height.mas_equalTo(self);
 //                make.height.mas_equalTo(self).multipliedBy(0.65);
+                make.edges.mas_equalTo(self);
             }];
         }
         

@@ -26,7 +26,7 @@
             [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
 //                            make.edges.equalTo(self);
                 make.top.bottom.mas_equalTo(self);
-                make.left.mas_equalTo(self).mas_offset(-2.5);
+                make.left.mas_equalTo(self);//.mas_offset(-2.5);
                 make.right.mas_equalTo(self);
             }];
             
