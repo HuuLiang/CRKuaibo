@@ -131,7 +131,6 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         }
         return nil;
     }
-    
 #if DEBUG
     price = 1;
 #endif

@@ -77,7 +77,7 @@ DefineLazyPropertyInitialization(CRKChannelProgramModel,program)
         }];
         
     }
-    
+
     _tableView.rowHeight = 160/667.*kScreenHeight;
     
     //下拉刷新
