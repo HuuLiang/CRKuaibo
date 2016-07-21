@@ -65,6 +65,10 @@
             }];
         }
         
+        
+        [_vipImageView bk_whenTapped:^{
+            
+        }];
     }
     
     return self;

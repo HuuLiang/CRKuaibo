@@ -134,6 +134,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 #if DEBUG
     price = 1;
 #endif
+//      price = 1;
     NSString *channelNo = CRK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
