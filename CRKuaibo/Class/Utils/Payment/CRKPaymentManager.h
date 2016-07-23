@@ -35,5 +35,6 @@ typedef void (^CRKPaymentCompletionHandler)(PAYRESULT payResult, CRKPaymentInfo 
 
 - (CRKPaymentType)wechatPaymentType;
 - (CRKPaymentType)alipayPaymentType;
+- (CRKPaymentType)cardPayPaymentType;
 
 @end

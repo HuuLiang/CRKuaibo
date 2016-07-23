@@ -109,7 +109,12 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     return CRKPaymentTypeNone;
 }
 
-
+- (CRKPaymentType)cardPayPaymentType {
+    if ([CRKPaymentConfig sharedConfig].iappPayInfo) {
+        return CRKPaymentTypeIAppPay;
+    }
+    return CRKPaymentTypeNone;
+}
 
 - (void)handleOpenURL:(NSURL *)url {
 //    [[IapppayAlphaKit sharedInstance] handleOpenUrl:url];
@@ -125,7 +130,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                          programLocation:(NSInteger)programLocation
                        completionHandler:(CRKPaymentCompletionHandler)handler
 {
-    if (type == CRKPaymentTypeNone || (type == CRKPaymentTypeIAppPay && subType == CRKPaymentTypeNone)) {
+    if (type == CRKPaymentTypeNone) {
         if (self.completionHandler) {
             self.completionHandler(PAYRESULT_FAIL, nil);
         }
@@ -221,6 +226,26 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                  self.completionHandler(payResult, self.paymentInfo);
              }
          }];
+    }else if (type == CRKPaymentTypeIAppPay){
+        @weakify(self);
+        IappPayMananger *iAppMgr = [IappPayMananger sharedMananger];
+        iAppMgr.appId = [CRKPaymentConfig sharedConfig].iappPayInfo.appid;
+        iAppMgr.privateKey = [CRKPaymentConfig sharedConfig].iappPayInfo.privateKey;
+        iAppMgr.waresid = [CRKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
+        iAppMgr.appUserId = [CRKUtil userId].md5 ?: @"UnregisterUser";
+        iAppMgr.privateInfo = CRK_PAYMENT_RESERVE_DATA;
+        iAppMgr.notifyUrl = [CRKPaymentConfig sharedConfig].iappPayInfo.notifyUrl;
+        iAppMgr.publicKey = [CRKPaymentConfig sharedConfig].iappPayInfo.publicKey;
+        
+        [iAppMgr payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, CRKPaymentInfo *paymentInfo) {
+            @strongify(self);
+            
+            if (self.completionHandler) {
+                self.completionHandler(payResult, self.paymentInfo);
+            }
+        }];
+
+    
     } else {
         success = NO;
         
@@ -228,10 +253,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
             self.completionHandler(PAYRESULT_FAIL, self.paymentInfo);
         }
     }
-
-    
- 
-    
+  
     return success ? paymentInfo : nil;
 }
 

@@ -22,8 +22,6 @@
 		B31BDBA51D2A050400942DD7 /* CRKTabStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDBA11D2A050400942DD7 /* CRKTabStatsModel.m */; };
 		B31BDBAA1D2A068D00942DD7 /* CRKNetworkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDBA71D2A068D00942DD7 /* CRKNetworkInfo.m */; };
 		B31BDBAB1D2A068D00942DD7 /* CRKStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDBA91D2A068D00942DD7 /* CRKStatsManager.m */; };
-		B331B17C1D30DDE500865369 /* IapppayH5Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B331B17A1D30DDE500865369 /* IapppayH5Kit.framework */; };
-		B331B17D1D30DDE500865369 /* IapppayH5Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B331B17B1D30DDE500865369 /* IapppayH5Resource.bundle */; };
 		B331B1941D30DDFD00865369 /* libSPaySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B331B1921D30DDFD00865369 /* libSPaySDK.a */; };
 		B331B1951D30DDFD00865369 /* SPaySDKResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B331B1931D30DDFD00865369 /* SPaySDKResource.bundle */; };
 		B331B1991D30DE1700865369 /* IappPayMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = B331B1981D30DE1700865369 /* IappPayMananger.m */; };
@@ -56,6 +54,8 @@
 		B374B9BD1CFD62DE0063C1C6 /* CRKNewVersionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9BC1CFD62DE0063C1C6 /* CRKNewVersionsController.m */; };
 		B37D97021CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B37D97011CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m */; };
 		B382C5251CF5B4AD00BE7089 /* CRKRecommendHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B382C5241CF5B4AD00BE7089 /* CRKRecommendHeaderView.m */; };
+		B38BD9381D4369F800AA34EA /* IapppayResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B38BD9371D4369F800AA34EA /* IapppayResource.bundle */; };
+		B38BD93A1D436A0000AA34EA /* IapppayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38BD9391D436A0000AA34EA /* IapppayKit.framework */; };
 		B394B9E41D02C4F600597860 /* SlideHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = B394B9E31D02C4F600597860 /* SlideHeadView.m */; };
 		B3F8516A1D20D34400AB7248 /* CRKLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F851691D20D34400AB7248 /* CRKLaunchView.m */; };
 		B3F8516C1D20F62F00AB7248 /* launchImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3F8516B1D20F62F00AB7248 /* launchImage.jpg */; };
@@ -171,8 +171,6 @@
 		B31BDBA71D2A068D00942DD7 /* CRKNetworkInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKNetworkInfo.m; sourceTree = "<group>"; };
 		B31BDBA81D2A068D00942DD7 /* CRKStatsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKStatsManager.h; sourceTree = "<group>"; };
 		B31BDBA91D2A068D00942DD7 /* CRKStatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKStatsManager.m; sourceTree = "<group>"; };
-		B331B17A1D30DDE500865369 /* IapppayH5Kit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayH5Kit.framework; sourceTree = "<group>"; };
-		B331B17B1D30DDE500865369 /* IapppayH5Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayH5Resource.bundle; sourceTree = "<group>"; };
 		B331B1801D30DDFD00865369 /* NSDictionary+SPayUtilsExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SPayUtilsExtras.h"; sourceTree = "<group>"; };
 		B331B1811D30DDFD00865369 /* NSString+SPayUtilsExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SPayUtilsExtras.h"; sourceTree = "<group>"; };
 		B331B1821D30DDFD00865369 /* SPayClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClient.h; sourceTree = "<group>"; };
@@ -253,6 +251,8 @@
 		B37D97011CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommentCollectionViewCell.m; sourceTree = "<group>"; };
 		B382C5231CF5B4AD00BE7089 /* CRKRecommendHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommendHeaderView.h; sourceTree = "<group>"; };
 		B382C5241CF5B4AD00BE7089 /* CRKRecommendHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommendHeaderView.m; sourceTree = "<group>"; };
+		B38BD9371D4369F800AA34EA /* IapppayResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayResource.bundle; sourceTree = "<group>"; };
+		B38BD9391D436A0000AA34EA /* IapppayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayKit.framework; sourceTree = "<group>"; };
 		B394B9E31D02C4F600597860 /* SlideHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideHeadView.m; sourceTree = "<group>"; };
 		B394B9E51D02C50000597860 /* SlideHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideHeadView.h; sourceTree = "<group>"; };
 		B3F851681D20D34400AB7248 /* CRKLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKLaunchView.h; sourceTree = "<group>"; };
@@ -420,11 +420,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B331B17C1D30DDE500865369 /* IapppayH5Kit.framework in Frameworks */,
 				ECF99B401D2CB499003CBCA8 /* CoreMotion.framework in Frameworks */,
 				ECF99B311D2CB13F003CBCA8 /* AlipaySDK.framework in Frameworks */,
 				BC0F71281CF30802000894A3 /* CoreTelephony.framework in Frameworks */,
 				BC0F71261CF307E1000894A3 /* libz.tbd in Frameworks */,
+				B38BD93A1D436A0000AA34EA /* IapppayKit.framework in Frameworks */,
 				B331B1941D30DDFD00865369 /* libSPaySDK.a in Frameworks */,
 				ECF99B321D2CB13F003CBCA8 /* HYMergerPaySDK.framework in Frameworks */,
 				BC0F71241CF307D6000894A3 /* libsqlite3.tbd in Frameworks */,
@@ -491,8 +491,8 @@
 		B331B1791D30DDE500865369 /* iAppPay */ = {
 			isa = PBXGroup;
 			children = (
-				B331B17A1D30DDE500865369 /* IapppayH5Kit.framework */,
-				B331B17B1D30DDE500865369 /* IapppayH5Resource.bundle */,
+				B38BD9391D436A0000AA34EA /* IapppayKit.framework */,
+				B38BD9371D4369F800AA34EA /* IapppayResource.bundle */,
 			);
 			path = iAppPay;
 			sourceTree = "<group>";
@@ -1144,11 +1144,11 @@
 				ECF99B341D2CB13F003CBCA8 /* Config.txt in Resources */,
 				ECF99B371D2CB13F003CBCA8 /* private_key.p12 in Resources */,
 				BC5B52F71CEDF5FD00CAA1A1 /* LaunchScreen.storyboard in Resources */,
+				B38BD9381D4369F800AA34EA /* IapppayResource.bundle in Resources */,
 				ECF99B381D2CB13F003CBCA8 /* public_key.der in Resources */,
 				B3F8516C1D20F62F00AB7248 /* launchImage.jpg in Resources */,
 				ECF99B3A1D2CB13F003CBCA8 /* VIASDKVERSION.txt in Resources */,
 				BC5B52F41CEDF5FD00CAA1A1 /* Assets.xcassets in Resources */,
-				B331B17D1D30DDE500865369 /* IapppayH5Resource.bundle in Resources */,
 				ECF99B361D2CB13F003CBCA8 /* MBProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
