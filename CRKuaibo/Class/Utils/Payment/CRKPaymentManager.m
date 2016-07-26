@@ -16,8 +16,8 @@
 #import "WeChatPayQueryOrderRequest.h"
 #import "WeChatPayManager.h"
 
-#import "PayUtils.h"
-#import "paySender.h"
+#import <PayUtil/PayUtil.h>
+//#import "paySender.h"
 
 #import "HTPayManager.h"
 #import "SPayUtil.h"
