@@ -18,9 +18,6 @@
 
 #import <PayUtil/PayUtil.h>
 //#import "paySender.h"
-
-#import "HTPayManager.h"
-#import "SPayUtil.h"
 #import "IappPayMananger.h"
 #import "CRKSystemConfigModel.h"
 
@@ -53,19 +50,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     [[PayUitls getIntents] initSdk];
     [paySender getIntents].delegate = self;
     [[CRKPaymentConfigModel sharedModel] fetchConfigWithCompletionHandler:^(BOOL success, id obj) {
-//        [[IapppayAlphaKit sharedInstance] setAppAlipayScheme:kAlipaySchemeUrl];
-//        [[IapppayAlphaKit sharedInstance] setAppId:[CRKPaymentConfig sharedConfig].iappPayInfo.appid mACID:CRK_CHANNEL_NO];
-//        [WXApi registerApp:[CRKPaymentConfig sharedConfig].weixinInfo.appId];
-        
-        [[SPayUtil sharedInstance] registerMchId:[CRKPaymentConfig sharedConfig].wftPayInfo.mchId
-                                         signKey:[CRKPaymentConfig sharedConfig].wftPayInfo.signKey
-                                       notifyUrl:[CRKPaymentConfig sharedConfig].wftPayInfo.notifyUrl];
-        
-        [[HTPayManager sharedManager] setMchId:[CRKPaymentConfig sharedConfig].haitunPayInfo.mchId
-                                    privateKey:[CRKPaymentConfig sharedConfig].haitunPayInfo.key
-                                     notifyUrl:[CRKPaymentConfig sharedConfig].haitunPayInfo.notifyUrl
-                                     channelNo:CRK_CHANNEL_NO
-                                         appId:CRK_REST_APP_ID];
+
     }];
     Class class = NSClassFromString(@"SZFViewController");
     if (class) {
@@ -181,51 +166,6 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                             andchannelOrderId:[orderNo stringByAppendingFormat:@"$%@", CRK_REST_APP_ID]
                                       andType:subType == CRKPaymentTypeAlipay ? @"5" : @"2"
                              andViewControler:[CRKUtil currentVisibleViewController]];
-    } else if (type == CRKPaymentTypeSPay && (subType == CRKPaymentTypeAlipay || subType == CRKPaymentTypeWeChatPay)) {
-        @weakify(self);
-        paymentInfo.reservedData = [NSString stringWithFormat:@"客服电话：%@", [CRKSystemConfigModel sharedModel].contact];
-        [[SPayUtil sharedInstance] payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, CRKPaymentInfo *paymentInfo) {
-            @strongify(self);
-//            [self onPaymentResult:payResult withPaymentInfo:paymentInfo];
-            
-            if (self.completionHandler) {
-                self.completionHandler(payResult, self.paymentInfo);
-            }
-        }];
-    } else if (type == CRKPaymentTypeIAppPay && (subType == CRKPaymentTypeAlipay || subType == CRKPaymentTypeWeChatPay)) {
-        @weakify(self);
-        IappPayMananger *iAppMgr = [IappPayMananger sharedMananger];
-        iAppMgr.appId = [CRKPaymentConfig sharedConfig].iappPayInfo.appid;
-        iAppMgr.privateKey = [CRKPaymentConfig sharedConfig].iappPayInfo.privateKey;
-        iAppMgr.waresid = [CRKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
-        iAppMgr.appUserId = [CRKUtil userId].md5 ?: @"UnregisterUser";
-        iAppMgr.privateInfo = CRK_PAYMENT_RESERVE_DATA;
-        iAppMgr.notifyUrl = [CRKPaymentConfig sharedConfig].iappPayInfo.notifyUrl;
-        iAppMgr.publicKey = [CRKPaymentConfig sharedConfig].iappPayInfo.publicKey;
-        
-        [iAppMgr payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, CRKPaymentInfo *paymentInfo) {
-            @strongify(self);
-//            [self onPaymentResult:payResult withPaymentInfo:paymentInfo];
-            
-            if (self.completionHandler) {
-                self.completionHandler(payResult, self.paymentInfo);
-            }
-        }];
-    } else if (type == CRKPaymentTypeHTPay && subType == CRKPaymentTypeWeChatPay) {
-        @weakify(self);
-        [[HTPayManager sharedManager] payWithOrderId:orderNo
-                                           orderName:@"VIP会员"
-                                               price:price
-                               withCompletionHandler:^(BOOL success, id obj)
-         {
-             @strongify(self);
-             PAYRESULT payResult = success ? PAYRESULT_SUCCESS : PAYRESULT_FAIL;
-//             [self onPaymentResult:payResult withPaymentInfo:paymentInfo];
-             
-             if (self.completionHandler) {
-                 self.completionHandler(payResult, self.paymentInfo);
-             }
-         }];
     }else if (type == CRKPaymentTypeIAppPay){
         @weakify(self);
         IappPayMananger *iAppMgr = [IappPayMananger sharedMananger];
