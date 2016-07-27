@@ -38,6 +38,7 @@
         self.backgroundColor = [UIColor whiteColor];
         _imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"holder.jpg"]];
         _imageView.contentMode = UIViewContentModeRedraw;
+        [_imageView YPB_addAnimationForImageAppearing];
         [self addSubview:_imageView];
         {
             [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {

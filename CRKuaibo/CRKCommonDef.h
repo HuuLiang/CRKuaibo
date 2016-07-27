@@ -34,6 +34,14 @@ typedef NS_ENUM(NSUInteger, CRKPaymentType) {
     CRKPaymentTypeHTPay = 1015
 };
 
+typedef NS_ENUM(NSUInteger, CRKSubPayType) {
+    CRKSubPayTypeUnknown = 0,
+    CRKSubPayTypeWeChat = 1 << 0,
+    CRKSubPayTypeAlipay = 1 << 1,
+    CRKSubPayUPPay = 1 << 2,
+    CRKSubPayTypeQQ = 1 << 3
+};
+
 typedef NS_ENUM(NSInteger, PAYRESULT)
 {
     PAYRESULT_SUCCESS   = 0,
@@ -91,6 +99,9 @@ return _##propertyName; \
 #define kPaidNotificationName @"crkuaibo_paid_notification"
 #define kDefaultDateFormat    @"yyyyMMddHHmmss"
 #define kDefaultCollectionViewInteritemSpace  (3)
+
+#define kBoldMediumFont [UIFont boldSystemFontOfSize:MIN(16, kScreenWidth*0.045)]
+#define kExExSmallFont [UIFont systemFontOfSize:MIN(10, kScreenWidth*0.03)]
 
 @class CRKPaymentInfo;
 typedef void (^CRKAction)(id obj);

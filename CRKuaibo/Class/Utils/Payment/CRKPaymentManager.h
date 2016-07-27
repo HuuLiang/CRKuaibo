@@ -23,7 +23,7 @@ typedef void (^CRKPaymentCompletionHandler)(PAYRESULT payResult, CRKPaymentInfo 
 //                  forProgram:(CRKProgram *)program
 //           completionHandler:(CRKPaymentCompletionHandler)handler;
 - (CRKPaymentInfo *)startPaymentWithType:(CRKPaymentType)type
-                                 subType:(CRKPaymentType)subType
+                                 subType:(CRKSubPayType)subType
                                    price:(NSUInteger)price
                               forProgram:(CRKProgram *)program
                                inChannel:(CRKChannel *)channel
@@ -36,5 +36,6 @@ typedef void (^CRKPaymentCompletionHandler)(PAYRESULT payResult, CRKPaymentInfo 
 - (CRKPaymentType)wechatPaymentType;
 - (CRKPaymentType)alipayPaymentType;
 - (CRKPaymentType)cardPayPaymentType;
+- (CRKPaymentType)qqPaymentType;
 
 @end

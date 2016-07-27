@@ -18,7 +18,12 @@
 @property (nonatomic,copy) CRKAction closeAction;
 @property (nonatomic) NSNumber *showPrice;
 
-- (void)addPaymentWithImage:(UIImage *)image title:(NSString *)title available:(BOOL)available action:(CRKAction)action;
+//- (void)addPaymentWithImage:(UIImage *)image title:(NSString *)title available:(BOOL)available action:(CRKAction)action;
+- (void)addPaymentWithImage:(UIImage *)image
+                      title:(NSString *)title
+                   subtitle:(NSString *)subtitle
+            backgroundColor:(UIColor *)backgroundColor
+                     action:(CRKAction)action;
 - (CGFloat)viewHeightRelativeToWidth:(CGFloat)width;
 
 @end

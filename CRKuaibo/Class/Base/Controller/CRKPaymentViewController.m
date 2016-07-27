@@ -46,7 +46,7 @@
     }
     
     @weakify(self);
-    void (^Pay)(CRKPaymentType type, CRKPaymentType subType) = ^(CRKPaymentType type, CRKPaymentType subType)
+    void (^Pay)(CRKPaymentType type, CRKSubPayType subType) = ^(CRKPaymentType type, CRKSubPayType subType)
     {
         @strongify(self);
         [self payForPaymentType:type paymentSubType:subType];
@@ -62,8 +62,9 @@
     if (wechatPay != CRKPaymentTypeNone) {
         
         //微信支付    首游
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信客户端支付" available:YES action:^(id sender) {
-            Pay(wechatPay, CRKPaymentTypeWeChatPay);
+        //微信支付
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信支付" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#05c30b"] action:^(id sender) {
+            Pay(wechatPay, CRKSubPayTypeWeChat);
         }];
     }
     
@@ -71,15 +72,21 @@
     if (alipay != CRKPaymentTypeNone) {
         
         //支付宝支付  首游时空
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-            Pay(alipay, CRKPaymentTypeAlipay);
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#02a0e9"] action:^(id sender) {
+            Pay(alipay, CRKSubPayTypeAlipay);
+        }];    }
+    
+    CRKPaymentType qqPaymentType = [[CRKPaymentManager sharedManager] qqPaymentType];
+    if (qqPaymentType != CRKPaymentTypeNone) {
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"qq_icon"] title:@"QQ钱包" subtitle:nil backgroundColor:[UIColor redColor] action:^(id sender) {
+            Pay(qqPaymentType, CRKSubPayTypeQQ);
         }];
     }
     
     CRKPaymentType cardType = [[CRKPaymentManager sharedManager] cardPayPaymentType];
     if (cardType != CRKPaymentTypeNone) {
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" available:YES action:^(id obj) {
-            Pay(cardType,CRKPaymentTypeNone);
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" subtitle:@"支持微信和支付宝" backgroundColor:[UIColor darkPink] action:^(id obj) {
+            Pay(cardType,CRKSubPayTypeUnknown);
         }];
     }
 
@@ -214,7 +221,7 @@
 }
 
 - (void)payForPaymentType:(CRKPaymentType)paymentType
-           paymentSubType:(CRKPaymentType)paymentSubType {
+           paymentSubType:(CRKSubPayType)paymentSubType {
     if (!self.payAmount) {
         [[CRKHudManager manager] showHudWithText:@"无法获取价格信息,请检查网络配置！"];
         return ;

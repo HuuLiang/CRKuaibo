@@ -22,8 +22,14 @@
 #import "CRKSystemConfigModel.h"
 
 
-//#import <IapppayAlphaKit/IapppayAlphaOrderUtils.h>
-//#import <IapppayAlphaKit/IapppayAlphaKit.h>
+typedef NS_ENUM(NSUInteger, CRKVIAPayType) {
+    CRKVIAPayTypeNone,
+    CRKVIAPayTypeWeChat = 2,
+    CRKVIAPayTypeQQ = 3,
+    CRKVIAPayTypeUPPay = 4,
+    CRKVIAPayTypeShenZhou = 5
+};
+
 
 static NSString *const kAlipaySchemeUrl = @"comcrkappalipayurlscheme";
 
@@ -50,9 +56,9 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     [[PayUitls getIntents] initSdk];
     [paySender getIntents].delegate = self;
     [[CRKPaymentConfigModel sharedModel] fetchConfigWithCompletionHandler:^(BOOL success, id obj) {
-
+        
     }];
-    Class class = NSClassFromString(@"SZFViewController");
+    Class class = NSClassFromString(@"VIASZFViewController");
     if (class) {
         [class aspect_hookSelector:NSSelectorFromString(@"viewWillAppear:")
                        withOptions:AspectPositionAfter
@@ -77,13 +83,14 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 - (CRKPaymentType)wechatPaymentType {
     if ([CRKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & CRKSubPayTypeWeChat) {
         return CRKPaymentTypeVIAPay;
-    } else if ([CRKPaymentConfig sharedConfig].wftPayInfo) {
-        return CRKPaymentTypeSPay;
-    } else if ([CRKPaymentConfig sharedConfig].iappPayInfo) {
-        return CRKPaymentTypeIAppPay;
-    } else if ([CRKPaymentConfig sharedConfig].haitunPayInfo) {
-        return CRKPaymentTypeHTPay;
     }
+    //    else if ([CRKPaymentConfig sharedConfig].wftPayInfo) {
+    //        return CRKPaymentTypeSPay;
+    //    } else if ([CRKPaymentConfig sharedConfig].iappPayInfo) {
+    //        return CRKPaymentTypeIAppPay;
+    //    } else if ([CRKPaymentConfig sharedConfig].haitunPayInfo) {
+    //        return CRKPaymentTypeHTPay;
+    //    }
     return CRKPaymentTypeNone;
 }
 
@@ -101,14 +108,22 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     return CRKPaymentTypeNone;
 }
 
+- (CRKPaymentType)qqPaymentType {
+    if ([CRKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.unsignedIntegerValue & CRKSubPayTypeQQ) {
+        return CRKPaymentTypeVIAPay;
+    }
+    return CRKPaymentTypeNone;
+}
+
 - (void)handleOpenURL:(NSURL *)url {
-//    [[IapppayAlphaKit sharedInstance] handleOpenUrl:url];
+    //    [[IapppayAlphaKit sharedInstance] handleOpenUrl:url];
     //    [WXApi handleOpenURL:url delegate:self];
     [[PayUitls getIntents] paytoAli:url];
 }
 
+
 - (CRKPaymentInfo *)startPaymentWithType:(CRKPaymentType)type
-                                 subType:(CRKPaymentType)subType
+                                 subType:(CRKSubPayType)subType
                                    price:(NSUInteger)price
                               forProgram:(CRKProgram *)program
                                inChannel:(CRKChannel *)channel
@@ -124,7 +139,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 #if DEBUG
     price = 1;
 #endif
-//      price = 1;
+//    price = 1;
     NSString *channelNo = CRK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
@@ -157,14 +172,18 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     
     BOOL success = YES;
     
-    if (type == CRKPaymentTypeVIAPay && (subType == CRKPaymentTypeAlipay || subType == CRKPaymentTypeWeChatPay)) {
+    if (type == CRKPaymentTypeVIAPay && (subType == CRKSubPayTypeWeChat || subType == CRKSubPayTypeAlipay || subType == CRKSubPayTypeQQ)) {
+        
+        NSDictionary *viaPayTypeMapping = @{@(CRKSubPayTypeAlipay):@(CRKVIAPayTypeShenZhou),
+                                            @(CRKSubPayTypeWeChat):@(CRKVIAPayTypeWeChat),
+                                            @(CRKSubPayTypeQQ):@(CRKVIAPayTypeQQ)};
         NSString *tradeName = @"VIP会员";
         [[PayUitls getIntents]   gotoPayByFee:@(price).stringValue
                                  andTradeName:tradeName
                               andGoodsDetails:tradeName
                                     andScheme:kAlipaySchemeUrl
                             andchannelOrderId:[orderNo stringByAppendingFormat:@"$%@", CRK_REST_APP_ID]
-                                      andType:subType == CRKPaymentTypeAlipay ? @"5" : @"2"
+                                      andType:[viaPayTypeMapping[@(subType)] stringValue]
                              andViewControler:[CRKUtil currentVisibleViewController]];
     }else if (type == CRKPaymentTypeIAppPay){
         @weakify(self);
@@ -184,8 +203,8 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                 self.completionHandler(payResult, self.paymentInfo);
             }
         }];
-
-    
+        
+        
     } else {
         success = NO;
         
@@ -193,7 +212,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
             self.completionHandler(PAYRESULT_FAIL, self.paymentInfo);
         }
     }
-  
+    
     return success ? paymentInfo : nil;
 }
 

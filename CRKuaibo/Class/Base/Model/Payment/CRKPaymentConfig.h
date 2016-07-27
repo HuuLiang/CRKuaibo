@@ -8,11 +8,11 @@
 
 #import "CRKURLResponse.h"
 
-typedef NS_ENUM(NSUInteger, CRKSubPayType) {
-    CRKSubPayTypeUnknown = 0,
-    CRKSubPayTypeWeChat = 1 << 0,
-    CRKSubPayTypeAlipay = 1 << 1
-};
+//typedef NS_ENUM(NSUInteger, CRKSubPayType) {
+//    CRKSubPayTypeUnknown = 0,
+//    CRKSubPayTypeWeChat = 1 << 0,
+//    CRKSubPayTypeAlipay = 1 << 1
+//};
 
 @interface CRKWeChatPaymentConfig : NSObject
 @property (nonatomic) NSString *appId;

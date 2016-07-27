@@ -50,6 +50,7 @@
         
         _imageView = [[UIImageView alloc] init];
         _imageView.backgroundColor = [UIColor clearColor];
+        [_imageView YPB_addAnimationForImageAppearing];
         [self addSubview:_imageView];
         {
             [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {

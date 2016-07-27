@@ -24,6 +24,7 @@
 //        self.backgroundColor = [UIColor darkGrayColor];
         _imageView = [[UIImageView alloc] init];
         _imageView.contentMode = UIViewContentModeScaleToFill;
+        [_imageView YPB_addAnimationForImageAppearing];
         [self addSubview:_imageView];
         {
         [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {

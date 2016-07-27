@@ -24,6 +24,7 @@
         _thumbImageView = [[UIImageView alloc] init];
 //        _thumbImageView.contentMode = UIViewContentModeScaleAspectFill;
         _thumbImageView.clipsToBounds = YES;
+        [_thumbImageView YPB_addAnimationForImageAppearing];
         [self addSubview:_thumbImageView];
         {
             [_thumbImageView mas_makeConstraints:^(MASConstraintMaker *make) {
