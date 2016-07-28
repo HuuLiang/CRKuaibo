@@ -32,6 +32,7 @@ typedef NS_ENUM(NSUInteger, CRKVIAPayType) {
 
 
 static NSString *const kAlipaySchemeUrl = @"comcrkappalipayurlscheme";
+static NSString *const kIappPaySchemeUrl = @"comcrkappiaapayurlscheme";
 
 @interface CRKPaymentManager () <WXApiDelegate, stringDelegate>
 @property (nonatomic,retain) CRKPaymentInfo *paymentInfo;
@@ -55,6 +56,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 - (void)setup {
     [[PayUitls getIntents] initSdk];
     [paySender getIntents].delegate = self;
+    [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
     [[CRKPaymentConfigModel sharedModel] fetchConfigWithCompletionHandler:^(BOOL success, id obj) {
         
     }];
@@ -118,7 +120,12 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 - (void)handleOpenURL:(NSURL *)url {
     //    [[IapppayAlphaKit sharedInstance] handleOpenUrl:url];
     //    [WXApi handleOpenURL:url delegate:self];
-    [[PayUitls getIntents] paytoAli:url];
+    //    [[PayUitls getIntents] paytoAli:url];
+    if ([url.absoluteString rangeOfString:kIappPaySchemeUrl].location == 0) {
+        [[IappPayMananger sharedMananger] handleOpenURL:url];
+    } else if ([url.absoluteString rangeOfString:kAlipaySchemeUrl].location == 0) {
+        [[PayUitls getIntents] paytoAli:url];
+    }
 }
 
 
@@ -137,9 +144,9 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         return nil;
     }
 #if DEBUG
-    price = 1;
+    price = 200;
 #endif
-//    price = 1;
+    //    price = 1;
     NSString *channelNo = CRK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];

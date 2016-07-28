@@ -72,7 +72,7 @@
     if (alipay != CRKPaymentTypeNone) {
         
         //支付宝支付  首游时空
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#02a0e9"] action:^(id sender) {
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#02a0e9"] action:^(id sender) {
             Pay(alipay, CRKSubPayTypeAlipay);
         }];    }
     
@@ -89,18 +89,18 @@
             Pay(cardType,CRKSubPayTypeUnknown);
         }];
     }
-
-//    if ([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & CRKSubPayTypeAlipay) {
-//        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-//            Pay(CRKPaymentTypeIAppPay, CRKPaymentTypeAlipay);
-//        }];
-//    }
-//    
-//    if ([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & CRKSubPayTypeWeChat) {
-//        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信客户端支付" available:YES action:^(id sender) {
-//            Pay(CRKPaymentTypeIAppPay, CRKPaymentTypeWeChatPay);
-//        }];
-//    }
+    
+    //    if ([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & CRKSubPayTypeAlipay) {
+    //        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
+    //            Pay(CRKPaymentTypeIAppPay, CRKPaymentTypeAlipay);
+    //        }];
+    //    }
+    //    
+    //    if ([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & CRKSubPayTypeWeChat) {
+    //        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信客户端支付" available:YES action:^(id sender) {
+    //            Pay(CRKPaymentTypeIAppPay, CRKPaymentTypeWeChatPay);
+    //        }];
+    //    }
     //    if (([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & CRKIAppPayTypeWeChat)
     //        || [CRKPaymentConfig sharedConfig].weixinInfo) {
     //        BOOL useBuildInWeChatPay = [CRKPaymentConfig sharedConfig].weixinInfo != nil;
