@@ -1,6 +1,6 @@
 //
 //  IappPayMananger.h
-//  YYKuaibo
+//  CRKuaibo
 //
 //  Created by Sean Yue on 16/6/15.
 //  Copyright © 2016年 iqu8. All rights reserved.
@@ -20,8 +20,7 @@
 @property (nonatomic) NSString *alipayURLScheme;
 
 + (instancetype)sharedMananger;
-- (void)payWithPaymentInfo:(CRKPaymentInfo *)paymentInfo completionHandler:(CRKPaymentCompletionHandler)completionHandler;
-
+- (void)payWithPaymentInfo:(CRKPaymentInfo *)paymentInfo payType:(CRKSubPayType)payType completionHandler:(CRKPaymentCompletionHandler)completionHandler;
 - (void)handleOpenURL:(NSURL *)url;
 
 @end

@@ -14,7 +14,7 @@
 #define CRK_CHANNEL_NO           [CRKConfiguration sharedConfig].channelNo
 #define CRK_REST_APP_ID          @"QUBA_2022"
 #define CRK_REST_PV              @100  //100
-#define CRK_PAYMENT_PV           @102
+#define CRK_PAYMENT_PV           @103
 #define CRK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd."
 #define CRK_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", CRK_REST_APP_ID, CRK_CHANNEL_NO]
 

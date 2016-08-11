@@ -83,12 +83,12 @@
         }];
     }
     
-    CRKPaymentType cardType = [[CRKPaymentManager sharedManager] cardPayPaymentType];
-    if (cardType != CRKPaymentTypeNone) {
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" subtitle:@"支持微信和支付宝" backgroundColor:[UIColor darkPink] action:^(id obj) {
-            Pay(cardType,CRKSubPayTypeUnknown);
-        }];
-    }
+    //    CRKPaymentType cardType = [[CRKPaymentManager sharedManager] cardPayPaymentType];
+    //    if (cardType != CRKPaymentTypeNone) {
+    //        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" subtitle:@"支持微信和支付宝" backgroundColor:[UIColor darkPink] action:^(id obj) {
+    //            Pay(cardType,CRKSubPayTypeUnknown);
+    //        }];
+    //    }
     
     //    if ([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & CRKSubPayTypeAlipay) {
     //        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {

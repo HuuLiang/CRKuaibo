@@ -85,6 +85,8 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 - (CRKPaymentType)wechatPaymentType {
     if ([CRKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & CRKSubPayTypeWeChat) {
         return CRKPaymentTypeVIAPay;
+    }else if ([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & CRKSubPayTypeWeChat){
+        return CRKPaymentTypeIAppPay;
     }
     //    else if ([CRKPaymentConfig sharedConfig].wftPayInfo) {
     //        return CRKPaymentTypeSPay;
@@ -99,6 +101,8 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 - (CRKPaymentType)alipayPaymentType {
     if ([CRKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & CRKSubPayTypeAlipay) {
         return CRKPaymentTypeVIAPay;
+    }else if ([CRKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & CRKSubPayTypeAlipay){
+        return CRKPaymentTypeIAppPay;
     }
     return CRKPaymentTypeNone;
 }
@@ -198,19 +202,18 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         iAppMgr.appId = [CRKPaymentConfig sharedConfig].iappPayInfo.appid;
         iAppMgr.privateKey = [CRKPaymentConfig sharedConfig].iappPayInfo.privateKey;
         iAppMgr.waresid = [CRKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
-        iAppMgr.appUserId = [CRKUtil userId].md5 ?: @"UnregisterUser";
+        iAppMgr.appUserId = [CRKUtil userId] ?: @"UnregisterUser";
         iAppMgr.privateInfo = CRK_PAYMENT_RESERVE_DATA;
         iAppMgr.notifyUrl = [CRKPaymentConfig sharedConfig].iappPayInfo.notifyUrl;
         iAppMgr.publicKey = [CRKPaymentConfig sharedConfig].iappPayInfo.publicKey;
         
-        [iAppMgr payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, CRKPaymentInfo *paymentInfo) {
+        [iAppMgr payWithPaymentInfo:paymentInfo payType:subType completionHandler:^(PAYRESULT payResult, CRKPaymentInfo *paymentInfo) {
             @strongify(self);
             
             if (self.completionHandler) {
                 self.completionHandler(payResult, self.paymentInfo);
             }
         }];
-        
         
     } else {
         success = NO;
