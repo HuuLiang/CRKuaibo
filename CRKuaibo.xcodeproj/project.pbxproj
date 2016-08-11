@@ -22,8 +22,6 @@
 		B31BDBA51D2A050400942DD7 /* CRKTabStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDBA11D2A050400942DD7 /* CRKTabStatsModel.m */; };
 		B31BDBAA1D2A068D00942DD7 /* CRKNetworkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDBA71D2A068D00942DD7 /* CRKNetworkInfo.m */; };
 		B31BDBAB1D2A068D00942DD7 /* CRKStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B31BDBA91D2A068D00942DD7 /* CRKStatsManager.m */; };
-		B32BB7371D5B276000E76494 /* IapppayAlphaResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B32BB7361D5B276000E76494 /* IapppayAlphaResource.bundle */; };
-		B32BB7391D5B276800E76494 /* IapppayAlphaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32BB7381D5B276800E76494 /* IapppayAlphaKit.framework */; };
 		B331B1991D30DE1700865369 /* IappPayMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = B331B1981D30DE1700865369 /* IappPayMananger.m */; };
 		B3341ACC1CF571C90002C674 /* CRKRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3341ACB1CF571C90002C674 /* CRKRecommendCell.m */; };
 		B33BCD091D06C50200D8E62F /* CRKDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCD081D06C50200D8E62F /* CRKDetailsController.m */; };
@@ -51,6 +49,8 @@
 		B374B9BA1CFD5F9E0063C1C6 /* CRKUserProtolController.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9B91CFD5F9E0063C1C6 /* CRKUserProtolController.m */; };
 		B374B9BD1CFD62DE0063C1C6 /* CRKNewVersionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9BC1CFD62DE0063C1C6 /* CRKNewVersionsController.m */; };
 		B37D97021CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B37D97011CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m */; };
+		B38151CD1D5C7C4300E6B7EE /* IapppayAlphaResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B38151CC1D5C7C4300E6B7EE /* IapppayAlphaResource.bundle */; };
+		B38151CF1D5C7C4C00E6B7EE /* IapppayAlphaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38151CE1D5C7C4C00E6B7EE /* IapppayAlphaKit.framework */; };
 		B382C5251CF5B4AD00BE7089 /* CRKRecommendHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B382C5241CF5B4AD00BE7089 /* CRKRecommendHeaderView.m */; };
 		B394B9E41D02C4F600597860 /* SlideHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = B394B9E31D02C4F600597860 /* SlideHeadView.m */; };
 		B3F8516A1D20D34400AB7248 /* CRKLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F851691D20D34400AB7248 /* CRKLaunchView.m */; };
@@ -181,8 +181,6 @@
 		B31BDBA71D2A068D00942DD7 /* CRKNetworkInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKNetworkInfo.m; sourceTree = "<group>"; };
 		B31BDBA81D2A068D00942DD7 /* CRKStatsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKStatsManager.h; sourceTree = "<group>"; };
 		B31BDBA91D2A068D00942DD7 /* CRKStatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKStatsManager.m; sourceTree = "<group>"; };
-		B32BB7361D5B276000E76494 /* IapppayAlphaResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayAlphaResource.bundle; sourceTree = "<group>"; };
-		B32BB7381D5B276800E76494 /* IapppayAlphaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayAlphaKit.framework; sourceTree = "<group>"; };
 		B331B1971D30DE1700865369 /* IappPayMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IappPayMananger.h; sourceTree = "<group>"; };
 		B331B1981D30DE1700865369 /* IappPayMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IappPayMananger.m; sourceTree = "<group>"; };
 		B3341ACA1CF571C90002C674 /* CRKRecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommendCell.h; sourceTree = "<group>"; };
@@ -237,6 +235,8 @@
 		B374B9BC1CFD62DE0063C1C6 /* CRKNewVersionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKNewVersionsController.m; sourceTree = "<group>"; };
 		B37D97001CF7EF2100520BDB /* CRKRecommentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommentCollectionViewCell.h; sourceTree = "<group>"; };
 		B37D97011CF7EF2100520BDB /* CRKRecommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommentCollectionViewCell.m; sourceTree = "<group>"; };
+		B38151CC1D5C7C4300E6B7EE /* IapppayAlphaResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayAlphaResource.bundle; sourceTree = "<group>"; };
+		B38151CE1D5C7C4C00E6B7EE /* IapppayAlphaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayAlphaKit.framework; sourceTree = "<group>"; };
 		B382C5231CF5B4AD00BE7089 /* CRKRecommendHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRKRecommendHeaderView.h; sourceTree = "<group>"; };
 		B382C5241CF5B4AD00BE7089 /* CRKRecommendHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRKRecommendHeaderView.m; sourceTree = "<group>"; };
 		B394B9E31D02C4F600597860 /* SlideHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideHeadView.m; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 				ECF99B401D2CB499003CBCA8 /* CoreMotion.framework in Frameworks */,
 				ECF99B311D2CB13F003CBCA8 /* AlipaySDK.framework in Frameworks */,
 				BC0F71281CF30802000894A3 /* CoreTelephony.framework in Frameworks */,
-				B32BB7391D5B276800E76494 /* IapppayAlphaKit.framework in Frameworks */,
+				B38151CF1D5C7C4C00E6B7EE /* IapppayAlphaKit.framework in Frameworks */,
 				BC0F71261CF307E1000894A3 /* libz.tbd in Frameworks */,
 				EC83A1591D471BB0008EA909 /* PayUtil.framework in Frameworks */,
 				BC0F71241CF307D6000894A3 /* libsqlite3.tbd in Frameworks */,
@@ -492,8 +492,8 @@
 		B331B1791D30DDE500865369 /* iAppPay */ = {
 			isa = PBXGroup;
 			children = (
-				B32BB7381D5B276800E76494 /* IapppayAlphaKit.framework */,
-				B32BB7361D5B276000E76494 /* IapppayAlphaResource.bundle */,
+				B38151CE1D5C7C4C00E6B7EE /* IapppayAlphaKit.framework */,
+				B38151CC1D5C7C4300E6B7EE /* IapppayAlphaResource.bundle */,
 			);
 			path = iAppPay;
 			sourceTree = "<group>";
@@ -1119,7 +1119,7 @@
 				EC83A1501D471BB0008EA909 /* btn3.png in Resources */,
 				EC83A1571D471BB0008EA909 /* unicom_back.png in Resources */,
 				EC83A1581D471BB0008EA909 /* Config.txt in Resources */,
-				B32BB7371D5B276000E76494 /* IapppayAlphaResource.bundle in Resources */,
+				B38151CD1D5C7C4300E6B7EE /* IapppayAlphaResource.bundle in Resources */,
 				BC0F71391CF30C28000894A3 /* config.plist in Resources */,
 				EC83A1551D471BB0008EA909 /* btn9.png in Resources */,
 				BC5B52F71CEDF5FD00CAA1A1 /* LaunchScreen.storyboard in Resources */,
